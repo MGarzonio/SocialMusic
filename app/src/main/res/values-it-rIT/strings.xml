@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SocialMusic</string>
+    <string name="login">Accedi</string>
+    <string name="password">Password</string>
+    <string name="username">Indirizzo mail</string>
+    <string name="sing_in">Registrati</string>
+    <string name="forgot_password">Password dimenticata</string>
+</resources>
