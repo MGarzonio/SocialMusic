@@ -6,4 +6,5 @@
     <string name="username">Indirizzo mail</string>
     <string name="sing_in">Registrati</string>
     <string name="forgot_password">Password dimenticata</string>
+    <string name="logo">logo</string>
 </resources>

@@ -16,7 +16,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/Logo_foreground" />
+        android:contentDescription="@string/logo"
+        app:srcCompat="@mipmap/logo_foreground" />
 
     <EditText
         android:id="@+id/editTextUsername"
@@ -24,6 +25,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/username"
+        android:autofillHints="@string/username"
         android:inputType="textPersonName"
         android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@id/editTextPassword"
@@ -37,6 +39,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/password"
+        android:autofillHints="@string/password"
         android:inputType="textPassword"
         android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@id/buttonLogin"
@@ -61,7 +64,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:background="#00"
+        android:background="@android:drawable/list_selector_background"
         android:onClick="openSingIn"
         android:text="@string/sing_in"
         android:textColor="#0000FF"
@@ -74,7 +77,7 @@
         android:id="@+id/buttonForgot"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="#00"
+        android:background="@android:drawable/list_selector_background"
         android:textColor="	#0000FF"
         android:text="@string/forgot_password"
         app:layout_constraintBottom_toBottomOf="parent"
