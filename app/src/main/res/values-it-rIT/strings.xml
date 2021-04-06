@@ -3,8 +3,16 @@
     <string name="app_name">SocialMusic</string>
     <string name="login">Accedi</string>
     <string name="password">Password</string>
-    <string name="username">Indirizzo mail</string>
+    <string name="email">Indirizzo mail</string>
     <string name="sing_in">Registrati</string>
     <string name="forgot_password">Password dimenticata</string>
     <string name="logo">logo</string>
+    <string name="forgot_message">Inserisci il tuo indirizzo di posta elettronica.\\nVerrà inviata una nuova password da utilizzare al primo accesso.</string>
+    <string name="submit">Invia</string>
+    <string name="profilepicture">Foto profilo</string>
+    <string name="nickame">Soprannome</string>
+    <string name="name">Nome</string>
+    <string name="surname">Cognome</string>
+    <string name="musical_instruments">Strumenti musicali</string>
+    <string name="musical_genres">Generi musicali</string>
 </resources>

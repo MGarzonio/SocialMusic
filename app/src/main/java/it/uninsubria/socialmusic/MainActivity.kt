@@ -20,13 +20,23 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
-    fun openSingIn(view: View) {
+    fun openLogin(view: View) {
         val mail = editTextUsername.text.toString()
         val password = editTextPassword.text.toString()
         if(doLogin(mail, password)) {
-            val intent = Intent(this, SingInActivity::class.java)
+            val intent = Intent(this,HomeActivity::class.java )
             intent.putExtra("mail", mail)
             startActivity(intent)
         }
+    }
+
+    fun openSingIn(view: View) {
+        val intent = Intent(this, SingInActivity::class.java)
+        startActivity(intent)
+    }
+
+    fun openForgot(view: View) {
+        val intent = Intent(this, ForgotActivity::class.java)
+        startActivity(intent)
     }
 }

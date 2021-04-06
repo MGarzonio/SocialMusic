@@ -2,8 +2,16 @@
     <string name="app_name">SocialMusic</string>
     <string name="login">Login</string>
     <string name="password">Password</string>
-    <string name="username">Email address</string>
+    <string name="email">Email address</string>
     <string name="sing_in">Sing in</string>
     <string name="forgot_password">Forgot password</string>
     <string name="logo">logo</string>
+    <string name="forgot_message">Please enter your e-mail address.\\nA new password will be sent to be used on first login.</string>
+    <string name="submit">Submit</string>
+    <string name="profilepicture">Profile picture</string>
+    <string name="nickame">Nickame</string>
+    <string name="name">Name</string>
+    <string name="surname">Surname</string>
+    <string name="musical_instruments">Musical instruments</string>
+    <string name="musical_genres">Musical genres</string>
 </resources>
