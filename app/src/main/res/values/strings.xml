@@ -8,7 +8,7 @@
     <string name="logo">logo</string>
     <string name="forgot_message">Please enter your e-mail address.\\nA new password will be sent to be used on first login.</string>
     <string name="submit">Submit</string>
-    <string name="profilepicture">Profile picture</string>
+    <string name="profile_picture">Profile picture</string>
     <string name="nickame">Nickame</string>
     <string name="name">Name</string>
     <string name="surname">Surname</string>
@@ -18,4 +18,6 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

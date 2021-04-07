@@ -22,11 +22,11 @@ class MainActivity : AppCompatActivity() {
     fun openLogin(view: View) {
         val mail = editTextUsername.text.toString()
         val password = editTextPassword.text.toString()
-        if(doLogin(mail, password)) {
+        //if(doLogin(mail, password)) {
             val intent = Intent(this,HomeActivity::class.java )
-            intent.putExtra("mail", mail)
+            //intent.putExtra("mail", mail)
             startActivity(intent)
-        }
+        //}
     }
 
     fun openSingIn(view: View) {

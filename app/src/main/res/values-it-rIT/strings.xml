@@ -9,7 +9,7 @@
     <string name="logo">logo</string>
     <string name="forgot_message">Inserisci il tuo indirizzo di posta elettronica.\\nVerrà inviata una nuova password da utilizzare al primo accesso.</string>
     <string name="submit">Invia</string>
-    <string name="profilepicture">Foto profilo</string>
+    <string name="profile_picture">Foto profilo</string>
     <string name="nickame">Soprannome</string>
     <string name="name">Nome</string>
     <string name="surname">Cognome</string>

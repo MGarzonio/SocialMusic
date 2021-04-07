@@ -4,30 +4,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.notifications.NotificationsFragment"
-    android:padding="24dp">
+    tools:context=".ProfileFragment"
+    android:background="@color/white" >
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="24dp"
-        app:layout_constraintBottom_toTopOf="@id/tableLayout"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="48dp"
+        android:contentDescription="@string/profile_picture"
+        app:layout_constraintBottom_toTopOf="@id/table"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/default_profile"
-        android:contentDescription="@string/profilepicture" />
+        app:layout_constraintVertical_bias="0.51"
+        app:srcCompat="@mipmap/default_profile" />
 
     <TableLayout
-        android:id="@+id/tableLayout"
+        android:id="@+id/table"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:shrinkColumns="0"
-        android:stretchColumns="1"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="12dp"
+        android:stretchColumns="2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -42,20 +45,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="1"
-                android:text="@string/nickame" />
+                android:text="@string/nickame"
+                android:textColor="@color/black" />
 
             <EditText
                 android:id="@+id/editTextNickname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="2"
-                android:ems="10"
-                android:inputType="textPersonName"
+                android:autofillHints=""
                 android:clickable="false"
                 android:cursorVisible="false"
+                android:ems="10"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
-                android:autofillHints="" />
+                android:inputType="textPersonName"
+                android:textColor="@color/black" />
         </TableRow>
 
         <TableRow
@@ -67,20 +72,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="1"
-                android:text="@string/name" />
+                android:text="@string/name"
+                android:textColor="@color/black" />
 
             <EditText
                 android:id="@+id/editTextName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="2"
-                android:ems="10"
-                android:inputType="textPersonName"
+                android:autofillHints=""
                 android:clickable="false"
                 android:cursorVisible="false"
+                android:ems="10"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
-                android:autofillHints="" />
+                android:inputType="textPersonName"
+                android:textColor="@color/black" />
         </TableRow>
 
         <TableRow
@@ -92,21 +99,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="1"
-                android:text="@string/surname" />
+                android:text="@string/surname"
+                android:textColor="@color/black" />
 
             <EditText
                 android:id="@+id/editTextSurname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="2"
-                android:ems="10"
-                android:inputType="textPersonName"
+                android:autofillHints=""
                 android:clickable="false"
                 android:cursorVisible="false"
+                android:ems="10"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
-                android:autofillHints="" />
+                android:inputType="textPersonName"
+                android:textColor="@color/black" />
         </TableRow>
+
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -116,21 +126,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="1"
-                android:text="@string/email" />
+                android:text="@string/email"
+                android:textColor="@color/black" />
 
             <EditText
                 android:id="@+id/editTextEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="2"
-                android:ems="10"
-                android:inputType="textEmailAddress"
+                android:autofillHints=""
                 android:clickable="false"
                 android:cursorVisible="false"
+                android:ems="10"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
-                android:autofillHints="" />
+                android:inputType="textEmailAddress"
+                android:textColor="@color/black" />
         </TableRow>
+
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -140,21 +153,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="1"
-                android:text="@string/musical_instruments" />
+                android:text="@string/musical_instruments"
+                android:textColor="@color/black" />
 
             <EditText
                 android:id="@+id/editTextGeneres"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="2"
-                android:ems="10"
-                android:inputType="textPersonName"
+                android:autofillHints=""
                 android:clickable="false"
                 android:cursorVisible="false"
+                android:ems="10"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
-                android:autofillHints="" />
+                android:inputType="textPersonName"
+                android:textColor="@color/black" />
         </TableRow>
+
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -164,22 +180,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="1"
-                android:text="@string/musical_genres" />
+                android:text="@string/musical_genres"
+                android:textColor="@color/black" />
 
             <EditText
                 android:id="@+id/editTextInstruments"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="2"
-                android:ems="10"
-                android:inputType="textPersonName"
+                android:autofillHints=""
                 android:clickable="false"
                 android:cursorVisible="false"
+                android:ems="10"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
-                android:autofillHints="" />
+                android:inputType="textPersonName"
+                android:textColor="@color/black" />
         </TableRow>
     </TableLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
