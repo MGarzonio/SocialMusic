@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SocialMusic">
-        <activity android:name=".ForgotActivity"></activity>
+        <activity
+            android:name=".activity_home"
+            android:label="@string/title_activity_home"></activity>
+        <activity android:name=".ForgotActivity" />
         <activity android:name=".HomeActivity" />
         <activity
             android:name=".SingInActivity"

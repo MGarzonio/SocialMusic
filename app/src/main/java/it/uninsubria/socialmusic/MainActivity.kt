@@ -12,8 +12,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
     }
 
-    private fun doLogin(m: String, p: String):Boolean
-    {
+    private fun doLogin(m: String, p: String):Boolean {
         /*
             LOGIN ACCOUNT FIREBASE
         */
