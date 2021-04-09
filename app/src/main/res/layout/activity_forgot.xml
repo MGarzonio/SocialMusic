@@ -15,6 +15,7 @@
         android:text="@string/forgot_message"
         android:textAlignment="center"
         android:textColor="@color/black"
+        android:inputType="textMultiLine"
         app:layout_constraintBottom_toTopOf="@+id/editTextEmail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

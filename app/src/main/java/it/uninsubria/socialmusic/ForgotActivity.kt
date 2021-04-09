@@ -40,7 +40,7 @@ class ForgotActivity : AppCompatActivity() {
             mail.error = getString(R.string.mail_error)
             checkError = true
         }
-        if(sendRecoveryMail(mail.text.toString()) && !checkError) {
+        if (!checkError) if (sendRecoveryMail(mail.text.toString())) {
             Toast.makeText(applicationContext, getString(R.string.mail_sent), Toast.LENGTH_SHORT).show()
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)

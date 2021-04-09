@@ -12,8 +12,8 @@
     <string name="nickame" translatable="false">Nickame</string>
     <string name="name">Name</string>
     <string name="surname">Surname</string>
-    <string name="musical_instruments">Musical instruments</string>
-    <string name="musical_genres">Musical genres</string>
+    <string name="musical_instruments">Instruments</string>
+    <string name="musical_genres">Genres</string>
     <string name="title_activity_home" translatable="false">MainActivity</string>
     <string name="title_home" translatable="false">Home</string>
     <string name="title_dashboard" translatable="false">Dashboard</string>
@@ -27,4 +27,6 @@
     <string name="edit_profile">Edit profile</string>
     <string name="logout">Logout</string>
     <string name="address">Address</string>
+    <string name="sing_in_done" >Registered, check your e-mail box!</string>
+    <string name="empty_string">This field cannot be empty!</string>
 </resources>

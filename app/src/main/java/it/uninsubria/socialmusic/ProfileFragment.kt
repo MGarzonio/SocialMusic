@@ -1,6 +1,8 @@
  package it.uninsubria.socialmusic
 
+import android.content.Intent
 import android.os.Bundle
+import android.text.method.KeyListener
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,13 +13,12 @@ import kotlinx.android.synthetic.main.fragment_profile.*
 
 class ProfileFragment : Fragment(), View.OnClickListener {
 
-    private var editable = false
     private lateinit var nickname : EditText
     private lateinit var name : EditText
     private lateinit var surname : EditText
     private lateinit var address : EditText
     private lateinit var mail : EditText
-
+    private var editable = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -33,7 +34,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         btnEdit.setOnClickListener(this)
         btnLogout.setOnClickListener(this)
         
-        switchEditable()
+        loadProfile()
 
         return view
     }
@@ -64,17 +65,27 @@ class ProfileFragment : Fragment(), View.OnClickListener {
     }
 
     private fun switchEditable(){
-        nickname.isFocusable = editable
-        name.isFocusable = editable
-        surname.isFocusable = editable
-        address.isFocusable = editable
-        mail.isFocusable = editable
+        nickname.isEnabled = editable
+        name.isEnabled = editable
+        surname.isEnabled = editable
+        address.isEnabled = editable
+        mail.isEnabled = editable
+    }
+
+    private fun loadProfile(){
+       switchEditable()
+
+        nickname.setText("Garzu")
+        name.setText("Mattia")
+        surname.setText("Garzonio")
+        address.setText("Via Don Selva 9, Somma Lombardo")
+        mail.setText("mgarzonio@studenti.uninsubria.it")
+
     }
 
     private fun doLogout(){
-
-        TODO()
-
+        val intent = Intent (activity, MainActivity::class.java)
+        activity?.startActivity(intent)
     }
 
 }

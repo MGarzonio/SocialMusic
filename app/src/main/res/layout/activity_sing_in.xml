@@ -4,6 +4,142 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SingInActivity">
+    tools:context=".SingInActivity"
+    android:background="@color/white" >
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginBottom="36dp"
+        android:contentDescription="@string/profile_picture"
+        app:layout_constraintBottom_toTopOf="@id/table"
+        app:layout_constraintDimensionRatio="H,1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/default_profile" />
+
+    <TableLayout
+        android:id="@+id/table"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:stretchColumns="2"
+        app:layout_constraintBottom_toTopOf="@+id/buttonSingIn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="45dp">
+
+            <TextView
+                android:layout_margin="10dp"
+                android:id="@+id/textViewNickname"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textAlignment="viewEnd"
+                android:gravity="center"
+                android:layout_column="1"
+                android:textSize="15dp"
+                android:text="@string/nickame"
+                android:textColor="@color/black"
+                tools:ignore="RtlCompat" />
+
+            <EditText
+
+                android:id="@+id/editTextNickname"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_column="2"
+                android:autofillHints=""
+                android:ems="10"
+                android:textSize="15dp"
+                android:inputType="textMultiLine"
+                android:textColor="@color/black" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:minHeight="45dp">
+
+            <TextView
+                android:layout_margin="10dp"
+                android:id="@+id/textViewPassword"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textAlignment="viewEnd"
+                android:gravity="center"
+                android:layout_column="1"
+                android:textSize="15dp"
+                android:text="@string/password"
+                android:textColor="@color/black"
+                tools:ignore="RtlCompat" />
+
+            <EditText
+                android:id="@+id/editTextPassword"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_column="2"
+                android:textSize="15dp"
+                android:ems="10"
+                android:inputType="textMultiLine"
+                android:textColor="@color/black" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="45dp">
+
+            <TextView
+                android:layout_margin="10dp"
+                android:id="@+id/textViewEmail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textAlignment="viewEnd"
+                android:gravity="center"
+                android:layout_column="1"
+                android:textSize="15dp"
+                android:text="@string/email"
+                android:textColor="@color/black"
+                tools:ignore="RtlCompat" />
+
+            <EditText
+                android:id="@+id/editTextEmail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_column="2"
+                android:textSize="15dp"
+                android:ems="10"
+                android:inputType="textMultiLine"
+                android:textColor="@color/black" />
+        </TableRow>
+
+    </TableLayout>
+
+    <Button
+        android:id="@+id/buttonSingIn"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="@string/sing_in"
+        android:background="@android:drawable/list_selector_background"
+        android:textAlignment="center"
+        android:textColor="#0000FF"
+        android:layout_marginTop="12dp"
+        android:onClick="doSingIn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/buttonLogout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/table"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,9 +10,16 @@ import kotlinx.android.synthetic.main.activity_main.*
 import java.util.regex.Pattern
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var mail : EditText
+    private lateinit var password : EditText
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        mail = findViewById<EditText>(R.id.editTextUsername)
+        password = findViewById<EditText>(R.id.editTextPassword)
     }
 
     private fun isValidPassword(psw: String): Boolean {
@@ -33,8 +40,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun openLogin(view: View) {
-        val mail = findViewById<EditText>(R.id.editTextUsername)
-        val password = findViewById<EditText>(R.id.editTextPassword)
         var errorCheck = false
         if(!isValidEmail(mail.text.toString())){
             mail.error = getString(R.string.mail_error)
