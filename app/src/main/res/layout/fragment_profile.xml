@@ -29,9 +29,8 @@
         android:layout_marginStart="12dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="12dp"
-        android:layout_marginBottom="12dp"
         android:stretchColumns="2"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/buttonLogout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView">
@@ -54,11 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_column="2"
                 android:autofillHints=""
-                android:clickable="false"
-                android:cursorVisible="false"
                 android:ems="10"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
                 android:inputType="textPersonName"
                 android:textColor="@color/black" />
         </TableRow>
@@ -81,11 +76,8 @@
                 android:layout_height="wrap_content"
                 android:layout_column="2"
                 android:autofillHints=""
-                android:clickable="false"
-                android:cursorVisible="false"
                 android:ems="10"
                 android:focusable="false"
-                android:focusableInTouchMode="false"
                 android:inputType="textPersonName"
                 android:textColor="@color/black" />
         </TableRow>
@@ -108,11 +100,32 @@
                 android:layout_height="wrap_content"
                 android:layout_column="2"
                 android:autofillHints=""
-                android:clickable="false"
-                android:cursorVisible="false"
                 android:ems="10"
                 android:focusable="false"
-                android:focusableInTouchMode="false"
+                android:inputType="textPersonName"
+                android:textColor="@color/black" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/textAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:text="@string/address"
+                android:textColor="@color/black" />
+
+            <EditText
+                android:id="@+id/editTextAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="2"
+                android:autofillHints=""
+                android:ems="10"
+                android:focusable="false"
                 android:inputType="textPersonName"
                 android:textColor="@color/black" />
         </TableRow>
@@ -135,11 +148,8 @@
                 android:layout_height="wrap_content"
                 android:layout_column="2"
                 android:autofillHints=""
-                android:clickable="false"
-                android:cursorVisible="false"
                 android:ems="10"
                 android:focusable="false"
-                android:focusableInTouchMode="false"
                 android:inputType="textEmailAddress"
                 android:textColor="@color/black" />
         </TableRow>
@@ -162,11 +172,8 @@
                 android:layout_height="wrap_content"
                 android:layout_column="2"
                 android:autofillHints=""
-                android:clickable="false"
-                android:cursorVisible="false"
                 android:ems="10"
                 android:focusable="false"
-                android:focusableInTouchMode="false"
                 android:inputType="textPersonName"
                 android:textColor="@color/black" />
         </TableRow>
@@ -189,14 +196,32 @@
                 android:layout_height="wrap_content"
                 android:layout_column="2"
                 android:autofillHints=""
-                android:clickable="false"
-                android:cursorVisible="false"
                 android:ems="10"
                 android:focusable="false"
-                android:focusableInTouchMode="false"
                 android:inputType="textPersonName"
                 android:textColor="@color/black" />
+
         </TableRow>
     </TableLayout>
+
+    <Button
+        android:id="@+id/buttonEdit"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:text="@string/edit_profile"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/buttonLogout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/table"/>
+
+    <Button
+        android:id="@+id/buttonLogout"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:text="@string/logout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/buttonEdit"
+        app:layout_constraintTop_toBottomOf="@id/table"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -24,4 +24,7 @@
     <string name="account_not_found">Account does not exist!</string>
     <string name="invalid_account">Incorrect username or password!</string>
     <string name="password_error"> The password must contain at least 8 characters!</string>
+    <string name="edit_profile">Edit profile</string>
+    <string name="logout">Logout</string>
+    <string name="address">Address</string>
 </resources>

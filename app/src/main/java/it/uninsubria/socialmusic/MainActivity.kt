@@ -42,6 +42,7 @@ class MainActivity : AppCompatActivity() {
         }
         if(!isValidPassword(password.text.toString())){
             password.error = getString(R.string.password_error)
+            errorCheck = true
         }
         if(doLogin(mail.text.toString(), password.text.toString()) && !errorCheck) {
             val intent = Intent(this,HomeActivity::class.java )

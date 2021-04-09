@@ -1,59 +1,80 @@
-package it.uninsubria.socialmusic
+ package it.uninsubria.socialmusic
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
+import kotlinx.android.synthetic.main.fragment_profile.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class ProfileFragment : Fragment(), View.OnClickListener {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ProfileFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class ProfileFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var editable = false
+    private lateinit var nickname : EditText
+    private lateinit var name : EditText
+    private lateinit var surname : EditText
+    private lateinit var address : EditText
+    private lateinit var mail : EditText
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
+        val view = inflater.inflate(R.layout.fragment_profile, container, false)
+        val btnLogout = view.findViewById<Button>(R.id.buttonLogout)
+        val btnEdit = view.findViewById<Button>(R.id.buttonEdit)
+
+        nickname = view.findViewById<EditText>(R.id.editTextNickname)
+        name = view.findViewById<EditText>(R.id.editTextName)
+        surname = view.findViewById<EditText>(R.id.editTextSurname)
+        address = view.findViewById<EditText>(R.id.editTextAddress)
+        mail = view.findViewById<EditText>(R.id.editTextEmail)
+        btnEdit.setOnClickListener(this)
+        btnLogout.setOnClickListener(this)
+        
+        switchEditable()
+
+        return view
+    }
+
+    override fun onClick(v: View?) {
+        val btn : Button
+        when (v?.id) {
+            R.id.buttonEdit -> {
+                btn = (view?.findViewById<Button>(R.id.buttonEdit)) as Button
+                if(editable) {   // click save
+                    btn.text = "Edit profile"
+                    editable = false
+                    switchEditable()
+                }
+                else{           //click edit
+                    btn.text = "Save"
+                    editable = true
+                    switchEditable()
+                }
+                doEditProfile()
+            }
+            R.id.buttonLogout -> doLogout()
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false)
+    private fun doEditProfile(){
+        editTextNickname
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ProfileFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ProfileFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    private fun switchEditable(){
+        nickname.isFocusable = editable
+        name.isFocusable = editable
+        surname.isFocusable = editable
+        address.isFocusable = editable
+        mail.isFocusable = editable
     }
+
+    private fun doLogout(){
+
+        TODO()
+
+    }
+
 }
