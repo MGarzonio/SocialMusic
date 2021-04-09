@@ -10,9 +10,13 @@
     <string name="forgot_message">Inserisci il tuo indirizzo di posta elettronica.\\nVerrà inviata una nuova password da utilizzare al primo accesso.</string>
     <string name="submit">Invia</string>
     <string name="profile_picture">Foto profilo</string>
-    <string name="nickame">Soprannome</string>
     <string name="name">Nome</string>
     <string name="surname">Cognome</string>
     <string name="musical_instruments">Strumenti musicali</string>
     <string name="musical_genres">Generi musicali</string>
+    <string name="mail_error">Inserisci un indirizzo di posta elettrionica valido!</string>
+    <string name="mail_sent">Mail di recupero inviata!</string>
+    <string name="account_not_found">Account inesistente!</string>
+    <string name="invalid_account">Username o password non corretti!</string>
+    <string name="password_error">La password deve contenere almeno 8 caratteri!</string>
 </resources>

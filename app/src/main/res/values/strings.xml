@@ -9,15 +9,19 @@
     <string name="forgot_message">Please enter your e-mail address.\\nA new password will be sent to be used on first login.</string>
     <string name="submit">Submit</string>
     <string name="profile_picture">Profile picture</string>
-    <string name="nickame">Nickame</string>
+    <string name="nickame" translatable="false">Nickame</string>
     <string name="name">Name</string>
     <string name="surname">Surname</string>
     <string name="musical_instruments">Musical instruments</string>
     <string name="musical_genres">Musical genres</string>
-    <string name="title_activity_home">MainActivity</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_home" translatable="false">MainActivity</string>
+    <string name="title_home" translatable="false">Home</string>
+    <string name="title_dashboard" translatable="false">Dashboard</string>
+    <string name="title_notifications" translatable="false">Notifications</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="mail_error">Please enter a valid email address!</string>
+    <string name="mail_sent">Recovery mail sent!</string>
+    <string name="account_not_found">Account does not exist!</string>
+    <string name="invalid_account">Incorrect username or password!</string>
+    <string name="password_error"> The password must contain at least 8 characters!</string>
 </resources>

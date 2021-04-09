@@ -14,26 +14,27 @@
         android:layout_height="wrap_content"
         android:text="@string/forgot_message"
         android:textAlignment="center"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/editTextEmail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:textColor="@color/black" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/editTextEmail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:autofillHints="@string/email"
         android:ems="10"
         android:hint="@string/email"
-        android:autofillHints="@string/email"
         android:inputType="textEmailAddress"
         android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textColorHint="@color/gray"
         app:layout_constraintBottom_toTopOf="@+id/buttonConfirm"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        android:textColor="@color/black" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <Button
         android:id="@+id/buttonConfirm"
@@ -45,6 +46,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editTextEmail" />
+        app:layout_constraintTop_toBottomOf="@id/editTextEmail"
+        android:onClick="openMain" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
