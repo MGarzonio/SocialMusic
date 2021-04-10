@@ -5,16 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ProfileFragment"
-    android:background="@color/white" >
+    android:background="@color/white"
+    android:padding="12dp">
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="36dp"
-        android:layout_marginBottom="36dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="12dp"
         android:contentDescription="@string/profile_picture"
         app:layout_constraintBottom_toTopOf="@id/table"
         app:layout_constraintDimensionRatio="H,1:1"
@@ -27,8 +28,9 @@
         android:id="@+id/table"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:stretchColumns="2"
-        app:layout_constraintBottom_toTopOf="@+id/buttonLogout"
+        app:layout_constraintBottom_toTopOf="@id/bottomRow"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView">
@@ -39,16 +41,16 @@
             android:minHeight="45dp">
 
             <TextView
-                android:layout_margin="10dp"
                 android:id="@+id/textViewNickname"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textAlignment="viewEnd"
-                android:gravity="center"
                 android:layout_column="1"
-                android:textSize="15dp"
+                android:layout_margin="10dp"
+                android:gravity="center"
                 android:text="@string/nickame"
+                android:textAlignment="viewEnd"
                 android:textColor="@color/black"
+                android:textSize="15dp"
                 tools:ignore="RtlCompat" />
 
             <EditText
@@ -56,13 +58,13 @@
                 android:id="@+id/editTextNickname"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center"
                 android:layout_column="2"
                 android:autofillHints=""
                 android:ems="10"
-                android:textSize="15dp"
+                android:gravity="center"
                 android:inputType="textMultiLine"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:textSize="15dp" />
         </TableRow>
 
         <TableRow
@@ -71,28 +73,28 @@
             android:minHeight="45dp">
 
             <TextView
-                android:layout_margin="10dp"
                 android:id="@+id/textViewName"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textAlignment="viewEnd"
-                android:gravity="center"
                 android:layout_column="1"
-                android:textSize="15dp"
+                android:layout_margin="10dp"
+                android:gravity="center"
                 android:text="@string/name"
+                android:textAlignment="viewEnd"
                 android:textColor="@color/black"
+                android:textSize="15dp"
                 tools:ignore="RtlCompat" />
 
             <EditText
                 android:id="@+id/editTextName"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center"
                 android:layout_column="2"
                 android:ems="10"
-                android:textSize="15dp"
+                android:gravity="center"
                 android:inputType="textMultiLine"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:textSize="15dp" />
         </TableRow>
 
         <TableRow
@@ -101,28 +103,28 @@
             android:minHeight="45dp">
 
             <TextView
-                android:layout_margin="10dp"
                 android:id="@+id/textViewSurname"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textAlignment="viewEnd"
-                android:gravity="center"
                 android:layout_column="1"
-                android:textSize="15dp"
+                android:layout_margin="10dp"
+                android:gravity="center"
                 android:text="@string/surname"
+                android:textAlignment="viewEnd"
                 android:textColor="@color/black"
+                android:textSize="15dp"
                 tools:ignore="RtlCompat" />
 
             <EditText
                 android:id="@+id/editTextSurname"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center"
                 android:layout_column="2"
-                android:textSize="15dp"
                 android:ems="10"
+                android:gravity="center"
                 android:inputType="textMultiLine"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:textSize="15dp" />
         </TableRow>
 
         <TableRow
@@ -131,28 +133,28 @@
             android:minHeight="45dp">
 
             <TextView
-                android:layout_margin="10dp"
                 android:id="@+id/textAddress"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textAlignment="viewEnd"
-                android:gravity="center"
                 android:layout_column="1"
-                android:textSize="15dp"
+                android:layout_margin="10dp"
+                android:gravity="center"
                 android:text="@string/address"
+                android:textAlignment="viewEnd"
                 android:textColor="@color/black"
+                android:textSize="15dp"
                 tools:ignore="RtlCompat" />
 
             <EditText
                 android:id="@+id/editTextAddress"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center"
                 android:layout_column="2"
-                android:textSize="15dp"
                 android:ems="10"
+                android:gravity="center"
                 android:inputType="textMultiLine"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:textSize="15dp" />
         </TableRow>
 
         <TableRow
@@ -161,28 +163,28 @@
             android:minHeight="45dp">
 
             <TextView
-                android:layout_margin="10dp"
                 android:id="@+id/textViewEmail"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textAlignment="viewEnd"
-                android:gravity="center"
                 android:layout_column="1"
-                android:textSize="15dp"
+                android:layout_margin="10dp"
+                android:gravity="center"
                 android:text="@string/email"
+                android:textAlignment="viewEnd"
                 android:textColor="@color/black"
+                android:textSize="15dp"
                 tools:ignore="RtlCompat" />
 
             <EditText
                 android:id="@+id/editTextEmail"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center"
                 android:layout_column="2"
-                android:textSize="15dp"
                 android:ems="10"
+                android:gravity="center"
                 android:inputType="textMultiLine"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:textSize="15dp" />
         </TableRow>
 
         <TableRow
@@ -191,22 +193,23 @@
             android:minHeight="45dp">
 
             <TextView
-                android:layout_margin="10dp"
                 android:id="@+id/textViewInstruments"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textAlignment="viewEnd"
-                android:gravity="center"
                 android:layout_column="1"
-                android:textSize="15dp"
+                android:layout_margin="10dp"
+                android:gravity="center"
                 android:text="@string/musical_instruments"
+                android:textAlignment="viewEnd"
                 android:textColor="@color/black"
+                android:textSize="15dp"
                 tools:ignore="RtlCompat" />
 
             <Spinner
                 android:id="@+id/spinnerInstruments"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_column="2"
                 android:textSize="15dp" />
 
         </TableRow>
@@ -217,20 +220,21 @@
             android:minHeight="45dp">
 
             <TextView
-                android:layout_margin="10dp"
                 android:id="@+id/textViewGenres"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textAlignment="viewEnd"
-                android:gravity="center"
                 android:layout_column="1"
-                android:textSize="15dp"
+                android:layout_margin="10dp"
+                android:gravity="center"
                 android:text="@string/musical_genres"
+                android:textAlignment="viewEnd"
                 android:textColor="@color/black"
+                android:textSize="15dp"
                 tools:ignore="RtlCompat" />
 
             <Spinner
                 android:id="@+id/spinnerGenres"
+                android:layout_column="2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textSize="15dp" />
@@ -238,32 +242,49 @@
         </TableRow>
     </TableLayout>
 
-    <Button
-        android:id="@+id/buttonEdit"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:text="@string/edit_profile"
-        android:background="@android:drawable/list_selector_background"
-        android:textAlignment="center"
-        android:textColor="#0000FF"
-        android:layout_marginTop="12dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/buttonLogout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/table"/>
-
-    <Button
-        android:id="@+id/buttonLogout"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:text="@string/logout"
-        android:background="@android:drawable/list_selector_background"
-        android:textAlignment="center"
-        android:textColor="#0000FF"
-        android:layout_marginTop="12dp"
+    <TableLayout
+        android:id="@+id/bottomRow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:stretchColumns="1"
+        app:layout_constraintTop_toBottomOf="@+id/table"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/buttonEdit"
-        app:layout_constraintTop_toBottomOf="@id/table"/>
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="45dp" >
+
+            <Button
+                android:id="@+id/buttonEdit"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_column="0"
+                android:background="@android:drawable/list_selector_background"
+                android:text="@string/edit_profile"
+                android:textAlignment="center"
+                android:textColor="#0000FF" />
+
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_column="1"
+                android:src="@drawable/ic_baseline_map_24" />
+
+            <Button
+                android:id="@+id/buttonLogout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_column="2"
+                android:background="@android:drawable/list_selector_background"
+                android:text="@string/logout"
+                android:textAlignment="center"
+                android:textColor="@color/design_default_color_error" />
+        </TableRow>
+    </TableLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

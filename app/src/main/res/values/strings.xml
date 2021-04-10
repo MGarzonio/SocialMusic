@@ -27,6 +27,7 @@
     <string name="edit_profile">Edit profile</string>
     <string name="logout">Logout</string>
     <string name="address">Address</string>
-    <string name="sing_in_done" >Registered, check your e-mail box!</string>
+    <string name="sing_in_done">Registered, check your e-mail box!</string>
     <string name="empty_string">This field cannot be empty!</string>
+    <string name="title_activity_maps">Map</string>
 </resources>

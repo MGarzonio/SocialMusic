@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
+import androidx.navigation.findNavController
 import java.util.regex.Pattern
 
 class SingInActivity : AppCompatActivity() {
@@ -17,6 +18,7 @@ class SingInActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sing_in)
+
         mail = findViewById<EditText>(R.id.editTextEmail)
         password = findViewById<EditText>(R.id.editTextPassword)
         nick = findViewById<EditText>(R.id.editTextNickname)

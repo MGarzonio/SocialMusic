@@ -2,16 +2,15 @@
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.method.KeyListener
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_profile.*
 
-class ProfileFragment : Fragment(), View.OnClickListener {
+ class ProfileFragment : Fragment(), View.OnClickListener {
 
     private lateinit var nickname : EditText
     private lateinit var name : EditText
@@ -33,7 +32,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         mail = view.findViewById<EditText>(R.id.editTextEmail)
         btnEdit.setOnClickListener(this)
         btnLogout.setOnClickListener(this)
-        
+
         loadProfile()
 
         return view
@@ -44,12 +43,11 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         when (v?.id) {
             R.id.buttonEdit -> {
                 btn = (view?.findViewById<Button>(R.id.buttonEdit)) as Button
-                if(editable) {   // click save
+                if (editable) {   // click save
                     btn.text = "Edit profile"
                     editable = false
                     switchEditable()
-                }
-                else{           //click edit
+                } else {           //click edit
                     btn.text = "Save"
                     editable = true
                     switchEditable()
@@ -74,18 +72,15 @@ class ProfileFragment : Fragment(), View.OnClickListener {
 
     private fun loadProfile(){
        switchEditable()
-
         nickname.setText("Garzu")
         name.setText("Mattia")
         surname.setText("Garzonio")
         address.setText("Via Don Selva 9, Somma Lombardo")
         mail.setText("mgarzonio@studenti.uninsubria.it")
-
     }
 
     private fun doLogout(){
-        val intent = Intent (activity, MainActivity::class.java)
+        val intent = Intent(activity, MainActivity::class.java)
         activity?.startActivity(intent)
     }
-
-}
+ }

@@ -4,34 +4,52 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SingInActivity"
-    android:padding="24dp"
-    android:background="@color/white" >
+    tools:context=".ProfileFragment"
+    android:background="@color/white"
+    android:padding="12dp">
+
+    <ImageButtonButton
+        android:id="@+id/mapView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="24dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="12dp"
         android:contentDescription="@string/profile_picture"
+        app:layout_constraintBottom_toTopOf="@id/mapView"
         app:layout_constraintDimensionRatio="H,1:1"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/table"
         app:srcCompat="@mipmap/default_profile" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
 
     <TableLayout
         android:id="@+id/table"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:layout_marginStart="12dp"
         android:stretchColumns="2"
-        android:layout_marginBottom="24dp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonSingIn"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView">
+        app:layout_constraintStart_toStartOf="@id/guideline"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TableRow
             android:layout_width="match_parent"
@@ -205,6 +223,7 @@
 
             <Spinner
                 android:id="@+id/spinnerInstruments"
+                android:layout_column="2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textSize="15dp" />
@@ -236,21 +255,34 @@
                 android:textSize="15dp" />
 
         </TableRow>
+        <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:minHeight="45dp">
 
+            <Button
+                android:id="@+id/buttonLogout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_column="1"
+                android:background="@android:drawable/list_selector_background"
+                android:text="@string/logout"
+                android:textAlignment="center"
+                android:textColor="@color/design_default_color_error" />
+
+            <Button
+                android:id="@+id/buttonEdit"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_column="2"
+                android:background="@android:drawable/list_selector_background"
+                android:text="@string/edit_profile"
+                android:textAlignment="center"
+                android:textColor="#0000FF" />
+
+
+        </TableRow>
     </TableLayout>
 
-    <Button
-        android:id="@+id/buttonSingIn"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@android:drawable/list_selector_background"
-        android:onClick="doSingIn"
-        android:text="@string/sing_in"
-        android:textAlignment="center"
-        android:textColor="#0000FF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/buttonLogout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="table" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
