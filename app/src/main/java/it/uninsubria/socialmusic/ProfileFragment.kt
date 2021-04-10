@@ -17,6 +17,7 @@ import kotlinx.android.synthetic.main.fragment_profile.*
     private lateinit var surname : EditText
     private lateinit var address : EditText
     private lateinit var mail : EditText
+    private lateinit var edit : Button
     private var editable = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -24,42 +25,55 @@ import kotlinx.android.synthetic.main.fragment_profile.*
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
         val btnLogout = view.findViewById<Button>(R.id.buttonLogout)
         val btnEdit = view.findViewById<Button>(R.id.buttonEdit)
+        val btnMaps = view.findViewById<Button>(R.id.mapsButton)
 
         nickname = view.findViewById<EditText>(R.id.editTextNickname)
         name = view.findViewById<EditText>(R.id.editTextName)
         surname = view.findViewById<EditText>(R.id.editTextSurname)
         address = view.findViewById<EditText>(R.id.editTextAddress)
         mail = view.findViewById<EditText>(R.id.editTextEmail)
+        edit = view.findViewById<Button>(R.id.buttonEdit)
+
         btnEdit.setOnClickListener(this)
         btnLogout.setOnClickListener(this)
+        btnMaps.setOnClickListener(this)
 
         loadProfile()
 
         return view
     }
 
-    override fun onClick(v: View?) {
-        val btn : Button
-        when (v?.id) {
+    override fun onClick(view: View) {
+        when (view.id) {
             R.id.buttonEdit -> {
-                btn = (view?.findViewById<Button>(R.id.buttonEdit)) as Button
-                if (editable) {   // click save
-                    btn.text = "Edit profile"
-                    editable = false
-                    switchEditable()
-                } else {           //click edit
-                    btn.text = "Save"
-                    editable = true
-                    switchEditable()
-                }
                 doEditProfile()
             }
-            R.id.buttonLogout -> doLogout()
+            R.id.buttonLogout -> {
+                doLogout(view)
+            }
+            R.id.mapsButton -> {
+                openMaps(view)
+            }
         }
     }
 
+     private fun openMaps(view: View) {
+         val intent = Intent(activity, MapsActivity::class.java)
+         intent.putExtra("address", address.text.toString())
+         intent.putExtra("nickname", nickname.text.toString())
+         startActivity(intent)
+     }
+
     private fun doEditProfile(){
-        editTextNickname
+        if (editable) {   // click save
+            edit.text = getString(R.string.edit_profile)
+            editable = false
+            switchEditable()
+        } else {           //click edit
+            edit.text = getString(R.string.save)
+            editable = true
+            switchEditable()
+        }
     }
 
     private fun switchEditable(){
@@ -79,8 +93,8 @@ import kotlinx.android.synthetic.main.fragment_profile.*
         mail.setText("mgarzonio@studenti.uninsubria.it")
     }
 
-    private fun doLogout(){
+    private fun doLogout(view: View){
         val intent = Intent(activity, MainActivity::class.java)
-        activity?.startActivity(intent)
+        startActivity(intent)
     }
  }

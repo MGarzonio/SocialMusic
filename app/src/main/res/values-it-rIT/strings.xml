@@ -7,7 +7,7 @@
     <string name="sing_in">Registrati</string>
     <string name="forgot_password">Password dimenticata</string>
     <string name="logo">logo</string>
-    <string name="forgot_message">Inserisci il tuo indirizzo di posta elettronica.\\nVerrà inviata una nuova password da utilizzare al primo accesso.</string>
+    <string name="forgot_message">Inserisci il tuo indirizzo di posta elettronica. Verrà inviata una nuova password da utilizzare al primo accesso.</string>
     <string name="submit">Invia</string>
     <string name="profile_picture">Foto profilo</string>
     <string name="name">Nome</string>
@@ -24,4 +24,7 @@
     <string name="sing_in_done">Registrazione effettuata, controlla la tua casella di posta elettronica!</string>
     <string name="empty_string">Questo campo non può essere vuoto!</string>
     <string name="edit_profile">Modifica profilo</string>
+    <string name="save">Salva</string>
+    <string name="title_activity_maps">maps</string>
+    <string name="title_activity_home">home</string>
 </resources>

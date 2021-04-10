@@ -5,18 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ProfileFragment"
-    android:background="@color/white"
-    android:padding="12dp">
-
-    <ImageButtonButton
-        android:id="@+id/mapView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="12dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+    android:background="@color/white">
 
     <ImageView
         android:id="@+id/imageView"
@@ -25,13 +14,23 @@
         android:layout_marginEnd="12dp"
         android:layout_marginBottom="12dp"
         android:contentDescription="@string/profile_picture"
-        app:layout_constraintBottom_toTopOf="@id/mapView"
+        app:layout_constraintBottom_toTopOf="@id/mapsButton"
         app:layout_constraintDimensionRatio="H,1:1"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@mipmap/default_profile" />
 
+    <ImageView
+        android:id="@+id/mapsButton"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        android:src="@drawable/common_google_signin_btn_icon_dark" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -283,6 +282,5 @@
 
         </TableRow>
     </TableLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

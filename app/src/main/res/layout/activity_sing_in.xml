@@ -251,6 +251,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/buttonLogout"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="table" />
+        app:layout_constraintTop_toBottomOf="@id/table" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,7 +6,7 @@
     <string name="sing_in">Sing in</string>
     <string name="forgot_password">Forgot password</string>
     <string name="logo">logo</string>
-    <string name="forgot_message">Please enter your e-mail address.\\nA new password will be sent to be used on first login.</string>
+    <string name="forgot_message">Please enter your e-mail address. A new password will be sent to be used on first login.</string>
     <string name="submit">Submit</string>
     <string name="profile_picture">Profile picture</string>
     <string name="nickame" translatable="false">Nickame</string>
@@ -14,11 +14,6 @@
     <string name="surname">Surname</string>
     <string name="musical_instruments">Instruments</string>
     <string name="musical_genres">Genres</string>
-    <string name="title_activity_home" translatable="false">MainActivity</string>
-    <string name="title_home" translatable="false">Home</string>
-    <string name="title_dashboard" translatable="false">Dashboard</string>
-    <string name="title_notifications" translatable="false">Notifications</string>
-    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="mail_error">Please enter a valid email address!</string>
     <string name="mail_sent">Recovery mail sent!</string>
     <string name="account_not_found">Account does not exist!</string>
@@ -29,5 +24,7 @@
     <string name="address">Address</string>
     <string name="sing_in_done">Registered, check your e-mail box!</string>
     <string name="empty_string">This field cannot be empty!</string>
-    <string name="title_activity_maps">Map</string>
+    <string name="save">Save</string>
+    <string name="title_activity_maps">maps</string>
+    <string name="title_activity_home">home</string>
 </resources>

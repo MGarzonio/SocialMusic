@@ -268,12 +268,15 @@
                 android:textAlignment="center"
                 android:textColor="#0000FF" />
 
-            <ImageButton
-                android:id="@+id/imageButton"
+            <Button
+                android:id="@+id/mapsButton"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_column="1"
-                android:src="@drawable/ic_baseline_map_24" />
+                android:background="@android:drawable/list_selector_background"
+                android:text="Maps"
+                android:textAlignment="center"
+                android:textColor="@color/teal_200" />
 
             <Button
                 android:id="@+id/buttonLogout"

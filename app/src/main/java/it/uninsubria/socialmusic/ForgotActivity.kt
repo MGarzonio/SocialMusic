@@ -15,7 +15,7 @@ class ForgotActivity : AppCompatActivity() {
     }
 
     private fun isValidPassword(psw: String): Boolean {
-        return psw != null && psw.length >= 4
+        return psw.length >= 4
     }
     private fun isValidEmail(email: String): Boolean {
         val emailPattern = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
@@ -24,7 +24,7 @@ class ForgotActivity : AppCompatActivity() {
         return matcher.matches()
     }
 
-    private fun sendRecoveryMail(email :String) :Boolean {
+    private fun sendRecoveryMail() :Boolean {
         /*
 
             TODO Recovery password
@@ -40,7 +40,7 @@ class ForgotActivity : AppCompatActivity() {
             mail.error = getString(R.string.mail_error)
             checkError = true
         }
-        if (!checkError) if (sendRecoveryMail(mail.text.toString())) {
+        if (!checkError) if (sendRecoveryMail()) {
             Toast.makeText(applicationContext, getString(R.string.mail_sent), Toast.LENGTH_SHORT).show()
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
