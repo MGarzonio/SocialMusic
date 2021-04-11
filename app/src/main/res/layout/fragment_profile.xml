@@ -12,10 +12,7 @@
         android:id="@+id/imageView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="12dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginBottom="12dp"
+        android:layout_margin="12dp"
         android:contentDescription="@string/profile_picture"
         app:layout_constraintBottom_toTopOf="@id/table"
         app:layout_constraintDimensionRatio="H,1:1"
@@ -28,12 +25,12 @@
         android:id="@+id/table"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:stretchColumns="1"
         android:gravity="center"
-        android:stretchColumns="2"
         app:layout_constraintBottom_toTopOf="@id/bottomRow"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView">
+        app:layout_constraintTop_toBottomOf="@id/imageView">
 
         <TableRow
             android:layout_width="match_parent"
@@ -44,8 +41,7 @@
                 android:id="@+id/textViewNickname"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_column="1"
-                android:layout_margin="10dp"
+                android:layout_column="0"
                 android:gravity="center"
                 android:text="@string/nickame"
                 android:textAlignment="viewEnd"
@@ -58,8 +54,9 @@
                 android:id="@+id/editTextNickname"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_column="2"
+                android:layout_column="1"
                 android:autofillHints=""
+                android:layout_margin="10dp"
                 android:ems="10"
                 android:gravity="center"
                 android:inputType="textMultiLine"
@@ -76,8 +73,7 @@
                 android:id="@+id/textViewName"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_column="1"
-                android:layout_margin="10dp"
+                android:layout_column="0"
                 android:gravity="center"
                 android:text="@string/name"
                 android:textAlignment="viewEnd"
@@ -89,7 +85,8 @@
                 android:id="@+id/editTextName"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_column="2"
+                android:layout_column="1"
+                android:layout_margin="10dp"
                 android:ems="10"
                 android:gravity="center"
                 android:inputType="textMultiLine"
@@ -106,8 +103,7 @@
                 android:id="@+id/textViewSurname"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_column="1"
-                android:layout_margin="10dp"
+                android:layout_column="0"
                 android:gravity="center"
                 android:text="@string/surname"
                 android:textAlignment="viewEnd"
@@ -119,7 +115,8 @@
                 android:id="@+id/editTextSurname"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_column="2"
+                android:layout_column="1"
+                android:layout_margin="10dp"
                 android:ems="10"
                 android:gravity="center"
                 android:inputType="textMultiLine"
@@ -136,8 +133,7 @@
                 android:id="@+id/textAddress"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_column="1"
-                android:layout_margin="10dp"
+                android:layout_column="0"
                 android:gravity="center"
                 android:text="@string/address"
                 android:textAlignment="viewEnd"
@@ -149,7 +145,8 @@
                 android:id="@+id/editTextAddress"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_column="2"
+                android:layout_column="1"
+                android:layout_margin="10dp"
                 android:ems="10"
                 android:gravity="center"
                 android:inputType="textMultiLine"
@@ -166,8 +163,7 @@
                 android:id="@+id/textViewEmail"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_column="1"
-                android:layout_margin="10dp"
+                android:layout_column="0"
                 android:gravity="center"
                 android:text="@string/email"
                 android:textAlignment="viewEnd"
@@ -179,7 +175,8 @@
                 android:id="@+id/editTextEmail"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_column="2"
+                android:layout_column="1"
+                android:layout_margin="10dp"
                 android:ems="10"
                 android:gravity="center"
                 android:inputType="textMultiLine"
@@ -196,8 +193,7 @@
                 android:id="@+id/textViewInstruments"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_column="1"
-                android:layout_margin="10dp"
+                android:layout_column="0"
                 android:gravity="center"
                 android:text="@string/musical_instruments"
                 android:textAlignment="viewEnd"
@@ -209,8 +205,17 @@
                 android:id="@+id/spinnerInstruments"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_column="2"
+                android:layout_margin="10dp"
+                android:layout_column="1"
                 android:textSize="15dp" />
+
+            <ImageView
+                android:id="@+id/editInstruments"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_column="2"
+                android:src="@mipmap/edit_foreground" />
+
 
         </TableRow>
 
@@ -223,8 +228,7 @@
                 android:id="@+id/textViewGenres"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_column="1"
-                android:layout_margin="10dp"
+                android:layout_column="0"
                 android:gravity="center"
                 android:text="@string/musical_genres"
                 android:textAlignment="viewEnd"
@@ -234,10 +238,18 @@
 
             <Spinner
                 android:id="@+id/spinnerGenres"
-                android:layout_column="2"
+                android:layout_column="1"
+                android:layout_margin="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textSize="15dp" />
+
+            <ImageView
+                android:id="@+id/editGenres"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_column="2"
+                android:src="@mipmap/edit_foreground" />
 
         </TableRow>
     </TableLayout>
@@ -268,22 +280,24 @@
                 android:textAlignment="center"
                 android:textColor="#0000FF" />
 
-            <ImageView
-                android:id="@+id/mapsButton"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_column="1"
-                android:src="@mipmap/google_maps_foreground" />
-
             <Button
                 android:id="@+id/buttonLogout"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_column="2"
+                android:layout_column="1"
                 android:background="@android:drawable/list_selector_background"
                 android:text="@string/logout"
                 android:textAlignment="center"
                 android:textColor="@color/design_default_color_error" />
+
+            <ImageView
+                android:id="@+id/mapsButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_column="2"
+                android:src="@mipmap/google_maps_foreground" />
+
+
         </TableRow>
     </TableLayout>
 
