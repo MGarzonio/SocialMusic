@@ -1,14 +1,16 @@
  package it.uninsubria.socialmusic
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
-import kotlinx.android.synthetic.main.fragment_profile.*
 
  class ProfileFragment : Fragment(), View.OnClickListener {
 
@@ -24,8 +26,7 @@ import kotlinx.android.synthetic.main.fragment_profile.*
 
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
         val btnLogout = view.findViewById<Button>(R.id.buttonLogout)
-        val btnEdit = view.findViewById<Button>(R.id.buttonEdit)
-        val btnMaps = view.findViewById<Button>(R.id.mapsButton)
+        val btnMap = view.findViewById<ImageView>(R.id.mapsButton)
 
         nickname = view.findViewById<EditText>(R.id.editTextNickname)
         name = view.findViewById<EditText>(R.id.editTextName)
@@ -34,9 +35,9 @@ import kotlinx.android.synthetic.main.fragment_profile.*
         mail = view.findViewById<EditText>(R.id.editTextEmail)
         edit = view.findViewById<Button>(R.id.buttonEdit)
 
-        btnEdit.setOnClickListener(this)
+        edit.setOnClickListener(this)
         btnLogout.setOnClickListener(this)
-        btnMaps.setOnClickListener(this)
+        btnMap.setOnClickListener(this)
 
         loadProfile()
 
@@ -45,15 +46,9 @@ import kotlinx.android.synthetic.main.fragment_profile.*
 
     override fun onClick(view: View) {
         when (view.id) {
-            R.id.buttonEdit -> {
-                doEditProfile()
-            }
-            R.id.buttonLogout -> {
-                doLogout(view)
-            }
-            R.id.mapsButton -> {
-                openMaps(view)
-            }
+            R.id.buttonEdit -> doEditProfile()
+            R.id.buttonLogout -> doLogout(view)
+            R.id.mapsButton -> openMaps(view)
         }
     }
 
