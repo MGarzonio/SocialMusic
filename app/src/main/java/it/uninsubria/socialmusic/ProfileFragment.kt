@@ -1,15 +1,12 @@
  package it.uninsubria.socialmusic
 
-import android.content.Context
 import android.content.Intent
-import android.media.tv.TvContract
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
-import kotlinx.android.synthetic.main.fragment_profile.*
 
  class ProfileFragment : Fragment(), View.OnClickListener {
 
@@ -19,27 +16,21 @@ import kotlinx.android.synthetic.main.fragment_profile.*
      private lateinit var address: EditText
      private lateinit var mail: EditText
      private lateinit var btnProfile: Button
-     private lateinit var btnGenres: ImageView
-     private lateinit var btnInstruments: ImageView
-     private lateinit var instrumentList: Spinner
-     private lateinit var genresList: Spinner
 
      override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-         val view = inflater.inflate(R.layout.fragment_profile, container, false)
-         val btnLogout = view.findViewById<Button>(R.id.buttonLogout)
-         val btnMap = view.findViewById<ImageView>(R.id.mapsButton)
+         val view = inflater.inflate(R.layout.fragment_profile, container, false) as View
+         val btnMap = view.findViewById(R.id.mapsButton) as ImageView
+         val btnLogout = view.findViewById(R.id.buttonLogout) as Button
+         val btnGenres = view.findViewById(R.id.buttonGenres) as Button
+         val btnInstruments = view.findViewById(R.id.buttonInstruments) as Button
 
-         nickname = view.findViewById(R.id.editTextNickname)
-         name = view.findViewById(R.id.editTextName)
-         surname = view.findViewById(R.id.editTextSurname)
-         address = view.findViewById(R.id.editTextAddress)
-         mail = view.findViewById(R.id.editTextEmail)
-         btnProfile = view.findViewById(R.id.buttonEdit)
-         btnGenres = view.findViewById(R.id.editGenres)
-         btnInstruments = view.findViewById(R.id.editInstruments)
-         instrumentList = view.findViewById(R.id.spinnerInstruments)
-         genresList = view.findViewById(R.id.spinnerGenres)
+         nickname = view.findViewById(R.id.editTextNickname) as EditText
+         name = view.findViewById(R.id.editTextName) as EditText
+         surname = view.findViewById(R.id.editTextSurname) as EditText
+         address = view.findViewById(R.id.editTextAddress) as EditText
+         mail = view.findViewById(R.id.editTextEmail) as EditText
+         btnProfile = view.findViewById(R.id.buttonEdit) as Button
 
          btnProfile.setOnClickListener(this)
          btnLogout.setOnClickListener(this)
@@ -47,7 +38,7 @@ import kotlinx.android.synthetic.main.fragment_profile.*
          btnGenres.setOnClickListener(this)
          btnInstruments.setOnClickListener(this)
 
-         loadProfile(view.context)
+         loadProfile()
 
          return view
      }
@@ -57,23 +48,22 @@ import kotlinx.android.synthetic.main.fragment_profile.*
              R.id.buttonEdit -> doEditProfile()
              R.id.buttonLogout -> doLogout(view)
              R.id.mapsButton -> openMaps(view)
-             R.id.editInstruments -> changeInstruments()
-             R.id.editGenres -> changeGenres()
+             R.id.buttonInstruments -> openInstruments(view)
+             R.id.buttonGenres -> openGenres(view)
          }
-     }
-
-     private fun openMaps(view: View) {
-         val intent = Intent(activity, MapsActivity::class.java)
-         intent.putExtra("address", address.text.toString())
-         intent.putExtra("nickname", nickname.text.toString())
-         startActivity(intent)
      }
 
      private fun doEditProfile() {
          when(btnProfile.text.toString()) {
-             getString(R.string.save) -> switchEditable(false)
+             getString(R.string.save) -> saveProfile()
              getString(R.string.edit_profile) -> switchEditable(true)
          }
+     }
+
+     private fun saveProfile() {
+         switchEditable(false)
+
+         //TODO load new values on firebase
      }
 
      private fun switchEditable(modifiable: Boolean) {
@@ -83,33 +73,16 @@ import kotlinx.android.synthetic.main.fragment_profile.*
          address.isEnabled = modifiable
          mail.isEnabled = modifiable
          when(modifiable){
-             true -> {
-                 btnProfile.text = getString(R.string.save)
-                 btnGenres.visibility = View.VISIBLE
-                 btnInstruments.visibility = View.VISIBLE
-             }
-             false -> {
-                 btnProfile.text = getString(R.string.edit_profile)
-                 btnGenres.visibility = View.GONE
-                 btnInstruments.visibility = View.GONE
-             }
+             true -> btnProfile.text = getString(R.string.save)
+             false ->  btnProfile.text = getString(R.string.edit_profile)
          }
      }
 
-     private fun loadProfile(context: Context) {
+     private fun loadProfile() {
 
          switchEditable(false)
 
-         //TODO() load data from firebase
-
-         val adapterGenres = ArrayAdapter(context, android.R.layout.simple_spinner_item, arrayOf<String>("Death metal", "Trash metal", "Heavy metal"))
-         val adapterInstruments = ArrayAdapter(context, android.R.layout.simple_spinner_item, arrayOf<String>("Drum", "Electric triangle"))
-
-         adapterGenres.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-         adapterInstruments.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-
-         //spinnerGenres.adapter = adapterGenres
-         //spinnerInstruments.adapter = adapterInstruments
+         //TODO load data from firebase with user's email as key
 
          nickname.setText("Garzu")
          name.setText("Mattia")
@@ -118,16 +91,25 @@ import kotlinx.android.synthetic.main.fragment_profile.*
          mail.setText("mgarzonio@studenti.uninsubria.it")
      }
 
-     private fun changeGenres(){
-
-     }
-
-     private fun changeInstruments(){
-
-     }
-
-     private fun doLogout(view: View) {
-         val intent = Intent(activity, MainActivity::class.java)
+     private fun openGenres(view: View) {
+         val intent = Intent(activity, GenresActivity::class.java)
+         intent.putExtra("mail", mail.text.toString())
          startActivity(intent)
      }
+
+     private fun openInstruments(view: View) {
+         val intent = Intent(activity, InstrumentsActivity::class.java)
+         intent.putExtra("mail", mail.text.toString())
+         startActivity(intent)
+     }
+
+     private fun openMaps(view: View) {
+         val intent = Intent(activity, MapsActivity::class.java)
+         intent.putExtra("address", address.text.toString())
+         intent.putExtra("nickname", nickname.text.toString())
+         startActivity(intent)
+     }
+
+     private fun doLogout(view: View) { startActivity(Intent(activity, MainActivity::class.java)) }
+
  }

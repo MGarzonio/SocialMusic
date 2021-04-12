@@ -12,8 +12,8 @@
     <string name="nickame" translatable="false">Nickame</string>
     <string name="name">Name</string>
     <string name="surname">Surname</string>
-    <string name="musical_instruments">Instruments</string>
-    <string name="musical_genres">Genres</string>
+    <string name="musical_instruments">Muscial instruments</string>
+    <string name="musical_genres">Musical genres</string>
     <string name="mail_error">Please enter a valid email address!</string>
     <string name="mail_sent">Recovery mail sent!</string>
     <string name="account_not_found">Account does not exist!</string>
