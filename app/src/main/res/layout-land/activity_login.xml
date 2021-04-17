@@ -81,7 +81,7 @@
         android:layout_marginStart="12dp"
         android:background="@android:drawable/list_selector_background"
         android:onClick="openSingIn"
-        android:text="@string/sing_in"
+        android:text="@string/sing_up"
         android:textColor="#0000FF"
         app:layout_constraintBottom_toTopOf="@id/buttonForgot"
         app:layout_constraintEnd_toEndOf="parent"

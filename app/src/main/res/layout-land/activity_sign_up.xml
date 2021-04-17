@@ -252,7 +252,7 @@
         android:layout_height="wrap_content"
         android:background="@android:drawable/list_selector_background"
         android:onClick="doSingIn"
-        android:text="@string/sing_in"
+        android:text="@string/sing_up"
         android:textAlignment="center"
         android:textColor="#0000FF"
         android:layout_marginStart="12dp"

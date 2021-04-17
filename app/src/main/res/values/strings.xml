@@ -2,7 +2,7 @@
     <string name="app_name">SocialMusic</string>
     <string name="password">Password</string>
     <string name="email">Email address</string>
-    <string name="sing_in">Sing in</string>
+    <string name="sing_up">SIGN UP</string>
     <string name="forgot_password">Forgot password</string>
     <string name="logo">logo</string>
     <string name="forgot_message">Please enter your e-mail address. A new password will be sent to be used on first login.</string>

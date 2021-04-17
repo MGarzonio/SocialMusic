@@ -4,7 +4,7 @@
     <string name="login">Accedi</string>
     <string name="password">Password</string>
     <string name="email">Indirizzo mail</string>
-    <string name="sing_in">Registrati</string>
+    <string name="sing_up">Registrati</string>
     <string name="forgot_password">Password dimenticata</string>
     <string name="logo">logo</string>
     <string name="forgot_message">Inserisci il tuo indirizzo di posta elettronica. Verrà inviata una nuova password da utilizzare al primo accesso.</string>
