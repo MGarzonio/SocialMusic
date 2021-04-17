@@ -42,7 +42,7 @@ class ForgotActivity : AppCompatActivity() {
         }
         if (!checkError) if (sendRecoveryMail()) {
             Toast.makeText(applicationContext, getString(R.string.mail_sent), Toast.LENGTH_SHORT).show()
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         } else {
             Toast.makeText(applicationContext, getString(R.string.account_not_found), Toast.LENGTH_LONG).show()

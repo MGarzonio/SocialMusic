@@ -7,14 +7,14 @@ import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import it.uninsubria.socialmusic.home.HomeActivity
 
-class MainActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity() {
 
     private lateinit var mail : EditText
     private lateinit var password : EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_login)
 
         mail = findViewById<EditText>(R.id.editTextUsername)
         password = findViewById<EditText>(R.id.editTextPassword)
@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun openSingIn(view: View) {
-        val intent = Intent(this, SingInActivity::class.java)
+        val intent = Intent(this, SignUpActivity::class.java)
         startActivity(intent)
     }
 

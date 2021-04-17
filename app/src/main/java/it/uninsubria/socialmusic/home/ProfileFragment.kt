@@ -111,6 +111,6 @@ import it.uninsubria.socialmusic.*
          startActivity(intent)
      }
 
-     private fun doLogout(view: View) { startActivity(Intent(activity, MainActivity::class.java)) }
+     private fun doLogout(view: View) { startActivity(Intent(activity, LoginActivity::class.java)) }
 
  }
