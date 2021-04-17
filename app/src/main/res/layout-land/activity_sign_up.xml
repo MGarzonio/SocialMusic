@@ -247,11 +247,10 @@
     </TableLayout>
 
     <Button
-        android:id="@+id/buttonSignUp"
+        android:id="@+id/buttonSignUpLand"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@android:drawable/list_selector_background"
-        android:onClick="doSingIn"
         android:text="@string/sing_up"
         android:textAlignment="center"
         android:textColor="#0000FF"

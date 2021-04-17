@@ -8,35 +8,6 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:588696481666:android:1706185f122ed8534de99b",
-        "android_client_info": {
-          "package_name": "com.example.chatprojectlogin"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "588696481666-2udjce4nfqkvvlsp3d8qjtbbta5q3eeu.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyA3wgyzdkP_Q2IHfSioz3cC4_Hd_hNW9Sk"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "588696481666-2udjce4nfqkvvlsp3d8qjtbbta5q3eeu.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
         "mobilesdk_app_id": "1:588696481666:android:de6a28a6ad963e2b4de99b",
         "android_client_info": {
           "package_name": "it.uninsubria.socialmusic"

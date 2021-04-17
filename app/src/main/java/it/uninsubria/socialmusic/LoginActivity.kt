@@ -23,8 +23,8 @@ class LoginActivity : AppCompatActivity() {
             performLogin()
             Log.d(TAG, "Logging in...")
         }
-        signUp_button_signUp.setOnClickListener {
-            openSingIn()
+        buttonSignUp.setOnClickListener {
+            openSingUp()
         }
         buttonForgot.setOnClickListener {
             openForgot()
@@ -56,7 +56,7 @@ class LoginActivity : AppCompatActivity() {
                 Log.d(TAG, "Login failed! ${it.message}")
             }
     }
-    fun openSingIn() {
+    fun openSingUp() {
         val intent = Intent(this, SignUpActivity::class.java)
         startActivity(intent)
     }
