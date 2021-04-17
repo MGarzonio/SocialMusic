@@ -12,33 +12,26 @@
         android:id="@+id/imageView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="24dp"
         android:contentDescription="@string/profile_picture"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="H,1:1"
-        app:layout_constraintEnd_toStartOf="@id/guideline"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/table"
         app:srcCompat="@mipmap/default_profile" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5" />
 
     <TableLayout
         android:id="@+id/table"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:stretchColumns="2"
-        android:layout_marginStart="12dp"
         android:gravity="center"
-        app:layout_constraintBottom_toTopOf="@+id/buttonSingIn"
+        android:stretchColumns="2"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonSignUp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView">
 
         <TableRow
             android:layout_width="match_parent"
@@ -52,7 +45,7 @@
                 android:layout_column="1"
                 android:layout_margin="10dp"
                 android:gravity="center"
-                android:text="@string/nickame"
+                android:text="@string/username"
                 android:textAlignment="viewEnd"
                 android:textColor="@color/black"
                 android:textSize="15dp"
@@ -247,18 +240,17 @@
     </TableLayout>
 
     <Button
-        android:id="@+id/buttonSingIn"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:id="@+id/buttonSignUp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
         android:background="@android:drawable/list_selector_background"
         android:onClick="doSingIn"
         android:text="@string/sing_in"
         android:textAlignment="center"
         android:textColor="#0000FF"
-        android:layout_marginStart="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/table" />
+        app:layout_constraintEnd_toStartOf="@+id/buttonLogout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/table" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

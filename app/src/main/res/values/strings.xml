@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">SocialMusic</string>
-    <string name="login">Login</string>
     <string name="password">Password</string>
     <string name="email">Email address</string>
     <string name="sing_in">Sing in</string>
@@ -9,7 +8,7 @@
     <string name="forgot_message">Please enter your e-mail address. A new password will be sent to be used on first login.</string>
     <string name="submit">Submit</string>
     <string name="profile_picture">Profile picture</string>
-    <string name="nickame" translatable="false">Nickame</string>
+    <string name="username" translatable="false">Nickame</string>
     <string name="name">Name</string>
     <string name="surname">Surname</string>
     <string name="musical_instruments">Muscial instruments</string>
@@ -27,4 +26,17 @@
     <string name="save">Save</string>
     <string name="title_activity_maps">maps</string>
     <string name="title_activity_home">home</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="login">LOGIN</string>
+    <string name="back_to_register_page" translatable="false">Back to register page</string>
+    <string name="invalidEmail">This email address is not valid!</string>
+    <string name="invalidPassword">This password is not valid!! Must have at least 6 characters.</string>
+    <string name="empty_user_psw">Please, enter email address and password!</string>
+    <string name="creation_success">User created successfully!</string>
+    <string name="creation_failure">User creation failure!</string>
+    <string name="login_failed">Login failed!</string>
+    <string name="select_photo">SELECT PHOTO</string>
+    <string name="update_success">Image update successfully!</string>
+    <string name="msg_token_fmt" translatable="false"></string>
+
 </resources>

@@ -27,4 +27,13 @@
     <string name="save">Salva</string>
     <string name="title_activity_maps">maps</string>
     <string name="title_activity_home">home</string>
+    <string name="already_have_an_account">Hai già un account?</string>
+    <string name="invalidEmail">Email non valida!</string>
+    <string name="invalidPassword">Password non valida! Deve contenere almeno 6 caratteri.</string>
+    <string name="empty_user_psw">Inserisci Email e Password!</string>
+    <string name="creation_success">Utente Creato correttamente!</string>
+    <string name="creation_failure">Registrazione utente fallita!</string>
+    <string name="login_failed">Login fallito!</string>
+    <string name="select_photo">SELEZIONA FOTO</string>
+    <string name="update_success">Immagine caricata con successo!</string>
 </resources>

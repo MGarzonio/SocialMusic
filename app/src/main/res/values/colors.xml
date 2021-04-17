@@ -8,4 +8,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="gray">#808080</color>
+    <color name="light_green">@android:color/holo_green_light</color>
+    <color name="dark_green">#059138</color>
+    <color name="gray_hint">#80636262</color>
+    <color name="black_text">@android:color/secondary_text_light</color>
+    <color name="white_text">@android:color/primary_text_dark</color>
 </resources>
