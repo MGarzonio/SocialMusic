@@ -38,5 +38,6 @@
     <string name="select_photo">SELECT PHOTO</string>
     <string name="update_success">Image update successfully!</string>
     <string name="msg_token_fmt" translatable="false"></string>
+    <string name="sign_up">SIGN UP</string>
 
 </resources>
