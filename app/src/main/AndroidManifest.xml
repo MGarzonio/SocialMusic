@@ -26,7 +26,7 @@
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
         <activity
-            android:name=".HomeActivity"
+            android:name=".home.HomeActivity"
             android:label="@string/title_activity_home" />
         <activity android:name=".ForgotActivity" />
         <activity

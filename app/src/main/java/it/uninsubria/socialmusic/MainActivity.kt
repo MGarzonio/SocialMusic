@@ -4,10 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_main.*
-import java.util.regex.Pattern
+import it.uninsubria.socialmusic.home.HomeActivity
 
 class MainActivity : AppCompatActivity() {
 
