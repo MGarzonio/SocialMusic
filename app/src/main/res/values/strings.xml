@@ -39,5 +39,6 @@
     <string name="update_success">Image update successfully!</string>
     <string name="msg_token_fmt" translatable="false"></string>
     <string name="sign_up">SIGN UP</string>
+    <string name="no_messages">No Messages Yet!</string>
 
 </resources>

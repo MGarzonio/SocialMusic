@@ -37,4 +37,5 @@
     <string name="select_photo">SELEZIONA FOTO</string>
     <string name="update_success">Immagine caricata con successo!</string>
     <string name="sign_up">REGISTRATI</string>
+    <string name="no_messages">Non ci sono messaggi!</string>
 </resources>
