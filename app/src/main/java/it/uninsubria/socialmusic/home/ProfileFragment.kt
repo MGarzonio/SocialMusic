@@ -99,9 +99,9 @@ import it.uninsubria.socialmusic.*
      }
 
      private fun openInstruments(view: View) {
-         //val intent = Intent(activity, InstrumentsActivity::class.java)
-         //intent.putExtra("mail", mail.text.toString())
-         //startActivity(intent)
+         /*val intent = Intent(activity, InstrumentsActivity::class.java)
+         intent.putExtra("mail", mail.text.toString())
+         startActivity(intent)*/
      }
 
      private fun openMaps(view: View) {
