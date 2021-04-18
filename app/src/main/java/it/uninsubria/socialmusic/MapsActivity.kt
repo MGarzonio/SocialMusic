@@ -4,6 +4,7 @@ import android.content.Context
 import android.location.Geocoder
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -16,8 +17,8 @@ import kotlin.properties.Delegates
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
-    private var address : String? = null
-    private var nickname : String? = null
+    private var address: String? = null
+    private var nickname: String? = null
     private var longitude by Delegates.notNull<Double>()
     private var latitude by Delegates.notNull<Double>()
 
@@ -41,7 +42,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private fun getCoordinates(context: Context) {
         var addressList = Geocoder(context, Locale.getDefault()).getFromLocationName(address, 1)
-        if(addressList != null && addressList.size > 0) {
+        if (addressList != null && addressList.size > 0) {
             val address = addressList[0];
             longitude = address.longitude;
             latitude = address.latitude;

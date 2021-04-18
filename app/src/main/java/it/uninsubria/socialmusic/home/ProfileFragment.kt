@@ -93,9 +93,9 @@ import it.uninsubria.socialmusic.*
      }
 
      private fun openGenres(view: View) {
-         //val intent = Intent(activity, GenresActivity::class.java)
-         //intent.putExtra("mail", mail.text.toString())
-         //startActivity(intent)
+         /*val intent = Intent(activity, GenresActivity::class.java)
+         intent.putExtra("mail", mail.text.toString())
+         startActivity(intent)*/
      }
 
      private fun openInstruments(view: View) {
