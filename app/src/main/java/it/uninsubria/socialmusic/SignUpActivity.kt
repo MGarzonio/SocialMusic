@@ -45,6 +45,7 @@ class SignUpActivity : AppCompatActivity() {
             selectPhoto_button.alpha = 0f
         }
     }
+
     private fun performRegister(){
         val email = email_editText_signUp.text.toString()
         val psw = password_editText_signUp.text.toString()
