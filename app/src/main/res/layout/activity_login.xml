@@ -71,8 +71,8 @@
     <Button
         android:id="@+id/buttonForgot"
         android:layout_width="0dp"
-        android:layout_height="25dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/rounded_button"
         android:insetTop="0dp"
         android:insetBottom="0dp"
