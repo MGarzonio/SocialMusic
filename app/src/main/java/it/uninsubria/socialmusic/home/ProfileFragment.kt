@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
+import com.google.firebase.auth.FirebaseAuth
 import it.uninsubria.socialmusic.*
 
  class ProfileFragment : Fragment(), View.OnClickListener {
@@ -111,6 +112,11 @@ import it.uninsubria.socialmusic.*
          startActivity(intent)
      }
 
-     private fun doLogout(view: View) { startActivity(Intent(activity, LoginActivity::class.java)) }
+     private fun doLogout(view: View) {
+         FirebaseAuth.getInstance().signOut()
+         val intent = Intent(context, LoginActivity::class.java)
+         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+         startActivity(intent)
+     }
 
  }

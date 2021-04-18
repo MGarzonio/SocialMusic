@@ -16,13 +16,13 @@ import kotlinx.android.synthetic.main.activity_sign_up.*
 import java.util.*
 
 class SignUpActivity : AppCompatActivity() {
-    val TAG = "RegisterActivity"
+    val TAG = "SignUpActivity"
     var selectedPhotoUri: Uri? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
         signUp_button_signUp.setOnClickListener{
-            performRegister()
+            performRegistration()
         }
         loginPage_textView_signUp.setOnClickListener{
             Log.d(TAG, "Accessing login page")
@@ -46,11 +46,9 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
 
-    private fun performRegister(){
+    private fun performRegistration(){
         val email = email_editText_signUp.text.toString()
         val psw = password_editText_signUp.text.toString()
-        Log.d(TAG, "Email is: $email")
-        Log.d(TAG, "Password is: $psw")
 
         if(email.isEmpty() || psw.isEmpty()){
             Toast.makeText(this,getString(R.string.empty_user_psw), Toast.LENGTH_SHORT).show()
@@ -81,7 +79,7 @@ class SignUpActivity : AppCompatActivity() {
             Log.d(TAG, "uri is null")
             return
         }
-        val bitmapImage = MediaStore.Images.Media.getBitmap(contentResolver, selectedPhotoUri)
+        //val bitmapImage = MediaStore.Images.Media.getBitmap(contentResolver, selectedPhotoUri)
         val fileName = UUID.randomUUID().toString()
         val fireRef = FirebaseStorage.getInstance().getReference("/images/$fileName")
         fireRef.putFile(selectedPhotoUri!!)
