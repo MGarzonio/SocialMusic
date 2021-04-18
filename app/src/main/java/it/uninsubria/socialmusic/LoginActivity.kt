@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.activity_sign_up.*
 
 class LoginActivity : AppCompatActivity() {
 
-    val TAG = "LoginActivity"
+    private val TAG = "LoginActivity"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -56,12 +56,12 @@ class LoginActivity : AppCompatActivity() {
                 Log.d(TAG, "Login failed! ${it.message}")
             }
     }
-    fun openSingUp() {
+    private fun openSingUp() {
         val intent = Intent(this, SignUpActivity::class.java)
         startActivity(intent)
     }
 
-    fun openForgot() {
+    private fun openForgot() {
         val intent = Intent(this, ForgotActivity::class.java)
         startActivity(intent)
     }
