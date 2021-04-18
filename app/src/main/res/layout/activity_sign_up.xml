@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignUpActivity"
+    android:background="@android:color/holo_blue_bright"
     android:padding="32dp"
-    android:background="@color/light_green" >
+    tools:context=".SignUpActivity">
 
     <EditText
         android:id="@+id/username_editText_signUp"
@@ -76,7 +75,7 @@
         android:layout_marginTop="16dp"
         android:gravity="center"
         android:text="@string/already_have_an_account"
-        android:textColor="@android:color/primary_text_dark"
+        android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/signUp_button_signUp"
@@ -112,10 +111,10 @@
         android:layout_height="50dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/rounded_edittext"
-        android:paddingLeft="16dp"
         android:ems="10"
         android:hint="@string/name"
         android:inputType="textPersonName"
+        android:paddingLeft="16dp"
         app:layout_constraintEnd_toEndOf="@+id/password_editText_signUp"
         app:layout_constraintStart_toStartOf="@+id/password_editText_signUp"
         app:layout_constraintTop_toBottomOf="@+id/password_editText_signUp" />
@@ -126,10 +125,10 @@
         android:layout_height="50dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/rounded_edittext"
-        android:paddingLeft="16dp"
         android:ems="10"
         android:hint="@string/surname"
         android:inputType="textPersonName"
+        android:paddingLeft="16dp"
         app:layout_constraintEnd_toEndOf="@+id/name_editText_signUp"
         app:layout_constraintStart_toStartOf="@+id/name_editText_signUp"
         app:layout_constraintTop_toBottomOf="@+id/name_editText_signUp" />
