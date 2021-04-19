@@ -14,15 +14,14 @@ import kotlinx.android.synthetic.main.list_recycleview_row.view.*
 class ListActivity : AppCompatActivity() {
 
     private var adapter = GroupAdapter<GroupieViewHolder>()
-    private val user = Firebase.auth.currentUser.uid
+    //private val user = Firebase.auth.currentUser.uid
     private var items = ArrayList<String>()
     private var images = ArrayList<Uri>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list)
-        var type = ' '
-        intent.getCharExtra("type", type )
+        var type = intent.getCharExtra("type",' ')
         if(type == 'I') getUserInstruments()
         else if(type == 'G') getUserGenres()
         loadAdapter()
