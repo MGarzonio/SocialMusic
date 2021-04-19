@@ -11,17 +11,17 @@
         android:layout_margin="10dp" >
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/itemImageView"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:padding="2dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/textView"/>
+            app:layout_constraintEnd_toStartOf="@id/itemTextView"/>
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/itemTextView"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_alignParentTop="true"
