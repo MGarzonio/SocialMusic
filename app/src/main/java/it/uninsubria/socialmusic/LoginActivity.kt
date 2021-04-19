@@ -39,9 +39,15 @@ class LoginActivity : AppCompatActivity() {
         FirebaseAuth.getInstance().signInWithEmailAndPassword(email, psw)
             .addOnCompleteListener {
                 if(!it.isSuccessful) return@addOnCompleteListener
+                if(!it.result!!.user.isEmailVerified){
+                    Toast.makeText(this,getString(R.string.verify_mail_address), Toast.LENGTH_LONG).show()
+                    return@addOnCompleteListener
+                }
                 val intent = Intent(this, HomeActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
+
+
             }
             .addOnFailureListener {
                 Toast.makeText(this,getString(R.string.login_failed), Toast.LENGTH_SHORT).show()

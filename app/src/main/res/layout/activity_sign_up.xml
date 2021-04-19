@@ -11,11 +11,11 @@
     <EditText
         android:id="@+id/username_editText_signUp"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/rounded_edittext"
         android:ems="10"
-        android:hint="@string/username"
+        android:hint="Nickname *"
         android:inputType="textPersonName"
         android:paddingLeft="16dp"
         android:textColor="@color/black"
@@ -27,11 +27,11 @@
     <EditText
         android:id="@+id/password_editText_signUp"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/rounded_edittext"
         android:ems="10"
-        android:hint="@string/password"
+        android:hint="Password *"
         android:inputType="textPassword"
         android:paddingLeft="16dp"
         android:textColor="@color/black"
@@ -43,11 +43,11 @@
     <EditText
         android:id="@+id/email_editText_signUp"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/rounded_edittext"
         android:ems="10"
-        android:hint="@string/email"
+        android:hint="Email address *"
         android:inputType="textEmailAddress"
         android:paddingLeft="16dp"
         android:textColor="@color/black"
@@ -64,23 +64,9 @@
         android:background="@drawable/rounded_button"
         android:text="@string/sign_up"
         android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="@+id/surname_editText_signUp"
-        app:layout_constraintStart_toStartOf="@+id/surname_editText_signUp"
-        app:layout_constraintTop_toBottomOf="@+id/surname_editText_signUp" />
-
-    <TextView
-        android:id="@+id/loginPage_textView_signUp"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:gravity="center"
-        android:text="@string/already_have_an_account"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/signUp_button_signUp"
-        app:layout_constraintStart_toStartOf="@+id/signUp_button_signUp"
-        app:layout_constraintTop_toBottomOf="@+id/signUp_button_signUp" />
+        app:layout_constraintEnd_toEndOf="@+id/gen_button_signUp"
+        app:layout_constraintStart_toStartOf="@+id/gen_editText_signUp"
+        app:layout_constraintTop_toBottomOf="@+id/gen_editText_signUp" />
 
     <android.widget.Button
         android:id="@+id/selectPhoto_button"
@@ -108,13 +94,14 @@
     <EditText
         android:id="@+id/name_editText_signUp"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/rounded_edittext"
         android:ems="10"
-        android:hint="@string/name"
+        android:hint="Name *"
         android:inputType="textPersonName"
         android:paddingLeft="16dp"
+        android:textColor="@color/black"
         android:textColorHint="@color/gray_hint"
         app:layout_constraintEnd_toEndOf="@+id/password_editText_signUp"
         app:layout_constraintStart_toStartOf="@+id/password_editText_signUp"
@@ -123,17 +110,101 @@
     <EditText
         android:id="@+id/surname_editText_signUp"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/rounded_edittext"
         android:ems="10"
-        android:hint="@string/surname"
+        android:hint="Surname *"
         android:inputType="textPersonName"
         android:paddingLeft="16dp"
+        android:textColor="@color/black"
         android:textColorHint="@color/gray_hint"
         app:layout_constraintEnd_toEndOf="@+id/name_editText_signUp"
         app:layout_constraintStart_toStartOf="@+id/name_editText_signUp"
         app:layout_constraintTop_toBottomOf="@+id/name_editText_signUp" />
+
+    <EditText
+        android:id="@+id/instrument_editText_signUp"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/rounded_edittext"
+        android:editable="false"
+        android:paddingLeft="16dp"
+        android:text="@string/musical_instruments"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toStartOf="@+id/instrument_button_signUp"
+        app:layout_constraintStart_toStartOf="@+id/location_editText_signUp"
+        app:layout_constraintTop_toBottomOf="@+id/location_editText_signUp" />
+
+    <EditText
+        android:id="@+id/gen_editText_signUp"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/rounded_edittext"
+        android:editable="false"
+        android:paddingLeft="16dp"
+        android:text="@string/musical_genres"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="@+id/instrument_editText_signUp"
+        app:layout_constraintStart_toStartOf="@+id/instrument_editText_signUp"
+        app:layout_constraintTop_toBottomOf="@+id/instrument_editText_signUp" />
+
+    <android.widget.Button
+        android:id="@+id/instrument_button_signUp"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:background="@drawable/rounded_button"
+        android:text="+"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/instrument_editText_signUp"
+        app:layout_constraintEnd_toEndOf="@+id/location_editText_signUp"
+        app:layout_constraintTop_toTopOf="@+id/instrument_editText_signUp" />
+
+    <android.widget.Button
+        android:id="@+id/gen_button_signUp"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:background="@drawable/rounded_button"
+        android:text="+"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/gen_editText_signUp"
+        app:layout_constraintEnd_toEndOf="@+id/instrument_button_signUp"
+        app:layout_constraintTop_toTopOf="@+id/gen_editText_signUp" />
+
+    <EditText
+        android:id="@+id/location_editText_signUp"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/rounded_edittext"
+        android:ems="10"
+        android:hint="Location *"
+        android:inputType="textPersonName"
+        android:paddingLeft="16dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/gray_hint"
+        app:layout_constraintEnd_toEndOf="@+id/surname_editText_signUp"
+        app:layout_constraintStart_toStartOf="@+id/surname_editText_signUp"
+        app:layout_constraintTop_toBottomOf="@+id/surname_editText_signUp" />
+
+    <TextView
+        android:id="@+id/loginPage_textView_signUp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/already_have_an_account"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/signUp_button_signUp"
+        app:layout_constraintStart_toStartOf="@+id/signUp_button_signUp"
+        app:layout_constraintTop_toBottomOf="@+id/signUp_button_signUp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,8 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
-import android.widget.PopupWindow
-import android.widget.TextView
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -18,7 +16,6 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
-import it.uninsubria.socialmusic.home.HomeActivity
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import java.util.*
 
@@ -26,6 +23,12 @@ class SignUpActivity : AppCompatActivity() {
     val TAG = "SignUpActivity"
     var selectedPhotoUri: Uri? = null
     val defaultID = "6N9HD0c5WgPsakocjfluSiSI0hm2"
+    var email = ""
+    var psw = ""
+    var name = ""
+    var surname = ""
+    var nick = ""
+    var location = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +45,16 @@ class SignUpActivity : AppCompatActivity() {
             val intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"
             startActivityForResult(intent,0)
+        }
+        instrument_button_signUp.setOnClickListener {
+            val intent = Intent(this, ListActivity::class.java)
+            intent.putExtra("type", 'I')
+            startActivity(intent)
+        }
+        gen_button_signUp.setOnClickListener {
+            val intent = Intent(this, ListActivity::class.java)
+            intent.putExtra("type", 'G')
+            startActivity(intent)
         }
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -65,11 +78,15 @@ class SignUpActivity : AppCompatActivity() {
                 }
     }
     private fun performRegistration(){
-        val email = email_editText_signUp.text.toString()
-        val psw = password_editText_signUp.text.toString()
+        email = email_editText_signUp.text.toString()
+        psw = password_editText_signUp.text.toString()
+        name = name_editText_signUp.text.toString()
+        surname = surname_editText_signUp.text.toString()
+        nick = username_editText_signUp.text.toString()
+        location = location_editText_signUp.text.toString()
 
-        if(email.isEmpty() || psw.isEmpty()){
-            Toast.makeText(this,getString(R.string.empty_user_psw), Toast.LENGTH_SHORT).show()
+        if(email.isEmpty() || psw.isEmpty() || name.isEmpty() || surname.isEmpty() || nick.isEmpty() || location.isEmpty()){
+            Toast.makeText(this,"Please, fill all the fields with '*'!", Toast.LENGTH_SHORT).show()
             return
         }
         //Firebase authentication
@@ -86,8 +103,7 @@ class SignUpActivity : AppCompatActivity() {
                             val imageDefault = snapshot.getValue(User::class.java)
                             saveUserToFirebaseDB(imageDefault!!.profile_image_url)
                         }
-                        override fun onCancelled(error: DatabaseError) {
-                        }
+                        override fun onCancelled(error: DatabaseError) {}
                     } )
                 } else{
                     updateImageToFirebase()
@@ -124,17 +140,16 @@ class SignUpActivity : AppCompatActivity() {
     private fun saveUserToFirebaseDB(fireImageUrl: String) {
         val uid = FirebaseAuth.getInstance().uid ?: ""
         val fireRef = FirebaseDatabase.getInstance().getReference("/users/$uid")
-        val user = User(uid, username_editText_signUp.text.toString(),fireImageUrl)
+        val user = User(uid, nick, fireImageUrl, name, surname, location)
         fireRef.setValue(user)
             .addOnSuccessListener {
                 Log.d(TAG, "User updated!")
-                showPopup()
+                val intent = Intent(this, LoginActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
             }
             .addOnFailureListener{
                 Log.d(TAG, "Updating user failure! ${it.message}")
             }
-    }
-    private fun showPopup(){
-
     }
 }
