@@ -3,8 +3,6 @@ package it.uninsubria.socialmusic
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
@@ -14,7 +12,7 @@ import kotlinx.android.synthetic.main.list_recyclerview_row.view.*
 class ListActivity : AppCompatActivity() {
 
     private var adapter = GroupAdapter<GroupieViewHolder>()
-    private val user = Firebase.auth.currentUser.uid
+    //private val user = Firebase.auth.currentUser.uid
     private var items = ArrayList<String>()
     private var images = ArrayList<Uri>()
 
@@ -52,8 +50,6 @@ class ListActivity : AppCompatActivity() {
 }
 
 class ListItem(val name : String) : Item<GroupieViewHolder>(){
-
-    constructor():this("")
 
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         viewHolder.itemView.itemTextView.text = name
