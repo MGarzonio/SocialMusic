@@ -41,4 +41,5 @@
     <string name="verified">VERIFICATO</string>
     <string name="verify_email_message">Controlla la tua casella di posta e clicca sul link per verificare il tuo indirizzo email per continuare!</string>
     <string name="verify_mail_address">Verifica il tuo indirizzo email per continuare!</string>
+    <string name="confirm">Conferma</string>
 </resources>

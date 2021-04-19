@@ -55,7 +55,8 @@ class LoginActivity : AppCompatActivity() {
             }
     }
     private fun openSingUp() {
-        val intent = Intent(this, SignUpActivity::class.java)
+        val intent = Intent(this, ListActivity::class.java)
+        intent.putExtra("type", 'I')
         startActivity(intent)
     }
 
