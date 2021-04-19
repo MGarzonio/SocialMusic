@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.widget.PopupWindow
+import android.widget.TextView
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -126,12 +128,26 @@ class SignUpActivity : AppCompatActivity() {
         fireRef.setValue(user)
             .addOnSuccessListener {
                 Log.d(TAG, "User updated!")
-                val intent = Intent(this, HomeActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
-                startActivity(intent)
+                showPopup()
             }
             .addOnFailureListener{
                 Log.d(TAG, "Updating user failure! ${it.message}")
             }
+    }
+    private fun showPopup(){
+        val popup = PopupWindow(this)
+        val view = layoutInflater.inflate(R.layout.activity_sign_up, null)
+        popup.contentView = view
+        val popUpView = view.findViewById<TextView>(R.id.signUp_popUp_textView)
+        popUpView.setOnClickListener {
+            if(Firebase.auth.currentUser.isEmailVerified){
+                val intent = Intent(this, HomeActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+            } else{
+                Toast.makeText(this,getString(R.string.verify_mail_address), Toast.LENGTH_SHORT).show()
+            }
+        }
+        popup.showAsDropDown(signUp_button_signUp)
     }
 }

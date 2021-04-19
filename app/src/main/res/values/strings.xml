@@ -40,5 +40,8 @@
     <string name="msg_token_fmt" translatable="false"></string>
     <string name="sign_up">SIGN UP</string>
     <string name="no_messages">No Messages Yet!</string>
+    <string name="verified">VERIFIED</string>
+    <string name="verify_email_message">Check your inbox and click on the link to verify your email address to continue!</string>
+    <string name="verify_mail_address">Verify your email address to continue!</string>
 
 </resources>
