@@ -15,7 +15,7 @@ import it.uninsubria.socialmusic.*
      private lateinit var nickname: EditText
      private lateinit var name: EditText
      private lateinit var surname: EditText
-     private lateinit var address: EditText
+     private lateinit var city: EditText
      private lateinit var mail: EditText
      private lateinit var btnProfile: Button
 
@@ -30,7 +30,7 @@ import it.uninsubria.socialmusic.*
          nickname = view.findViewById(R.id.editTextNickname) as EditText
          name = view.findViewById(R.id.editTextName) as EditText
          surname = view.findViewById(R.id.editTextSurname) as EditText
-         address = view.findViewById(R.id.editTextAddress) as EditText
+         city = view.findViewById(R.id.editTextAddress) as EditText
          mail = view.findViewById(R.id.editTextEmail) as EditText
          btnProfile = view.findViewById(R.id.buttonEdit) as Button
 
@@ -72,7 +72,7 @@ import it.uninsubria.socialmusic.*
          nickname.isEnabled = modifiable
          name.isEnabled = modifiable
          surname.isEnabled = modifiable
-         address.isEnabled = modifiable
+         city.isEnabled = modifiable
          mail.isEnabled = modifiable
          when(modifiable){
              true -> btnProfile.text = getString(R.string.save)
@@ -89,7 +89,7 @@ import it.uninsubria.socialmusic.*
          nickname.setText("Garzu")
          name.setText("Mattia")
          surname.setText("Garzonio")
-         address.setText("Via Don Selva 9, Somma Lombardo")
+         city.setText("Somma Lombardo")
          mail.setText("mgarzonio@studenti.uninsubria.it")
      }
 
@@ -107,7 +107,7 @@ import it.uninsubria.socialmusic.*
 
      private fun openMaps(view: View) {
          val intent = Intent(activity, MapsActivity::class.java)
-         intent.putExtra("address", address.text.toString())
+         intent.putExtra("city", city.text.toString())
          intent.putExtra("nickname", nickname.text.toString())
          startActivity(intent)
      }
