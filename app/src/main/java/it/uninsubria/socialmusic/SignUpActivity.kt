@@ -9,7 +9,12 @@ import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import it.uninsubria.socialmusic.home.HomeActivity
 import kotlinx.android.synthetic.main.activity_sign_up.*
@@ -18,6 +23,8 @@ import java.util.*
 class SignUpActivity : AppCompatActivity() {
     val TAG = "SignUpActivity"
     var selectedPhotoUri: Uri? = null
+    val defaultID = "6N9HD0c5WgPsakocjfluSiSI0hm2"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
@@ -46,6 +53,15 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
 
+    private fun sendEmail(){
+        val myUser = Firebase.auth.currentUser
+        myUser!!.sendEmailVerification()
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        Log.d(TAG, "Email sent.")
+                    }
+                }
+    }
     private fun performRegistration(){
         val email = email_editText_signUp.text.toString()
         val psw = password_editText_signUp.text.toString()
@@ -61,7 +77,20 @@ class SignUpActivity : AppCompatActivity() {
                 //if successful
                 Toast.makeText(this,getString(R.string.creation_success), Toast.LENGTH_SHORT).show()
                 Log.d(TAG,"Successfully created user whit uid: ${it.result?.user?.uid}")
-                updateImageToFirebase()
+                if(selectedPhotoUri == null){
+                    val ref = FirebaseDatabase.getInstance().getReference("/users/$defaultID")
+                    ref.addListenerForSingleValueEvent(object: ValueEventListener {
+                        override fun onDataChange(snapshot: DataSnapshot) {
+                            val imageDefault = snapshot.getValue(User::class.java)
+                            saveUserToFirebaseDB(imageDefault!!.profile_image_url)
+                        }
+                        override fun onCancelled(error: DatabaseError) {
+                        }
+                    } )
+                } else{
+                    updateImageToFirebase()
+                }
+                sendEmail()
             }
             .addOnFailureListener {
                 Toast.makeText(this,getString(R.string.creation_failure), Toast.LENGTH_SHORT).show()
@@ -75,11 +104,6 @@ class SignUpActivity : AppCompatActivity() {
             }
     }
     private fun updateImageToFirebase() {
-        if(selectedPhotoUri == null){
-            Log.d(TAG, "uri is null")
-            return
-        }
-        //val bitmapImage = MediaStore.Images.Media.getBitmap(contentResolver, selectedPhotoUri)
         val fileName = UUID.randomUUID().toString()
         val fireRef = FirebaseStorage.getInstance().getReference("/images/$fileName")
         fireRef.putFile(selectedPhotoUri!!)

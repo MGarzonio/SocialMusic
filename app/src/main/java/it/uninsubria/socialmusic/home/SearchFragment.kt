@@ -63,8 +63,9 @@ class SearchFragment : Fragment() {
 
     class UserItem(val user: User): Item<GroupieViewHolder>(){
         override fun bind(viewHolder: GroupieViewHolder, position: Int) {
+            val target = viewHolder.itemView.circle_user_ImageView
             viewHolder.itemView.user_textView.text = user.username
-            Picasso.get().load(user.profile_image_url).into(viewHolder.itemView.circle_user_ImageView)
+            Picasso.get().load(user.profile_image_url).into(target)
         }
         override fun getLayout(): Int {
             return R.layout.user_row

@@ -105,7 +105,12 @@ class ChatToItem(val text: String, val user: User): Item<GroupieViewHolder>(){
         viewHolder.itemView.chat_to_textView.text = text
         val photoUri = user.profile_image_url
         val target = viewHolder.itemView.chat_to_imageView
-        Picasso.get().load(photoUri).into(target)
+        if(photoUri == "none"){
+            Picasso.get().load(R.drawable.default_profile_background).into(target)
+        } else{
+            Picasso.get().load(photoUri).into(target)
+        }
+
     }
     override fun getLayout(): Int {
         return R.layout.to_chat_row
