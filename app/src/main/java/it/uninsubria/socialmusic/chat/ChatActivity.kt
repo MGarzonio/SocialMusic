@@ -10,7 +10,6 @@ import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
 import it.uninsubria.socialmusic.R
 import it.uninsubria.socialmusic.User
-import it.uninsubria.socialmusic.home.ChatFragment
 import kotlinx.android.synthetic.main.activity_chat.*
 import kotlinx.android.synthetic.main.from_chat_row.view.*
 import kotlinx.android.synthetic.main.to_chat_row.view.*
@@ -18,17 +17,32 @@ import kotlinx.android.synthetic.main.to_chat_row.view.*
 class ChatActivity : AppCompatActivity() {
     var toUser: User? = null
     val adapter = GroupAdapter<GroupieViewHolder>()
+    companion object{
+        var currentUser: User? = null
+        val USER_KEY = "USER_KEY"
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
-        listenForMessages()
         chat_recyclerView.adapter = adapter
-        toUser = intent.getParcelableExtra<User>(ChatFragment.USER_KEY)
+        toUser = intent.getParcelableExtra<User>(USER_KEY)
         supportActionBar?.title = toUser?.username
-
+        fetchCurrentUser()
+        listenForMessages()
         send_button.setOnClickListener {
             sendMessage()
         }
+    }
+    private fun fetchCurrentUser(){
+        val uid = FirebaseAuth.getInstance().uid
+        val fer = FirebaseDatabase.getInstance().getReference("/users/$uid")
+        fer.addListenerForSingleValueEvent(object: ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                currentUser = snapshot.getValue(User::class.java)
+            }
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
     }
     private fun listenForMessages() {
         val fromID = FirebaseAuth.getInstance().uid
@@ -39,7 +53,7 @@ class ChatActivity : AppCompatActivity() {
                 val chatMessage = snapshot.getValue(ChatMessage::class.java)
                 if(chatMessage != null){
                     if(chatMessage.fromID == FirebaseAuth.getInstance().uid) {
-                        val currentUser = ChatFragment.currentUser
+                        val currentUser = currentUser
                         adapter.add(ChatToItem(chatMessage.text, currentUser!!))
                     }else{
                         adapter.add(ChatFromItem(chatMessage.text, toUser!!))
@@ -47,25 +61,17 @@ class ChatActivity : AppCompatActivity() {
                 }
                 chat_recyclerView.scrollToPosition(adapter.itemCount -1)
             }
-            override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
-                TODO("Not yet implemented")
-            }
-            override fun onChildRemoved(snapshot: DataSnapshot) {
-                TODO("Not yet implemented")
-            }
-            override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
-                TODO("Not yet implemented")
-            }
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
+            override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {}
+            override fun onChildRemoved(snapshot: DataSnapshot) {}
+            override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {}
+            override fun onCancelled(error: DatabaseError) {}
         })
     }
 
     private fun sendMessage() {
         val messageText = message_editText_chat.text.toString()
         val fromID = FirebaseAuth.getInstance().uid
-        val user = intent.getParcelableExtra<User>(ChatFragment.USER_KEY)
+        val user = intent.getParcelableExtra<User>(USER_KEY)
         val toID = user!!.uid
         val ref = FirebaseDatabase.getInstance().getReference("/user-messages/$fromID/$toID").push()
         val toRef = FirebaseDatabase.getInstance().getReference("/user-messages/$toID/$fromID").push()
@@ -81,10 +87,6 @@ class ChatActivity : AppCompatActivity() {
         val latestMessageToRef = FirebaseDatabase.getInstance().getReference("/latest-message/$toID/$fromID")
         latestMessageToRef.setValue(chatMessage)
     }
-}
-
-class ChatMessage(val id: String, val text: String, val fromID: String, val toID:String, val timestamp: Long){
-    constructor(): this("","","","",-1)
 }
 
 class ChatFromItem(val text: String, val user: User): Item<GroupieViewHolder>(){
