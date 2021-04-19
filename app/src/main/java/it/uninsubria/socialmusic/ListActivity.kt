@@ -19,7 +19,7 @@ class ListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list)
-        var type = intent.getCharExtra("name", ' ')
+        var type = intent.getCharExtra("type", ' ')
         if(type == 'I') getUserInstruments()
         else if(type == 'G') getUserGenres()
         loadAdapter()
