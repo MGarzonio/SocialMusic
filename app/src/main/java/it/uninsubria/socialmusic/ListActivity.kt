@@ -9,7 +9,7 @@ import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
 import kotlinx.android.synthetic.main.activity_list.*
-import kotlinx.android.synthetic.main.list_recycleview_row.view.*
+import kotlinx.android.synthetic.main.list_recyclerview_row.view.*
 
 class ListActivity : AppCompatActivity() {
 
@@ -60,6 +60,6 @@ class ListItem(val name : String) : Item<GroupieViewHolder>(){
     }
 
     override fun getLayout(): Int {
-        return R.layout.list_recycleview_row
+        return R.layout.list_recyclerview_row
     }
 }
