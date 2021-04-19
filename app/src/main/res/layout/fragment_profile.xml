@@ -137,7 +137,7 @@
                 android:layout_height="match_parent"
                 android:layout_column="0"
                 android:gravity="center"
-                android:text="@string/address"
+                android:text="@string/city"
                 android:textAlignment="viewEnd"
                 android:textColor="@color/black"
                 android:textSize="15dp"

@@ -20,7 +20,6 @@
     <string name="invalid_account">Username o password non corretti!</string>
     <string name="password_error">La password deve contenere almeno 8 caratteri!</string>
     <string name="logout">Disconnettiti</string>
-    <string name="address">Indirizzo</string>
     <string name="sing_in_done">Registrazione effettuata, controlla la tua casella di posta elettronica!</string>
     <string name="empty_string">Questo campo non può essere vuoto!</string>
     <string name="edit_profile">Modifica profilo</string>
@@ -42,4 +41,5 @@
     <string name="verify_email_message">Controlla la tua casella di posta e clicca sul link per verificare il tuo indirizzo email per continuare!</string>
     <string name="verify_mail_address">Verifica il tuo indirizzo email per continuare!</string>
     <string name="confirm">Conferma</string>
+    <string name="city">Città</string>
 </resources>

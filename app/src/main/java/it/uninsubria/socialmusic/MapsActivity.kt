@@ -16,7 +16,7 @@ import kotlin.properties.Delegates
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
-    private var address: String? = null
+    private var city: String? = null
     private var nickname: String? = null
     private var longitude by Delegates.notNull<Double>()
     private var latitude by Delegates.notNull<Double>()
@@ -27,8 +27,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
-        address = intent.getStringExtra("address");
-        nickname = intent.getStringExtra("nickname");
+        city = intent.getStringExtra("city")
+        nickname = intent.getStringExtra("nickname")
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
@@ -40,7 +40,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private fun getCoordinates(context: Context) {
-        var addressList = Geocoder(context, Locale.getDefault()).getFromLocationName(address, 1)
+        var addressList = Geocoder(context, Locale.getDefault()).getFromLocationName(city, 1)
         if (addressList != null && addressList.size > 0) {
             val address = addressList[0];
             longitude = address.longitude;
