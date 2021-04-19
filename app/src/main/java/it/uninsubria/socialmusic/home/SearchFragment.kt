@@ -24,6 +24,7 @@ import kotlinx.android.synthetic.main.user_row.view.*
 class SearchFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
+    val defaultID = "6N9HD0c5WgPsakocjfluSiSI0hm2"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,7 +44,7 @@ class SearchFragment : Fragment() {
                 val adapter = GroupAdapter<GroupieViewHolder>()
                 snapshot.children.forEach {
                     val user = it.getValue(User::class.java)
-                    if (user != null && user.uid != myUid) {
+                    if (user != null && user.uid != myUid && user.uid != defaultID) {
                         adapter.add(UserItem(user))
                     }
                 }

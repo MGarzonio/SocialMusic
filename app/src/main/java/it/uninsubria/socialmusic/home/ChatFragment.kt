@@ -22,6 +22,7 @@ class ChatFragment : Fragment() {
     companion object{
         val USER_KEY = "USER_KEY"
     }
+    val defaultID = "6N9HD0c5WgPsakocjfluSiSI0hm2"
     private val adapter = GroupAdapter<GroupieViewHolder>()
     val messagesMap = HashMap<String, ChatMessage>()
     val fromID = FirebaseAuth.getInstance().uid
@@ -46,7 +47,7 @@ class ChatFragment : Fragment() {
     private fun refreshRView(){
         adapter.clear()
         messagesMap.values.forEach{
-            if(it.toID != fromID) {
+            if(it.toID != fromID && it.toID != defaultID) {
                 adapter.add(LatestMessageRow(it))
             }
         }
