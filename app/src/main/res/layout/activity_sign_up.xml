@@ -9,7 +9,7 @@
     tools:context=".SignUpActivity">
 
     <EditText
-        android:id="@+id/username_editText_signUp"
+        android:id="@+id/nickname_editText_signUp"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginTop="16dp"
@@ -22,7 +22,7 @@
         android:textColorHint="@color/gray_hint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/selectPhoto_button" />
+        app:layout_constraintTop_toBottomOf="@+id/selectPhoto_button_signUp" />
 
     <EditText
         android:id="@+id/password_editText_signUp"
@@ -52,9 +52,9 @@
         android:paddingLeft="16dp"
         android:textColor="@color/black"
         android:textColorHint="@color/gray_hint"
-        app:layout_constraintEnd_toEndOf="@+id/username_editText_signUp"
-        app:layout_constraintStart_toStartOf="@+id/username_editText_signUp"
-        app:layout_constraintTop_toBottomOf="@+id/username_editText_signUp" />
+        app:layout_constraintEnd_toEndOf="@+id/nickname_editText_signUp"
+        app:layout_constraintStart_toStartOf="@+id/nickname_editText_signUp"
+        app:layout_constraintTop_toBottomOf="@+id/nickname_editText_signUp" />
 
     <android.widget.Button
         android:id="@+id/signUp_button_signUp"
@@ -69,16 +69,17 @@
         app:layout_constraintTop_toBottomOf="@+id/gen_editText_signUp" />
 
     <android.widget.Button
-        android:id="@+id/selectPhoto_button"
+        android:id="@+id/selectPhoto_button_signUp"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/rounded_selectphoto_button"
         android:text="@string/select_photo"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/username_editText_signUp"
+        app:layout_constraintBottom_toTopOf="@+id/nickname_editText_signUp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profilePhoto_imageView_signUp"
@@ -86,10 +87,10 @@
         android:layout_height="150dp"
         app:civ_border_color="@android:color/holo_blue_dark"
         app:civ_border_width="5dp"
-        app:layout_constraintBottom_toBottomOf="@+id/selectPhoto_button"
-        app:layout_constraintEnd_toEndOf="@+id/selectPhoto_button"
-        app:layout_constraintStart_toStartOf="@+id/selectPhoto_button"
-        app:layout_constraintTop_toTopOf="@+id/selectPhoto_button" />
+        app:layout_constraintBottom_toTopOf="@+id/nickname_editText_signUp"
+        app:layout_constraintEnd_toEndOf="@+id/selectPhoto_button_signUp"
+        app:layout_constraintStart_toStartOf="@+id/selectPhoto_button_signUp"
+        app:layout_constraintTop_toTopOf="@+id/selectPhoto_button_signUp" />
 
     <EditText
         android:id="@+id/name_editText_signUp"

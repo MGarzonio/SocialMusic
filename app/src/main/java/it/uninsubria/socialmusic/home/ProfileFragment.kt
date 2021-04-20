@@ -17,28 +17,31 @@ import it.uninsubria.socialmusic.*
      private lateinit var surname: EditText
      private lateinit var city: EditText
      private lateinit var mail: EditText
-     private lateinit var btnProfile: Button
+     private lateinit var btnEditProfile: Button
+     private lateinit var btnPhoto : Button
 
      override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
          val view = inflater.inflate(R.layout.fragment_profile, container, false) as View
          val btnMap = view.findViewById(R.id.mapsButton) as ImageView
          val btnLogout = view.findViewById(R.id.buttonLogout) as Button
-         val btnGenres = view.findViewById(R.id.buttonGenres) as Button
-         val btnInstruments = view.findViewById(R.id.buttonInstruments) as Button
+         val btnGenres = view.findViewById(R.id.gen_button_Profile) as Button
+         val btnInstruments = view.findViewById(R.id.instrument_button_Profile) as Button
 
-         nickname = view.findViewById(R.id.editTextNickname) as EditText
-         name = view.findViewById(R.id.editTextName) as EditText
-         surname = view.findViewById(R.id.editTextSurname) as EditText
-         city = view.findViewById(R.id.editTextAddress) as EditText
+         nickname = view.findViewById(R.id.nickname_editText_Profile) as EditText
+         name = view.findViewById(R.id.name_editText_Profile) as EditText
+         surname = view.findViewById(R.id.surname_editText_Profile) as EditText
+         city = view.findViewById(R.id.location_editText_Profile) as EditText
          mail = view.findViewById(R.id.editTextEmail) as EditText
-         btnProfile = view.findViewById(R.id.buttonEdit) as Button
+         btnEditProfile = view.findViewById(R.id.buttonEdit) as Button
+         btnPhoto = view.findViewById(R.id.selectPhoto_button_Profile) as Button
 
-         btnProfile.setOnClickListener(this)
+         btnEditProfile.setOnClickListener(this)
          btnLogout.setOnClickListener(this)
          btnMap.setOnClickListener(this)
          btnGenres.setOnClickListener(this)
          btnInstruments.setOnClickListener(this)
+         btnPhoto.setOnClickListener(this)
 
          loadProfile()
 
@@ -50,13 +53,13 @@ import it.uninsubria.socialmusic.*
              R.id.buttonEdit -> doEditProfile()
              R.id.buttonLogout -> doLogout(view)
              R.id.mapsButton -> openMaps(view)
-             R.id.buttonInstruments -> openInstruments(view)
-             R.id.buttonGenres -> openGenres(view)
+             R.id.instrument_button_Profile -> openInstruments(view)
+             R.id.gen_button_Profile -> openGenres(view)
          }
      }
 
      private fun doEditProfile() {
-         when(btnProfile.text.toString()) {
+         when(btnEditProfile.text.toString()) {
              getString(R.string.save) -> saveProfile()
              getString(R.string.edit_profile) -> switchEditable(true)
          }
@@ -75,8 +78,15 @@ import it.uninsubria.socialmusic.*
          city.isEnabled = modifiable
          mail.isEnabled = modifiable
          when(modifiable){
-             true -> btnProfile.text = getString(R.string.save)
-             false ->  btnProfile.text = getString(R.string.edit_profile)
+             true -> {
+                 btnPhoto.visibility = View.GONE
+
+                 btnEditProfile.text = getString(R.string.save)
+             }
+             false -> {
+                 btnPhoto.visibility = View.VISIBLE
+                 btnEditProfile.text = getString(R.string.edit_profile)
+             }
          }
      }
 

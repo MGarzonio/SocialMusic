@@ -41,7 +41,7 @@ class SignUpActivity : AppCompatActivity() {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
-        selectPhoto_button.setOnClickListener {
+        selectPhoto_button_signUp.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"
             startActivityForResult(intent,0)
@@ -64,7 +64,7 @@ class SignUpActivity : AppCompatActivity() {
             Log.d(TAG, "photo was selected")
             val bitmapImage = MediaStore.Images.Media.getBitmap(contentResolver, selectedPhotoUri)
             profilePhoto_imageView_signUp.setImageBitmap(bitmapImage)
-            selectPhoto_button.alpha = 0f
+            selectPhoto_button_signUp.alpha = 0f
         }
     }
 
@@ -82,7 +82,7 @@ class SignUpActivity : AppCompatActivity() {
         psw = password_editText_signUp.text.toString()
         name = name_editText_signUp.text.toString()
         surname = surname_editText_signUp.text.toString()
-        nick = username_editText_signUp.text.toString()
+        nick = nickname_editText_signUp.text.toString()
         location = location_editText_signUp.text.toString()
 
         if(email.isEmpty() || psw.isEmpty() || name.isEmpty() || surname.isEmpty() || nick.isEmpty() || location.isEmpty()){
