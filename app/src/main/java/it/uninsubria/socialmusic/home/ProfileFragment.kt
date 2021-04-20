@@ -87,11 +87,11 @@ import kotlinx.android.synthetic.main.to_chat_row.view.*
          password.isEnabled = modifiable
          when(modifiable){
              true -> {
-                 btnPhoto.visibility = View.GONE
+                 btnPhoto.visibility = View.VISIBLE
                  btnEditProfile.text = getString(R.string.save)
              }
              false -> {
-                 btnPhoto.visibility = View.VISIBLE
+                 btnPhoto.visibility = View.GONE
                  btnEditProfile.text = getString(R.string.edit_profile)
              }
          }
@@ -103,7 +103,12 @@ import kotlinx.android.synthetic.main.to_chat_row.view.*
          name.setText(currentUser?.name)
          surname.setText(currentUser?.surname)
          city.setText(currentUser?.location)
-         Picasso.get().load(currentUser?.profile_image_url).into(profilePhoto)
+         val photoUri = currentUser?.profile_image_url
+         if(photoUri == "none"){
+             Picasso.get().load(R.drawable.default_profile_background).into(profilePhoto)
+         } else{
+             Picasso.get().load(photoUri).into(profilePhoto)
+         }
      }
 
      private fun openGenres(view: View) {
