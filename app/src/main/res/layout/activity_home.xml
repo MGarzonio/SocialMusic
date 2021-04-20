@@ -15,6 +15,7 @@
         android:layout_marginStart="12dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="12dp"
+        android:layout_marginBottom="12dp"
         app:defaultNavHost="true"
         app:layout_constraintBottom_toTopOf="@id/BottomMenu"
         app:layout_constraintEnd_toEndOf="parent"

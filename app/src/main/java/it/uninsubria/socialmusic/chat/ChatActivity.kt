@@ -15,12 +15,15 @@ import kotlinx.android.synthetic.main.from_chat_row.view.*
 import kotlinx.android.synthetic.main.to_chat_row.view.*
 
 class ChatActivity : AppCompatActivity() {
+
     var toUser: User? = null
     val adapter = GroupAdapter<GroupieViewHolder>()
+
     companion object{
         var currentUser: User? = null
-        val USER_KEY = "USER_KEY"
+        const val USER_KEY = "USER_KEY"
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
@@ -33,6 +36,7 @@ class ChatActivity : AppCompatActivity() {
             sendMessage()
         }
     }
+
     private fun fetchCurrentUser(){
         val uid = FirebaseAuth.getInstance().uid
         val fer = FirebaseDatabase.getInstance().getReference("/users/$uid")
@@ -44,6 +48,7 @@ class ChatActivity : AppCompatActivity() {
             }
         })
     }
+
     private fun listenForMessages() {
         val fromID = FirebaseAuth.getInstance().uid
         val toID = toUser?.uid

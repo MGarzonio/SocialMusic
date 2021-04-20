@@ -20,15 +20,15 @@ import kotlinx.android.synthetic.main.activity_sign_up.*
 import java.util.*
 
 class SignUpActivity : AppCompatActivity() {
-    val TAG = "SignUpActivity"
+    private val TAG = "SignUpActivity"
     var selectedPhotoUri: Uri? = null
-    val defaultID = "6N9HD0c5WgPsakocjfluSiSI0hm2"
-    var email = ""
-    var psw = ""
-    var name = ""
-    var surname = ""
-    var nick = ""
-    var location = ""
+    private val defaultID = "6N9HD0c5WgPsakocjfluSiSI0hm2"
+    private var email = ""
+    private var psw = ""
+    private var name = ""
+    private var surname = ""
+    private var nick = ""
+    private var location = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

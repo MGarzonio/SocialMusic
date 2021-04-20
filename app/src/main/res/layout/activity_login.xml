@@ -9,8 +9,11 @@
 
     <EditText
         android:id="@+id/email_editText_login"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="40dp"
+        android:gravity="center_vertical"
+        android:layout_marginTop="16dp"
         android:background="@drawable/rounded_edittext"
         android:ems="10"
         android:hint="@string/email"
@@ -19,15 +22,17 @@
         android:textColor="@color/black"
         android:textColorHint="@color/gray_hint"
         app:layout_constraintBottom_toTopOf="@+id/password_editText_login"
-        app:layout_constraintEnd_toEndOf="@+id/logo_imageView_login"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/logo_imageView_login"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_imageView_login" />
 
     <EditText
         android:id="@+id/password_editText_login"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="40dp"
+        android:gravity="center_vertical"
         android:layout_marginTop="8dp"
         android:background="@drawable/rounded_edittext"
         android:ems="10"
@@ -36,42 +41,42 @@
         android:paddingLeft="16dp"
         android:textColor="@color/black"
         android:textColorHint="@color/gray_hint"
-        app:layout_constraintBottom_toTopOf="@+id/buttonSignUp"
-        app:layout_constraintEnd_toEndOf="@+id/email_editText_login"
+        app:layout_constraintBottom_toTopOf="@id/login_button_login"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/email_editText_login"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/email_editText_login" />
 
     <android.widget.Button
-        android:id="@+id/login_button"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:id="@+id/login_button_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:background="@drawable/rounded_button"
         android:text="@string/login"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/buttonSignUp"
-        app:layout_constraintEnd_toEndOf="@+id/password_editText_login"
-        app:layout_constraintStart_toStartOf="@+id/password_editText_login"
+        app:layout_constraintBottom_toTopOf="@+id/buttonSignUp_login"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password_editText_login" />
 
     <android.widget.Button
-        android:id="@+id/buttonSignUp"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="24dp"
+        android:id="@+id/buttonSignUp_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:background="@drawable/rounded_button"
         android:text="@string/sing_up"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/buttonForgot"
-        app:layout_constraintEnd_toEndOf="@+id/login_button"
-        app:layout_constraintStart_toStartOf="@+id/login_button"
-        app:layout_constraintTop_toBottomOf="@+id/login_button" />
+        app:layout_constraintBottom_toTopOf="@+id/buttonForgot_login"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login_button_login" />
 
     <android.widget.Button
-        android:id="@+id/buttonForgot"
-        android:layout_width="0dp"
-        android:layout_height="35dp"
+        android:id="@+id/buttonForgot_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/rounded_button"
@@ -81,29 +86,29 @@
         android:textColor="@color/black"
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/buttonSignUp"
-        app:layout_constraintStart_toStartOf="@+id/buttonSignUp"
-        app:layout_constraintTop_toBottomOf="@+id/buttonSignUp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonSignUp_login" />
 
     <ImageView
         android:id="@+id/logo_imageView_login"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView2"
+        app:layout_constraintDimensionRatio="H,1:1"
+        app:layout_constraintBottom_toTopOf="@+id/title_imageView_login"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@mipmap/logo_foreground" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/title_imageView_login"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="H,1:1"
         app:layout_constraintBottom_toTopOf="@+id/email_editText_login"
-        app:layout_constraintEnd_toEndOf="@+id/logo_imageView_login"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/logo_imageView_login"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logo_imageView_login"
         app:srcCompat="@mipmap/ic_logo_social_foreground" />
 

@@ -12,8 +12,10 @@ import it.uninsubria.socialmusic.R
 import it.uninsubria.socialmusic.User
 import kotlinx.android.synthetic.main.latestmessage_row.view.*
 
-class LatestMessageRow(val chatMessage: ChatMessage): Item<GroupieViewHolder>(){
+class LatestMessageRow(private val chatMessage: ChatMessage): Item<GroupieViewHolder>(){
+
     var chatPartnerUser: User? = null
+
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         viewHolder.itemView.lastMess_textView_latestMessage.text = chatMessage.text
         val chatPartnerID: String

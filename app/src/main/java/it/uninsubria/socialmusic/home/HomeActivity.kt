@@ -19,9 +19,9 @@ import it.uninsubria.socialmusic.R.layout.activity_home
 import it.uninsubria.socialmusic.User
 
 class HomeActivity : AppCompatActivity() {
-    companion object{
-        var currentUser: User? = null
-    }
+
+    var currentUser : User? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(activity_home)
@@ -44,6 +44,7 @@ class HomeActivity : AppCompatActivity() {
             }
         })
     }
+
     private fun verifyUserLoggedIn() {
         val uid = FirebaseAuth.getInstance().uid
         if(uid == null || !Firebase.auth.currentUser.isEmailVerified){

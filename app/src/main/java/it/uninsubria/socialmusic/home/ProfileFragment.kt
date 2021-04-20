@@ -8,7 +8,10 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
+import com.squareup.picasso.Picasso
 import it.uninsubria.socialmusic.*
+import it.uninsubria.socialmusic.chat.ChatActivity.Companion.currentUser
+import kotlinx.android.synthetic.main.to_chat_row.view.*
 
  class ProfileFragment : Fragment(), View.OnClickListener {
 
@@ -17,14 +20,16 @@ import it.uninsubria.socialmusic.*
      private lateinit var surname: EditText
      private lateinit var city: EditText
      private lateinit var mail: EditText
+     private lateinit var password: EditText
      private lateinit var btnEditProfile: Button
      private lateinit var btnPhoto : Button
+     private lateinit var profilePhoto : de.hdodenhof.circleimageview.CircleImageView
 
      override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
          val view = inflater.inflate(R.layout.fragment_profile, container, false) as View
-         val btnMap = view.findViewById(R.id.mapsButton) as ImageView
-         val btnLogout = view.findViewById(R.id.buttonLogout) as Button
+         val btnMap = view.findViewById(R.id.mapsButton_Profile) as ImageView
+         val btnLogout = view.findViewById(R.id.buttonLogout_Profile) as Button
          val btnGenres = view.findViewById(R.id.gen_button_Profile) as Button
          val btnInstruments = view.findViewById(R.id.instrument_button_Profile) as Button
 
@@ -32,9 +37,11 @@ import it.uninsubria.socialmusic.*
          name = view.findViewById(R.id.name_editText_Profile) as EditText
          surname = view.findViewById(R.id.surname_editText_Profile) as EditText
          city = view.findViewById(R.id.location_editText_Profile) as EditText
-         mail = view.findViewById(R.id.editTextEmail) as EditText
-         btnEditProfile = view.findViewById(R.id.buttonEdit) as Button
+         mail = view.findViewById(R.id.email_editText_Profile) as EditText
+         password = view.findViewById(R.id.password_editText_Profile) as EditText
+         btnEditProfile = view.findViewById(R.id.buttonEdit_Profile) as Button
          btnPhoto = view.findViewById(R.id.selectPhoto_button_Profile) as Button
+         profilePhoto = view.findViewById(R.id.profilePhoto_imageView_Profile) as de.hdodenhof.circleimageview.CircleImageView
 
          btnEditProfile.setOnClickListener(this)
          btnLogout.setOnClickListener(this)
@@ -50,9 +57,9 @@ import it.uninsubria.socialmusic.*
 
      override fun onClick(view: View) {
          when (view.id) {
-             R.id.buttonEdit -> doEditProfile()
-             R.id.buttonLogout -> doLogout(view)
-             R.id.mapsButton -> openMaps(view)
+             R.id.buttonEdit_Profile -> doEditProfile()
+             R.id.buttonLogout_Profile -> doLogout(view)
+             R.id.mapsButton_Profile -> openMaps(view)
              R.id.instrument_button_Profile -> openInstruments(view)
              R.id.gen_button_Profile -> openGenres(view)
          }
@@ -68,7 +75,7 @@ import it.uninsubria.socialmusic.*
      private fun saveProfile() {
          switchEditable(false)
 
-         //TODO load new values on firebase
+         //TODO(load new values on firebase)
      }
 
      private fun switchEditable(modifiable: Boolean) {
@@ -77,10 +84,10 @@ import it.uninsubria.socialmusic.*
          surname.isEnabled = modifiable
          city.isEnabled = modifiable
          mail.isEnabled = modifiable
+         password.isEnabled = modifiable
          when(modifiable){
              true -> {
                  btnPhoto.visibility = View.GONE
-
                  btnEditProfile.text = getString(R.string.save)
              }
              false -> {
@@ -91,16 +98,12 @@ import it.uninsubria.socialmusic.*
      }
 
      private fun loadProfile() {
-
          switchEditable(false)
-
-         //TODO load data from firebase with user's email as key
-
-         nickname.setText("Garzu")
-         name.setText("Mattia")
-         surname.setText("Garzonio")
-         city.setText("Somma Lombardo")
-         mail.setText("mgarzonio@studenti.uninsubria.it")
+         nickname.setText(currentUser?.username)
+         name.setText(currentUser?.name)
+         surname.setText(currentUser?.surname)
+         city.setText(currentUser?.location)
+         Picasso.get().load(currentUser?.profile_image_url).into(profilePhoto)
      }
 
      private fun openGenres(view: View) {

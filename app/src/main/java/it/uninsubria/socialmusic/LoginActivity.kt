@@ -17,14 +17,14 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        login_button.setOnClickListener{
+        login_button_login.setOnClickListener{
             performLogin()
             Log.d(TAG, "Logging in...")
         }
-        buttonSignUp.setOnClickListener {
+        buttonSignUp_login.setOnClickListener {
             openSingUp()
         }
-        buttonForgot.setOnClickListener {
+        buttonForgot_login.setOnClickListener {
             openForgot()
         }
     }
