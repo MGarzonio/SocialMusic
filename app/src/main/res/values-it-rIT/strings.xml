@@ -42,4 +42,6 @@
     <string name="verify_mail_address">Verifica il tuo indirizzo email per continuare!</string>
     <string name="confirm">Conferma</string>
     <string name="city">Città</string>
+    <string name="nickname_name_surname_email">Nickname / Nome / Cognome / Email</string>
+    <string name="search_info">Lasciare i campi vuoti per ignorare il filtro di ricerca</string>
 </resources>

@@ -44,5 +44,7 @@
     <string name="verify_email_message">Check your inbox and click on the link to verify your email address to continue!</string>
     <string name="verify_mail_address">Verify your email address to continue!</string>
     <string name="confirm">Confirm</string>
+    <string name="nickname_name_surname_email">Nickname / Name / Surname / Email</string>
+    <string name="search_info">Do not fill in the fields to ignore the search filter</string>
 
 </resources>

@@ -6,6 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Spinner
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -21,19 +25,53 @@ import it.uninsubria.socialmusic.User
 import it.uninsubria.socialmusic.chat.ChatActivity
 import kotlinx.android.synthetic.main.user_row.view.*
 
-class SearchFragment : Fragment() {
+class SearchFragment : Fragment(), View.OnClickListener {
 
     private lateinit var recyclerView: RecyclerView
+    private lateinit var nameKey: EditText
+    private lateinit var instrumentKey : Spinner
+    private lateinit var genreKey : Spinner
+    private lateinit var instrumentAdapter: ArrayAdapter<String>
+    private lateinit var genresAdapter: ArrayAdapter<String>
+
     val defaultID = "6N9HD0c5WgPsakocjfluSiSI0hm2"
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
+
         val viewVal = inflater.inflate(R.layout.fragment_search, container, false) as View
-        recyclerView = viewVal.findViewById<RecyclerView>(R.id.userSearch_recyclerView)
+        val btnSearch = viewVal.findViewById(R.id.search_button_search) as Button
+        nameKey = viewVal.findViewById(R.id.name_editText_search) as EditText
+        instrumentKey = viewVal.findViewById(R.id.instrument_Spinner_search) as Spinner
+        genreKey = viewVal.findViewById(R.id.genre_Spinner_search) as Spinner
+        recyclerView = viewVal.findViewById(R.id.user_recyclerView_search) as RecyclerView
+
+        instrumentAdapter = ArrayAdapter<String>(viewVal.context, android.R.layout.simple_spinner_dropdown_item)
+        genresAdapter = ArrayAdapter<String>(viewVal.context, android.R.layout.simple_spinner_dropdown_item)
+        getInstruments()
+        getGenres()
+        instrumentKey.adapter = instrumentAdapter
+        genreKey.adapter = genresAdapter
+
+        btnSearch.setOnClickListener(this)
+
         fetchUsers(viewVal)
+
         return  viewVal
+    }
+
+    override fun onClick(v: View) {
+        when (v.id){
+            R.id.search_button_search -> doSearch()
+        }
+    }
+
+
+    private fun getInstruments(){
+        // TODO(get Array<String> instruments)
+    }
+
+    private fun getGenres(){
+        // TODO(get Array<String> genres)
     }
 
     private fun fetchUsers(view: View) {
@@ -42,6 +80,7 @@ class SearchFragment : Fragment() {
         ref.addListenerForSingleValueEvent(object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val adapter = GroupAdapter<GroupieViewHolder>()
+                // TODO (search result control)
                 snapshot.children.forEach {
                     val user = it.getValue(User::class.java)
                     if (user != null && user.uid != myUid && user.uid != defaultID) {
@@ -62,6 +101,10 @@ class SearchFragment : Fragment() {
         })
     }
 
+    private fun doSearch(){
+        // TODO(do research with filters on firebase)
+    }
+
     class UserItem(val user: User): Item<GroupieViewHolder>(){
         override fun bind(viewHolder: GroupieViewHolder, position: Int) {
             val target = viewHolder.itemView.circle_user_ImageView
@@ -72,5 +115,4 @@ class SearchFragment : Fragment() {
             return R.layout.user_row
         }
     }
-
 }
