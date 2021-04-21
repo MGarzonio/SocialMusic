@@ -18,7 +18,6 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
 import it.uninsubria.socialmusic.*
-import it.uninsubria.socialmusic.chat.ChatActivity.Companion.currentUser
 import kotlinx.android.synthetic.main.fragment_profile.*
 
  class ProfileFragment : Fragment(), View.OnClickListener {
@@ -96,17 +95,16 @@ import kotlinx.android.synthetic.main.fragment_profile.*
          password.isEnabled = modifiable
          when(modifiable){
              true -> {
-                 btnPhoto.isClickable = true//MODIFICATO
+                 btnPhoto.isClickable = true
                  btnEditProfile.text = getString(R.string.save)
              }
              false -> {
-                 btnPhoto.isClickable = false//MODIFICATO
+                 btnPhoto.isClickable = false
                  btnEditProfile.text = getString(R.string.edit_profile)
              }
          }
      }
 
-     //AGGIUNTO
      private fun loadProfileFromFirebase(){
          switchEditable(false)
          val myUser = Firebase.auth.currentUser
@@ -127,21 +125,6 @@ import kotlinx.android.synthetic.main.fragment_profile.*
              override fun onCancelled(error: DatabaseError) {
              }
          })
-     }
-
-     //DISATTIVATO
-     private fun loadProfile() {
-         switchEditable(false)
-         nickname.setText(currentUser?.username)
-         name.setText(currentUser?.name)
-         surname.setText(currentUser?.surname)
-         city.setText(currentUser?.location)
-         val photoUri = currentUser?.profile_image_url
-         if(photoUri == "none"){
-             Picasso.get().load(R.drawable.default_profile_background).into(profilePhoto)
-         } else{
-             Picasso.get().load(photoUri).into(profilePhoto)
-         }
      }
 
      private fun openGenres(view: View) {
@@ -170,14 +153,12 @@ import kotlinx.android.synthetic.main.fragment_profile.*
          startActivity(intent)
      }
 
-     //AGGIUNTO
      private fun loadImageFromGallery(view: View){
          val intent = Intent(Intent.ACTION_PICK)
          intent.type = "image/*"
          startActivityForResult(intent,0)
      }
 
-     //AGGIUNTO
      override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
          super.onActivityResult(requestCode, resultCode, data)
          if(requestCode == 0 && resultCode == Activity.RESULT_OK && data != null){

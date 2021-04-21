@@ -17,9 +17,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/icon_foreground"
+        android:icon="@mipmap/icon_social_music_app"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/icon_social_music_app_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SocialMusic">
         <!--
