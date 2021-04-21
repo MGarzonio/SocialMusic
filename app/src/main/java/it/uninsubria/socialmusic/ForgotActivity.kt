@@ -3,9 +3,12 @@ package it.uninsubria.socialmusic
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import java.util.regex.Pattern
 
 class ForgotActivity : AppCompatActivity() {
@@ -25,11 +28,13 @@ class ForgotActivity : AppCompatActivity() {
     }
 
     private fun sendRecoveryMail() :Boolean {
-        /*
-
-            TODO Recovery password
-
-         */
+        val emailAddress = "chry45@gmail.com"
+        Firebase.auth.sendPasswordResetEmail(emailAddress)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        Log.d("FORGOT", "Email sent.")
+                    }
+                }
         return true
     }
 
