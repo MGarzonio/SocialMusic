@@ -25,7 +25,7 @@
     <string name="edit_profile">Modifica profilo</string>
     <string name="save">Salva</string>
     <string name="title_activity_maps">maps</string>
-    <string name="title_activity_home">home</string>
+    <string name="title_activity_home">SocialMusic</string>
     <string name="already_have_an_account">Hai già un account?</string>
     <string name="invalidEmail">Email non valida!</string>
     <string name="invalidPassword">Password non valida! Deve contenere almeno 6 caratteri.</string>

@@ -98,8 +98,10 @@ class ChatFromItem(val text: String, val user: User): Item<GroupieViewHolder>(){
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         viewHolder.itemView.chat_from_textView.text = text
         val photoUri = user.profile_image_url
-        val target = viewHolder.itemView.chat_from_imageView
-        Picasso.get().load(photoUri).into(target)
+        if(photoUri != "default") {
+            val target = viewHolder.itemView.chat_from_imageView
+            Picasso.get().load(photoUri).into(target)
+        }
     }
     override fun getLayout(): Int {
         return R.layout.from_chat_row
@@ -109,10 +111,8 @@ class ChatToItem(val text: String, val user: User): Item<GroupieViewHolder>(){
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         viewHolder.itemView.chat_to_textView.text = text
         val photoUri = user.profile_image_url
-        val target = viewHolder.itemView.chat_to_imageView
-        if(photoUri == "none"){
-          Picasso.get().load(R.drawable.default_profile_background).into(target)
-        } else{
+        if(photoUri != "default") {
+            val target = viewHolder.itemView.chat_to_imageView
             Picasso.get().load(photoUri).into(target)
         }
 

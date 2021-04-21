@@ -10,10 +10,7 @@ import android.util.Log
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_sign_up.*
@@ -22,7 +19,6 @@ import java.util.*
 class SignUpActivity : AppCompatActivity() {
     private val TAG = "SignUpActivity"
     var selectedPhotoUri: Uri? = null
-    private val defaultID = "6N9HD0c5WgPsakocjfluSiSI0hm2"
     private var email = ""
     private var psw = ""
     private var name = ""
@@ -97,14 +93,7 @@ class SignUpActivity : AppCompatActivity() {
                 Toast.makeText(this,getString(R.string.creation_success), Toast.LENGTH_SHORT).show()
                 Log.d(TAG,"Successfully created user whit uid: ${it.result?.user?.uid}")
                 if(selectedPhotoUri == null){
-                    val ref = FirebaseDatabase.getInstance().getReference("/users/$defaultID")
-                    ref.addListenerForSingleValueEvent(object: ValueEventListener {
-                        override fun onDataChange(snapshot: DataSnapshot) {
-                            val imageDefault = snapshot.getValue(User::class.java)
-                            saveUserToFirebaseDB(imageDefault!!.profile_image_url)
-                        }
-                        override fun onCancelled(error: DatabaseError) {}
-                    } )
+                    saveUserToFirebaseDB("default")
                 } else{
                     updateImageToFirebase()
                 }

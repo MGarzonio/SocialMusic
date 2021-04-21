@@ -25,7 +25,7 @@
     <string name="empty_string">This field cannot be empty!</string>
     <string name="save">Save</string>
     <string name="title_activity_maps">maps</string>
-    <string name="title_activity_home">home</string>
+    <string name="title_activity_home">SocialMusic</string>
     <string name="already_have_an_account">Already have an account?</string>
     <string name="login">LOGIN</string>
     <string name="back_to_register_page" translatable="false">Back to register page</string>
@@ -39,7 +39,7 @@
     <string name="update_success">Image update successfully!</string>
     <string name="msg_token_fmt" translatable="false"></string>
     <string name="sign_up">SIGN UP</string>
-    <string name="no_messages">No Messages Yet!</string>
+    <string name="no_messages">Nothing to show yet!</string>
     <string name="verified">VERIFIED</string>
     <string name="verify_email_message">Check your inbox and click on the link to verify your email address to continue!</string>
     <string name="verify_mail_address">Verify your email address to continue!</string>

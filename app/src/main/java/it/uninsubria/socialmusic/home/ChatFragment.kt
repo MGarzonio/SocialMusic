@@ -22,7 +22,6 @@ class ChatFragment : Fragment() {
     companion object{
         val USER_KEY = "USER_KEY"
     }
-    val defaultID = "6N9HD0c5WgPsakocjfluSiSI0hm2"
     private val adapter = GroupAdapter<GroupieViewHolder>()
     val messagesMap = HashMap<String, ChatMessage>()
     val fromID = FirebaseAuth.getInstance().uid
@@ -38,7 +37,7 @@ class ChatFragment : Fragment() {
             intent.putExtra(USER_KEY, row.chatPartnerUser)
             startActivity(intent)
         }
-        if(adapter.itemCount == 0){
+        if(adapter == null){
             Toast.makeText(viewVal.context,getString(R.string.no_messages), Toast.LENGTH_SHORT).show()
         }
         return viewVal
@@ -47,9 +46,7 @@ class ChatFragment : Fragment() {
     private fun refreshRView(){
         adapter.clear()
         messagesMap.values.forEach{
-            if(it.toID != fromID && it.toID != defaultID) {
-                adapter.add(LatestMessageRow(it))
-            }
+            adapter.add(LatestMessageRow(it))
         }
     }
 

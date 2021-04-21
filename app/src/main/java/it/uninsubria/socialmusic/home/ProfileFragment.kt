@@ -119,8 +119,10 @@ import kotlinx.android.synthetic.main.fragment_profile.*
                  city.setText(user?.location)
                  mail.setText(myUser.email)
                  password.setText("********")
-                 Picasso.get().load(user?.profile_image_url).into(profilePhoto)
-                 btnPhoto.alpha = 0F
+                 if(user?.profile_image_url != "default") {
+                     Picasso.get().load(user?.profile_image_url).into(profilePhoto)
+                     btnPhoto.alpha = 0F
+                 }
              }
              override fun onCancelled(error: DatabaseError) {
              }

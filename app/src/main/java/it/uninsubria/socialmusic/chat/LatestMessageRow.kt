@@ -30,7 +30,10 @@ class LatestMessageRow(private val chatMessage: ChatMessage): Item<GroupieViewHo
                 chatPartnerUser = snapshot.getValue(User::class.java)
                 viewHolder.itemView.user_textView_latestMessage.text = chatPartnerUser?.username
                 val target = viewHolder.itemView.user_imageView_latestMessage
-                Picasso.get().load(chatPartnerUser?.profile_image_url).into(target)
+                val imageUrl = chatPartnerUser?.profile_image_url
+                if(imageUrl != "default") {
+                    Picasso.get().load(imageUrl).into(target)
+                }
             }
             override fun onCancelled(error: DatabaseError) {
             }
