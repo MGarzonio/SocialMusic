@@ -1,17 +1,25 @@
  package it.uninsubria.socialmusic.home
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
 import it.uninsubria.socialmusic.*
 import it.uninsubria.socialmusic.chat.ChatActivity.Companion.currentUser
-import kotlinx.android.synthetic.main.to_chat_row.view.*
+import kotlinx.android.synthetic.main.fragment_profile.*
 
  class ProfileFragment : Fragment(), View.OnClickListener {
 
@@ -50,7 +58,7 @@ import kotlinx.android.synthetic.main.to_chat_row.view.*
          btnInstruments.setOnClickListener(this)
          btnPhoto.setOnClickListener(this)
 
-         loadProfile()
+         loadProfileFromFirebase()
 
          return view
      }
@@ -62,6 +70,7 @@ import kotlinx.android.synthetic.main.to_chat_row.view.*
              R.id.mapsButton_Profile -> openMaps(view)
              R.id.instrument_button_Profile -> openInstruments(view)
              R.id.gen_button_Profile -> openGenres(view)
+             R.id.selectPhoto_button_Profile -> loadImageFromGallery(view)//AGGIUNTO
          }
      }
 
@@ -87,16 +96,40 @@ import kotlinx.android.synthetic.main.to_chat_row.view.*
          password.isEnabled = modifiable
          when(modifiable){
              true -> {
-                 btnPhoto.visibility = View.VISIBLE
+                 btnPhoto.isClickable = true//MODIFICATO
                  btnEditProfile.text = getString(R.string.save)
              }
              false -> {
-                 btnPhoto.visibility = View.GONE
+                 btnPhoto.isClickable = false//MODIFICATO
                  btnEditProfile.text = getString(R.string.edit_profile)
              }
          }
      }
 
+     //AGGIUNTO
+     private fun loadProfileFromFirebase(){
+         switchEditable(false)
+         val myUser = Firebase.auth.currentUser
+         val userID = myUser.uid
+         val ref = FirebaseDatabase.getInstance().getReference("/users/$userID")
+         ref.addListenerForSingleValueEvent(object: ValueEventListener {
+             override fun onDataChange(snapshot: DataSnapshot) {
+                 val user = snapshot.getValue(User::class.java)
+                 nickname.setText(user?.username)
+                 name.setText(user?.name)
+                 surname.setText(user?.surname)
+                 city.setText(user?.location)
+                 mail.setText(myUser.email)
+                 password.setText("********")
+                 Picasso.get().load(user?.profile_image_url).into(profilePhoto)
+                 btnPhoto.alpha = 0F
+             }
+             override fun onCancelled(error: DatabaseError) {
+             }
+         })
+     }
+
+     //DISATTIVATO
      private fun loadProfile() {
          switchEditable(false)
          nickname.setText(currentUser?.username)
@@ -137,4 +170,21 @@ import kotlinx.android.synthetic.main.to_chat_row.view.*
          startActivity(intent)
      }
 
+     //AGGIUNTO
+     private fun loadImageFromGallery(view: View){
+         val intent = Intent(Intent.ACTION_PICK)
+         intent.type = "image/*"
+         startActivityForResult(intent,0)
+     }
+
+     //AGGIUNTO
+     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+         super.onActivityResult(requestCode, resultCode, data)
+         if(requestCode == 0 && resultCode == Activity.RESULT_OK && data != null){
+             val selectedPhotoUri = data.data
+             val bitmapImage = MediaStore.Images.Media.getBitmap(requireContext().contentResolver, selectedPhotoUri)
+             profilePhoto_imageView_Profile.setImageBitmap(bitmapImage)
+             selectPhoto_button_Profile.alpha = 0f
+         }
+     }
  }

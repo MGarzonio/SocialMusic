@@ -64,7 +64,7 @@ class SignUpActivity : AppCompatActivity() {
             Log.d(TAG, "photo was selected")
             val bitmapImage = MediaStore.Images.Media.getBitmap(contentResolver, selectedPhotoUri)
             profilePhoto_imageView_signUp.setImageBitmap(bitmapImage)
-            selectPhoto_button_signUp.alpha = 0f
+            selectPhoto_button_signUp.alpha = 0F
         }
     }
 
