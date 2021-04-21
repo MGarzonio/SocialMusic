@@ -27,9 +27,8 @@ class ForgotActivity : AppCompatActivity() {
         return matcher.matches()
     }
 
-    private fun sendRecoveryMail() :Boolean {
-        val emailAddress = "chry45@gmail.com"
-        Firebase.auth.sendPasswordResetEmail(emailAddress)
+    private fun sendRecoveryMail(to: String) :Boolean {
+        Firebase.auth.sendPasswordResetEmail(to)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         Log.d("FORGOT", "Email sent.")
@@ -40,12 +39,13 @@ class ForgotActivity : AppCompatActivity() {
 
     fun openMain(view: View) {
         val mail = findViewById<EditText>(R.id.editTextEmail)
+        val address = mail.text.toString()
         var checkError = false
-        if (!isValidEmail(mail.text.toString())) {
+        if (!isValidEmail(address)) {
             mail.error = getString(R.string.mail_error)
             checkError = true
         }
-        if (!checkError) if (sendRecoveryMail()) {
+        if (!checkError) if (sendRecoveryMail(address)) {
             Toast.makeText(applicationContext, getString(R.string.mail_sent), Toast.LENGTH_SHORT).show()
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
