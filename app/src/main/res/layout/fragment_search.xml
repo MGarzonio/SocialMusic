@@ -42,35 +42,35 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        app:layout_constraintHeight_min="35dp"
         android:background="@drawable/rounded_edittext"
         android:ems="10"
         android:gravity="center_vertical"
         android:minHeight="35dp"
-        android:spinnerMode="dropdown"
         android:paddingLeft="16dp"
+        android:spinnerMode="dropdown"
         android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@id/search_button_search"
         app:layout_constraintEnd_toEndOf="@+id/genre_Spinner_search"
+        app:layout_constraintHeight_min="35dp"
         app:layout_constraintStart_toStartOf="@+id/genre_Spinner_search"
         app:layout_constraintTop_toBottomOf="@+id/genre_Spinner_search" />
 
     <Spinner
         android:id="@+id/genre_Spinner_search"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        app:layout_constraintHeight_min="35dp"
         android:background="@drawable/rounded_edittext"
         android:ems="10"
         android:gravity="center_vertical"
         android:minHeight="35dp"
-        android:spinnerMode="dropdown"
         android:paddingLeft="16dp"
+        android:spinnerMode="dropdown"
         android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@id/instrument_Spinner_search"
         app:layout_constraintEnd_toEndOf="@+id/name_editText_search"
-        app:layout_constraintStart_toStartOf="@+id/name_editText_search"
+        app:layout_constraintHeight_min="35dp"
+        app:layout_constraintStart_toEndOf="@+id/instruments_textView_search"
         app:layout_constraintTop_toBottomOf="@+id/name_editText_search" />
 
     <android.widget.Button
@@ -101,5 +101,19 @@
         app:layout_constraintEnd_toEndOf="@+id/search_button_search"
         app:layout_constraintStart_toStartOf="@+id/search_button_search"
         app:layout_constraintTop_toBottomOf="@id/search_button_search" />
+
+    <TextView
+        android:id="@+id/instruments_textView_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        android:layout_marginBottom="15dp"
+        android:text="TextView"
+        android:textColor="@color/black"
+        android:background="@color/white"
+        app:layout_constraintEnd_toStartOf="@+id/genre_Spinner_search"
+        app:layout_constraintBottom_toTopOf="@+id/instrument_Spinner_search"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name_editText_search" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
