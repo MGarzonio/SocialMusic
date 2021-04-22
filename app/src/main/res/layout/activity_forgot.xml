@@ -3,19 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="24dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
     android:background="@color/white"
+    android:padding="24dp"
     tools:context=".ForgotActivity">
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:inputType="textMultiLine"
         android:text="@string/forgot_message"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:inputType="textMultiLine"
         app:layout_constraintBottom_toTopOf="@+id/editTextEmail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,8 +26,9 @@
     <EditText
         android:id="@+id/editTextEmail"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:autofillHints="@string/email"
+        android:background="@drawable/rounded_edittext"
         android:ems="10"
         android:hint="@string/email"
         android:inputType="textEmailAddress"
@@ -37,17 +40,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-    <Button
+    <android.widget.Button
         android:id="@+id/buttonConfirm"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:backgroundTint="#008000"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/rounded_button"
+        android:onClick="openMain"
         android:text="@string/submit"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editTextEmail"
-        android:onClick="openMain" />
+        app:layout_constraintTop_toBottomOf="@id/editTextEmail" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

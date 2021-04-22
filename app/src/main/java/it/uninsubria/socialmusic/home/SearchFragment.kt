@@ -93,7 +93,6 @@ class SearchFragment : Fragment(), View.OnClickListener {
         ref.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val adapter = GroupAdapter<GroupieViewHolder>()
-                // TODO (search result control)
                 snapshot.children.forEach {
                     val user = it.getValue(User::class.java)
                     if (user != null && user.uid != myUid && user.uid != defaultID) {
