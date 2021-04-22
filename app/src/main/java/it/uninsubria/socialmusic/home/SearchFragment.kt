@@ -138,7 +138,10 @@ class SearchFragment : Fragment(), View.OnClickListener{
         override fun bind(viewHolder: GroupieViewHolder, position: Int) {
             val target = viewHolder.itemView.circle_user_ImageView
             viewHolder.itemView.user_textView.text = user.username
-            Picasso.get().load(user.profile_image_url).into(target)
+            val imageUrl = user?.profile_image_url
+            if(imageUrl != "default") {
+                Picasso.get().load(imageUrl).into(target)
+            }
         }
 
         override fun getLayout(): Int {
