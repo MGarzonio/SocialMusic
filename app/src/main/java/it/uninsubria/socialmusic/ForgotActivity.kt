@@ -17,7 +17,6 @@ class ForgotActivity : AppCompatActivity() {
     }
 
     private fun sendRecoveryMail(to: String) :Boolean {
-        val mail = findViewById<EditText>(R.id.editTextEmail)
         Firebase.auth.sendPasswordResetEmail(to)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
