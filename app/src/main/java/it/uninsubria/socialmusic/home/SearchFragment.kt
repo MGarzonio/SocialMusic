@@ -6,10 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Spinner
+import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -29,14 +26,14 @@ class SearchFragment : Fragment(), View.OnClickListener {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var nameKey: EditText
-    private lateinit var instrumentKey : Spinner
-    private lateinit var genreKey : Spinner
+    private lateinit var instrumentKey: Spinner
+    private lateinit var genreKey: Spinner
     private lateinit var instrumentAdapter: ArrayAdapter<String>
     private lateinit var genresAdapter: ArrayAdapter<String>
 
     val defaultID = "6N9HD0c5WgPsakocjfluSiSI0hm2"
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val viewVal = inflater.inflate(R.layout.fragment_search, container, false) as View
         val btnSearch = viewVal.findViewById(R.id.search_button_search) as Button
@@ -45,10 +42,10 @@ class SearchFragment : Fragment(), View.OnClickListener {
         genreKey = viewVal.findViewById(R.id.genre_Spinner_search) as Spinner
         recyclerView = viewVal.findViewById(R.id.user_recyclerView_search) as RecyclerView
 
-        instrumentAdapter = ArrayAdapter<String>(viewVal.context, android.R.layout.simple_spinner_dropdown_item)
-        genresAdapter = ArrayAdapter<String>(viewVal.context, android.R.layout.simple_spinner_dropdown_item)
-        getInstruments()
-        getGenres()
+        instrumentAdapter = ArrayAdapter<String>(viewVal.context, android.R.layout.simple_spinner_item, getInstruments())
+        genresAdapter = ArrayAdapter<String>(viewVal.context, android.R.layout.simple_spinner_item, getGenres())
+        instrumentAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        genresAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         instrumentKey.adapter = instrumentAdapter
         genreKey.adapter = genresAdapter
 
@@ -56,28 +53,44 @@ class SearchFragment : Fragment(), View.OnClickListener {
 
         fetchUsers(viewVal)
 
-        return  viewVal
+        return viewVal
     }
 
     override fun onClick(v: View) {
-        when (v.id){
+        when (v.id) {
             R.id.search_button_search -> doSearch()
         }
     }
 
 
-    private fun getInstruments(){
+    private fun getInstruments(): ArrayList<String> {
+        var list = ArrayList<String>()
+
+        list.add("Drum")
+        list.add("Guitar")
+        list.add("Bass")
+
         // TODO(get Array<String> instruments)
+
+        return list
     }
 
-    private fun getGenres(){
-        // TODO(get Array<String> genres)
+    private fun getGenres(): ArrayList<String> {
+        var list = ArrayList<String>()
+
+        list.add("Rock")
+        list.add("Metal")
+        list.add("Jazz")
+
+        // TODO(get Array<String> instruments)
+
+        return list
     }
 
     private fun fetchUsers(view: View) {
         val ref = FirebaseDatabase.getInstance().getReference("/users")
         val myUid = FirebaseAuth.getInstance().uid
-        ref.addListenerForSingleValueEvent(object: ValueEventListener {
+        ref.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val adapter = GroupAdapter<GroupieViewHolder>()
                 // TODO (search result control)
@@ -87,7 +100,7 @@ class SearchFragment : Fragment(), View.OnClickListener {
                         adapter.add(UserItem(user))
                     }
                 }
-                adapter.setOnItemClickListener{item, view ->
+                adapter.setOnItemClickListener { item, view ->
                     val userItem = item as UserItem
                     val intent = Intent(view.context, ChatActivity::class.java)
                     intent.putExtra(ChatFragment.USER_KEY, userItem.user)
@@ -95,22 +108,24 @@ class SearchFragment : Fragment(), View.OnClickListener {
                 }
                 recyclerView.adapter = adapter
             }
+
             override fun onCancelled(error: DatabaseError) {
 
             }
         })
     }
 
-    private fun doSearch(){
+    private fun doSearch() {
         // TODO(do research with filters on firebase)
     }
 
-    class UserItem(val user: User): Item<GroupieViewHolder>(){
+    class UserItem(val user: User) : Item<GroupieViewHolder>() {
         override fun bind(viewHolder: GroupieViewHolder, position: Int) {
             val target = viewHolder.itemView.circle_user_ImageView
             viewHolder.itemView.user_textView.text = user.username
             Picasso.get().load(user.profile_image_url).into(target)
         }
+
         override fun getLayout(): Int {
             return R.layout.user_row
         }
