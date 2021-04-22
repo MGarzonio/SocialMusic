@@ -86,8 +86,6 @@ class SearchFragment : Fragment(), View.OnClickListener{
         list.add("Guitar")
         list.add("Bass")
 
-        // TODO(get Array<String> instruments)
-
         return list
     }
 
@@ -97,8 +95,6 @@ class SearchFragment : Fragment(), View.OnClickListener{
         list.add("Rock")
         list.add("Metal")
         list.add("Jazz")
-
-        // TODO(get Array<String> instruments)
 
         return list
     }
