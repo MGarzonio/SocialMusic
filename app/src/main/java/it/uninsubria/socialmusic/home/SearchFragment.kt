@@ -43,10 +43,10 @@ class SearchFragment : Fragment(), View.OnClickListener{
         genreKey = viewVal.findViewById(R.id.genre_Spinner_search) as Spinner
         recyclerView = viewVal.findViewById(R.id.user_recyclerView_search) as RecyclerView
 
-        val instrumentAdapter = ArrayAdapter(viewVal.context, android.R.layout.simple_spinner_item, getInstruments())
-        instrumentAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        val genresAdapter = ArrayAdapter(viewVal.context, android.R.layout.simple_spinner_item, getGenres())
-        genresAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        val instrumentAdapter = ArrayAdapter(viewVal.context, R.layout.color_spinner_layout, getInstruments())
+        instrumentAdapter.setDropDownViewResource(R.layout.spinner_dropdown_layout)
+        val genresAdapter = ArrayAdapter(viewVal.context, R.layout.color_spinner_layout, getGenres())
+        genresAdapter.setDropDownViewResource(R.layout.spinner_dropdown_layout)
 
         instrumentKey.adapter = instrumentAdapter
         genreKey.adapter = genresAdapter
