@@ -21,6 +21,7 @@ import it.uninsubria.socialmusic.R
 import it.uninsubria.socialmusic.User
 import it.uninsubria.socialmusic.chat.ChatActivity
 import kotlinx.android.synthetic.main.user_row.view.*
+import org.w3c.dom.Text
 
 class SearchFragment : Fragment(), View.OnClickListener{
 
@@ -28,6 +29,8 @@ class SearchFragment : Fragment(), View.OnClickListener{
     private lateinit var nameKey: EditText
     private lateinit var instrumentKey: Spinner
     private lateinit var genreKey: Spinner
+    private var selectedInstrument = "None"
+    private var selectedGenre = "None"
 
     val defaultID = "6N9HD0c5WgPsakocjfluSiSI0hm2"
 
@@ -35,7 +38,6 @@ class SearchFragment : Fragment(), View.OnClickListener{
 
         val viewVal = inflater.inflate(R.layout.fragment_search, container, false) as View
         val btnSearch = viewVal.findViewById(R.id.search_button_search) as Button
-        val instrumentTextView = viewVal.findViewById(R.id.instruments_textView_search) as TextView
         nameKey = viewVal.findViewById(R.id.name_editText_search) as EditText
         instrumentKey = viewVal.findViewById(R.id.instrument_Spinner_search) as Spinner
         genreKey = viewVal.findViewById(R.id.genre_Spinner_search) as Spinner
@@ -53,18 +55,19 @@ class SearchFragment : Fragment(), View.OnClickListener{
 
         instrumentKey?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
-                instrumentTextView.text = getString(R.string.musical_instruments)
+
             }
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                instrumentTextView.text = instrumentKey.selectedItem.toString()
+                selectedInstrument = instrumentKey.selectedItem.toString()
             }
         }
         genreKey?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
-               // genreTextView.text = getString(R.string.musical_genres)
+
             }
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-               // genreTextView.text = instrumentKey.selectedItem.toString()
+                if(genreKey.selectedItem.toString() != "None")
+                    selectedGenre = genreKey.selectedItem.toString()
             }
         }
 
@@ -82,6 +85,7 @@ class SearchFragment : Fragment(), View.OnClickListener{
     private fun getInstruments(): ArrayList<String> {
         var list = ArrayList<String>()
 
+        list.add("None")
         list.add("Drum")
         list.add("Guitar")
         list.add("Bass")
@@ -92,6 +96,7 @@ class SearchFragment : Fragment(), View.OnClickListener{
     private fun getGenres(): ArrayList<String> {
         var list = ArrayList<String>()
 
+        list.add("None")
         list.add("Rock")
         list.add("Metal")
         list.add("Jazz")
