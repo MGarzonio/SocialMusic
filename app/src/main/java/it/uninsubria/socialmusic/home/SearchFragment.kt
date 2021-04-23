@@ -10,8 +10,6 @@ import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
@@ -20,7 +18,6 @@ import it.uninsubria.socialmusic.R
 import it.uninsubria.socialmusic.User
 import it.uninsubria.socialmusic.chat.ChatActivity
 import kotlinx.android.synthetic.main.user_row.view.*
-import org.w3c.dom.Text
 
 class SearchFragment : Fragment(), View.OnClickListener{
 
