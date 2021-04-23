@@ -39,15 +39,14 @@
 
     <TextView
         android:id="@+id/genres_textView_search"
-        android:layout_width="wrap_content"
+        android:layout_width="140dp"
         android:layout_height="wrap_content"
         android:minHeight="35dp"
-        android:minWidth="150dp"
         android:layout_marginTop="8dp"
         android:gravity="center"
         android:text="@string/musical_genres"
         android:textColor="@color/black"
-        android:background="@drawable/rounded_edittext"
+        android:background="@color/white"
         app:layout_constraintEnd_toStartOf="@+id/genre_Spinner_search"
         app:layout_constraintBottom_toTopOf="@+id/instruments_textView_search"
         app:layout_constraintStart_toStartOf="@id/name_editText_search"
@@ -72,10 +71,9 @@
 
     <TextView
         android:id="@+id/instruments_textView_search"
-        android:layout_width="wrap_content"
+        android:layout_width="140dp"
         android:layout_height="wrap_content"
-        android:minWidth="150dp"
-        android:background="@drawable/rounded_edittext"
+        android:background="@color/white"
         android:gravity="center"
         android:minHeight="35dp"
         android:layout_marginBottom="16dp"
