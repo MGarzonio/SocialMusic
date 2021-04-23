@@ -10,6 +10,7 @@ import android.util.Log
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
@@ -119,6 +120,7 @@ class SignUpActivity : AppCompatActivity() {
                 Toast.makeText(this,getString(R.string.update_success), Toast.LENGTH_SHORT).show()
                 fireRef.downloadUrl.addOnSuccessListener {url ->
                     Log.d(TAG, "File location: $url")
+                    //setUserNickNUrl(url.toString())
                     saveUserToFirebaseDB(url.toString())
                 }
             }
@@ -141,4 +143,20 @@ class SignUpActivity : AppCompatActivity() {
                 Log.d(TAG, "Updating user failure! ${it.message}")
             }
     }
+
+    /*private fun setUserNickNUrl(url: String){
+        val user = Firebase.auth.currentUser
+
+        val profileUpdates = userProfileChangeRequest {
+            displayName = "Jane Q. User"
+            photoUri = Uri.parse(url)
+        }
+
+        user!!.updateProfile(profileUpdates)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        Log.d(TAG, "User profile updated.")
+                    }
+                }
+    }*/
 }

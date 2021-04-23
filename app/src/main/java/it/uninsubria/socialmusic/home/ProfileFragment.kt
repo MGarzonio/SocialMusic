@@ -27,32 +27,38 @@ import kotlinx.android.synthetic.main.fragment_profile.*
      private lateinit var surname: EditText
      private lateinit var city: EditText
      private lateinit var mail: EditText
-     private lateinit var password: EditText
+     private lateinit var btnMail: Button
+     private lateinit var btnPassword: Button
      private lateinit var btnEditProfile: Button
      private lateinit var btnPhoto : Button
      private lateinit var profilePhoto : de.hdodenhof.circleimageview.CircleImageView
+     private  lateinit var btnGenres: Button
+     private  lateinit var btnInstruments: Button
 
      override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
          val view = inflater.inflate(R.layout.fragment_profile, container, false) as View
          val btnMap = view.findViewById(R.id.mapsButton_Profile) as ImageView
          val btnLogout = view.findViewById(R.id.buttonLogout_Profile) as Button
-         val btnGenres = view.findViewById(R.id.gen_button_Profile) as Button
-         val btnInstruments = view.findViewById(R.id.instrument_button_Profile) as Button
 
          nickname = view.findViewById(R.id.nickname_editText_Profile) as EditText
          name = view.findViewById(R.id.name_editText_Profile) as EditText
          surname = view.findViewById(R.id.surname_editText_Profile) as EditText
          city = view.findViewById(R.id.location_editText_Profile) as EditText
-         mail = view.findViewById(R.id.email_editText_Profile) as EditText
-         password = view.findViewById(R.id.password_editText_Profile) as EditText
+         mail =view.findViewById(R.id.email_editText_profile) as EditText
+         btnMail = view.findViewById(R.id.email_button_Profile) as Button
+         btnPassword = view.findViewById(R.id.password_button_profile) as Button
          btnEditProfile = view.findViewById(R.id.buttonEdit_Profile) as Button
          btnPhoto = view.findViewById(R.id.selectPhoto_button_Profile) as Button
          profilePhoto = view.findViewById(R.id.profilePhoto_imageView_Profile) as de.hdodenhof.circleimageview.CircleImageView
+         btnGenres = view.findViewById(R.id.gen_button_Profile) as Button
+         btnInstruments = view.findViewById(R.id.instrument_button_Profile) as Button
 
          btnEditProfile.setOnClickListener(this)
          btnLogout.setOnClickListener(this)
          btnMap.setOnClickListener(this)
+         btnMail.setOnClickListener(this)
+         btnPassword.setOnClickListener(this)
          btnGenres.setOnClickListener(this)
          btnInstruments.setOnClickListener(this)
          btnPhoto.setOnClickListener(this)
@@ -69,7 +75,7 @@ import kotlinx.android.synthetic.main.fragment_profile.*
              R.id.mapsButton_Profile -> openMaps(view)
              R.id.instrument_button_Profile -> openInstruments(view)
              R.id.gen_button_Profile -> openGenres(view)
-             R.id.selectPhoto_button_Profile -> loadImageFromGallery(view)//AGGIUNTO
+             R.id.selectPhoto_button_Profile -> loadImageFromGallery(view)
          }
      }
 
@@ -91,15 +97,16 @@ import kotlinx.android.synthetic.main.fragment_profile.*
          name.isEnabled = modifiable
          surname.isEnabled = modifiable
          city.isEnabled = modifiable
-         mail.isEnabled = modifiable
-         password.isEnabled = modifiable
+         btnMail.isClickable = modifiable
+         btnPassword.isClickable = modifiable
+         btnPhoto.isClickable = modifiable
+         btnInstruments.isClickable = modifiable
+         btnGenres.isClickable = modifiable
          when(modifiable){
              true -> {
-                 btnPhoto.isClickable = true
                  btnEditProfile.text = getString(R.string.save)
              }
              false -> {
-                 btnPhoto.isClickable = false
                  btnEditProfile.text = getString(R.string.edit_profile)
              }
          }
@@ -118,7 +125,6 @@ import kotlinx.android.synthetic.main.fragment_profile.*
                  surname.setText(user?.surname)
                  city.setText(user?.location)
                  mail.setText(myUser.email)
-                 password.setText("********")
                  if(user?.profile_image_url != "default") {
                      Picasso.get().load(user?.profile_image_url).into(profilePhoto)
                      btnPhoto.alpha = 0F
