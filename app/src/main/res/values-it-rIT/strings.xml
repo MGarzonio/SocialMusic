@@ -44,4 +44,5 @@
     <string name="city">Città</string>
     <string name="nickname_name_surname_email">Nickname / Nome / Cognome / Email</string>
     <string name="search_info">Lasciare i campi vuoti per ignorare il filtro di ricerca</string>
+    <string name="edit">modifica</string>
 </resources>

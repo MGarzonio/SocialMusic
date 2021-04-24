@@ -16,7 +16,7 @@ class ForgotActivity : AppCompatActivity() {
         setContentView(R.layout.activity_forgot)
     }
 
-    private fun sendRecoveryMail(to: String) :Boolean {
+    private fun sendRecoveryMail(to: String) {
         Firebase.auth.sendPasswordResetEmail(to)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
@@ -30,7 +30,6 @@ class ForgotActivity : AppCompatActivity() {
                     Toast.makeText(applicationContext, getString(R.string.account_not_found), Toast.LENGTH_LONG).show()
                     Log.d("FORGOT", "Failed to send mail! $it")
                 }
-        return true
     }
 
     fun openMain(view: View) {

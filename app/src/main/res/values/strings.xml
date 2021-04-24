@@ -46,5 +46,6 @@
     <string name="confirm">Confirm</string>
     <string name="nickname_name_surname_email">Nickname / Name / Surname / Email</string>
     <string name="search_info">Do not fill in the fields to ignore the search filter</string>
+    <string name="edit">edit</string>
 
 </resources>

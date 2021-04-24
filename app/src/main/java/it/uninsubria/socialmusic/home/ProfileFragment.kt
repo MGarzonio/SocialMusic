@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -70,50 +71,19 @@ import kotlinx.android.synthetic.main.fragment_profile.*
 
      override fun onClick(view: View) {
          when (view.id) {
-             R.id.buttonEdit_Profile -> doEditProfile()
-             R.id.buttonLogout_Profile -> doLogout(view)
+             R.id.buttonEdit_Profile -> editProfile()
+             R.id.buttonLogout_Profile -> doLogout()
              R.id.mapsButton_Profile -> openMaps(view)
              R.id.instrument_button_Profile -> openInstruments(view)
              R.id.gen_button_Profile -> openGenres(view)
              R.id.selectPhoto_button_Profile -> loadImageFromGallery(view)
-         }
-     }
-
-     private fun doEditProfile() {
-         when(btnEditProfile.text.toString()) {
-             getString(R.string.save) -> saveProfile()
-             getString(R.string.edit_profile) -> switchEditable(true)
-         }
-     }
-
-     private fun saveProfile() {
-         switchEditable(false)
-
-         //TODO(load new values on firebase)
-     }
-
-     private fun switchEditable(modifiable: Boolean) {
-         nickname.isEnabled = modifiable
-         name.isEnabled = modifiable
-         surname.isEnabled = modifiable
-         city.isEnabled = modifiable
-         btnMail.isClickable = modifiable
-         btnPassword.isClickable = modifiable
-         btnPhoto.isClickable = modifiable
-         btnInstruments.isClickable = modifiable
-         btnGenres.isClickable = modifiable
-         when(modifiable){
-             true -> {
-                 btnEditProfile.text = getString(R.string.save)
-             }
-             false -> {
-                 btnEditProfile.text = getString(R.string.edit_profile)
-             }
+             R.id.email_button_Profile -> editEmail()
          }
      }
 
      private fun loadProfileFromFirebase(){
-         switchEditable(false)
+         switchEditableProfile(false)
+         setEmailEditable(false)
          val myUser = Firebase.auth.currentUser
          val userID = myUser.uid
          val ref = FirebaseDatabase.getInstance().getReference("/users/$userID")
@@ -135,6 +105,92 @@ import kotlinx.android.synthetic.main.fragment_profile.*
          })
      }
 
+     private fun editProfile() {
+         when(btnEditProfile.text.toString()) {
+             getString(R.string.save) -> saveProfile()
+             getString(R.string.edit_profile) -> switchEditableProfile(true)
+         }
+     }
+
+     private fun saveProfile() {
+         switchEditableProfile(false)
+
+         //TODO(load new values on firebase)
+     }
+
+     private fun switchEditableProfile(modifiable: Boolean) {
+         nickname.isEnabled = modifiable
+         name.isEnabled = modifiable
+         surname.isEnabled = modifiable
+         city.isEnabled = modifiable
+         btnPhoto.isClickable = modifiable
+         btnInstruments.isClickable = modifiable
+         btnGenres.isClickable = modifiable
+         when(modifiable){
+             true -> {
+                 btnEditProfile.text = getString(R.string.save)
+             }
+             false -> {
+                 btnEditProfile.text = getString(R.string.edit_profile)
+             }
+         }
+     }
+
+     private fun editEmail(){
+         val oldEmail = mail.text.toString()
+         when(btnMail.text.toString()) {
+             getString(R.string.save) -> updateEmail(oldEmail)
+             getString(R.string.edit) -> setEmailEditable(true)
+         }
+     }
+
+     private fun setEmailEditable(editable: Boolean){
+         mail.isEnabled = editable
+         when(editable){
+             true -> {
+                 btnMail.text = getString(R.string.save)
+                 mail.text.clear()
+             }
+             false -> {
+                 btnMail.text = getString(R.string.edit)
+             }
+         }
+     }
+
+     private fun updateEmail(old: String){
+         val user = Firebase.auth.currentUser
+         val newEmail = mail.text.toString()
+         if(newEmail.isEmpty()) {
+             Toast.makeText(context, "Insert email address!", Toast.LENGTH_SHORT).show()
+         } else{
+             user!!.updateEmail(newEmail)
+                     .addOnSuccessListener{ task ->
+                             sendEmail(old)
+                             Log.d("EMAIL", "User email address updated.")
+                     }
+                     .addOnFailureListener {
+                         mail.error = getString(R.string.invalidEmail)
+                         Log.d("EMAIL", "Failed ${it.toString()}")
+                     }
+         }
+     }
+
+     private fun sendEmail(old: String){
+         val myUser = Firebase.auth.currentUser
+         myUser!!.sendEmailVerification()
+                 .addOnCompleteListener { task ->
+                     if (task.isSuccessful) {
+                         doLogout()
+                         Log.d("EMAIL", "Email sent.")
+                     } else{
+                         mail.error = getString(R.string.invalidEmail)
+                         mail.setText(old)
+                         myUser!!.updateEmail(old)
+                         Log.d("EMAIL", "Failed")
+                     }
+                 }
+     }
+
      private fun openGenres(view: View) {
          val intent = Intent(activity, ListActivity::class.java)
          intent.putExtra("type", 'G')
@@ -154,7 +210,7 @@ import kotlinx.android.synthetic.main.fragment_profile.*
          startActivity(intent)
      }
 
-     private fun doLogout(view: View) {
+     private fun doLogout() {
          FirebaseAuth.getInstance().signOut()
          val intent = Intent(context, LoginActivity::class.java)
          intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -176,4 +232,5 @@ import kotlinx.android.synthetic.main.fragment_profile.*
              selectPhoto_button_Profile.alpha = 0f
          }
      }
+
  }
