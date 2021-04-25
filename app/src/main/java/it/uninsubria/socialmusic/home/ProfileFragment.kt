@@ -78,6 +78,7 @@ import kotlinx.android.synthetic.main.fragment_profile.*
              R.id.gen_button_Profile -> openGenres(view)
              R.id.selectPhoto_button_Profile -> loadImageFromGallery(view)
              R.id.email_button_Profile -> editEmail()
+             R.id.password_button_profile -> editPassword()
          }
      }
 
@@ -173,6 +174,11 @@ import kotlinx.android.synthetic.main.fragment_profile.*
                          Log.d("EMAIL", "Failed ${it.toString()}")
                      }
          }
+     }
+
+     private fun editPassword(){
+         val intent = Intent(activity, ForgotActivity::class.java)
+         startActivity(intent)
      }
 
      private fun sendEmail(old: String){
