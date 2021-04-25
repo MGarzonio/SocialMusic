@@ -10,12 +10,13 @@ import android.util.Log
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import java.util.*
+//import com.google.firebase.auth.ktx.userProfileChangeRequest
+
 
 class SignUpActivity : AppCompatActivity() {
     private val TAG = "SignUpActivity"
@@ -26,6 +27,8 @@ class SignUpActivity : AppCompatActivity() {
     private var surname = ""
     private var nick = ""
     private var location = ""
+    private val instruments = "1,4,7"
+    private val generes = "2,3,5"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -111,6 +114,7 @@ class SignUpActivity : AppCompatActivity() {
                 Log.d(TAG, "Failed to create new user! ${it.message}")
             }
     }
+
     private fun updateImageToFirebase() {
         val fileName = UUID.randomUUID().toString()
         val fireRef = FirebaseStorage.getInstance().getReference("/images/$fileName")
@@ -120,7 +124,6 @@ class SignUpActivity : AppCompatActivity() {
                 Toast.makeText(this,getString(R.string.update_success), Toast.LENGTH_SHORT).show()
                 fireRef.downloadUrl.addOnSuccessListener {url ->
                     Log.d(TAG, "File location: $url")
-                    //setUserNickNUrl(url.toString())
                     saveUserToFirebaseDB(url.toString())
                 }
             }
@@ -131,7 +134,7 @@ class SignUpActivity : AppCompatActivity() {
     private fun saveUserToFirebaseDB(fireImageUrl: String) {
         val uid = FirebaseAuth.getInstance().uid ?: ""
         val fireRef = FirebaseDatabase.getInstance().getReference("/users/$uid")
-        val user = User(uid, nick, fireImageUrl, name, surname, location)
+        val user = User(uid, nick, fireImageUrl, name, surname, location, instruments, generes)
         fireRef.setValue(user)
             .addOnSuccessListener {
                 Log.d(TAG, "User updated!")
@@ -144,12 +147,12 @@ class SignUpActivity : AppCompatActivity() {
             }
     }
 
-    /*private fun setUserNickNUrl(url: String){
-        val user = Firebase.auth.currentUser
+    /*private fun setNickNImage(){
+        val user = FirebaseAuth.getInstance().currentUser
 
         val profileUpdates = userProfileChangeRequest {
-            displayName = "Jane Q. User"
-            photoUri = Uri.parse(url)
+            displayName = nick
+            photoUri = selectedPhotoUri
         }
 
         user!!.updateProfile(profileUpdates)
