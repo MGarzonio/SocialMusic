@@ -17,6 +17,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
 import it.uninsubria.socialmusic.*
 import kotlinx.android.synthetic.main.fragment_profile.*
@@ -73,7 +74,7 @@ import kotlinx.android.synthetic.main.fragment_profile.*
          when (view.id) {
              R.id.buttonEdit_Profile -> editProfile()
              R.id.buttonLogout_Profile -> doLogout()
-             R.id.mapsButton_Profile -> openMaps(view)
+             R.id.mapsButton_Profile -> deleteUser()
              R.id.instrument_button_Profile -> openInstruments(view)
              R.id.gen_button_Profile -> openGenres(view)
              R.id.selectPhoto_button_Profile -> loadImageFromGallery(view)
@@ -237,6 +238,19 @@ import kotlinx.android.synthetic.main.fragment_profile.*
              profilePhoto_imageView_Profile.setImageBitmap(bitmapImage)
              selectPhoto_button_Profile.alpha = 0f
          }
+     }
+     private fun deleteUser(){
+         val user = FirebaseAuth.getInstance().currentUser
+         val refDB = FirebaseDatabase.getInstance().getReference("/users/")
+         //val refStore = FirebaseStorage.getInstance().getReferenceFromUrl(refDB.child("/profile_image_url").toString())
+         refDB.child(user.uid).removeValue()
+         //refStore.delete()
+         user!!.delete()
+             .addOnSuccessListener {
+                 val intent = Intent(activity, LoginActivity::class.java)
+                 startActivity(intent)
+             }
+
      }
 
  }
