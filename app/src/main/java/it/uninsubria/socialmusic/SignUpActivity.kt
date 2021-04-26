@@ -20,7 +20,7 @@ import java.util.*
 
 
 class SignUpActivity : AppCompatActivity() {
-    private val TAG = "SignUpActivity"
+    private val tag = "SignUpActivity"
     var selectedPhotoUri: Uri? = null
     private var email = ""
     private var psw = ""
@@ -29,7 +29,7 @@ class SignUpActivity : AppCompatActivity() {
     private var nick = ""
     private var location = ""
     private val instruments = "1,4,7"
-    private val generes = "2,3,5"
+    private val genres = "2,3,5"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +38,7 @@ class SignUpActivity : AppCompatActivity() {
             performRegistration()
         }
         loginPage_textView_signUp.setOnClickListener{
-            Log.d(TAG, "Accessing login page")
+            Log.d(tag, "Accessing login page")
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
@@ -62,7 +62,7 @@ class SignUpActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode == 0 && resultCode == Activity.RESULT_OK && data != null){
             selectedPhotoUri = data.data
-            Log.d(TAG, "photo was selected")
+            Log.d(tag, "photo was selected")
             val bitmapImage = MediaStore.Images.Media.getBitmap(contentResolver, selectedPhotoUri)
             profilePhoto_imageView_signUp.setImageBitmap(bitmapImage)
             selectPhoto_button_signUp.alpha = 0F
@@ -74,7 +74,7 @@ class SignUpActivity : AppCompatActivity() {
         myUser!!.sendEmailVerification()
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        Log.d(TAG, "Email sent.")
+                        Log.d(tag, "Email sent.")
                     }
                 }
     }
@@ -123,7 +123,7 @@ class SignUpActivity : AppCompatActivity() {
                 if(!it.isSuccessful) return@addOnCompleteListener
                 //if successful
                 Toast.makeText(this,getString(R.string.creation_success), Toast.LENGTH_SHORT).show()
-                Log.d(TAG,"Successfully created user whit uid: ${it.result?.user?.uid}")
+                Log.d(tag,"Successfully created user whit uid: ${it.result?.user?.uid}")
                 if(selectedPhotoUri == null){
                     saveUserToFirebaseDB("default")
                 } else{
@@ -139,7 +139,7 @@ class SignUpActivity : AppCompatActivity() {
                 if(it.message.equals("The given password is invalid. [ Password should be at least 6 characters ]")){
                     password_editText_signUp.error = getString(R.string.invalidPassword)
                 }
-                Log.d(TAG, "Failed to create new user! ${it.message}")
+                Log.d(tag, "Failed to create new user! ${it.message}")
             }
     }
 
@@ -148,15 +148,15 @@ class SignUpActivity : AppCompatActivity() {
         val fireRef = FirebaseStorage.getInstance().getReference("/images/$fileName")
         fireRef.putFile(selectedPhotoUri!!)
             .addOnSuccessListener {
-                Log.d(TAG, "Successfully update on Firebase Storage image: ${it.metadata?.path}")
+                Log.d(tag, "Successfully update on Firebase Storage image: ${it.metadata?.path}")
                 Toast.makeText(this,getString(R.string.update_success), Toast.LENGTH_SHORT).show()
                 fireRef.downloadUrl.addOnSuccessListener {url ->
-                    Log.d(TAG, "File location: $url")
+                    Log.d(tag, "File location: $url")
                     saveUserToFirebaseDB(url.toString())
                 }
             }
             .addOnFailureListener{
-                Log.d(TAG, "Updating image failure! ${it.message}")
+                Log.d(tag, "Updating image failure! ${it.message}")
             }
     }
 
@@ -164,17 +164,17 @@ class SignUpActivity : AppCompatActivity() {
         val uid = FirebaseAuth.getInstance().uid ?: ""
         val fireRef = FirebaseDatabase.getInstance().getReference("/users/$uid")
         val nickRef = FirebaseDatabase.getInstance().getReference("/nicknames/")
-        val user = User(uid, nick, fireImageUrl, name, surname, location, instruments, generes)
+        val user = User(uid, nick, fireImageUrl, name, surname, location, instruments, genres)
         nickRef.setValue(nick)
         fireRef.setValue(user)
             .addOnSuccessListener {
-                Log.d(TAG, "User updated!")
+                Log.d(tag, "User updated!")
                 val intent = Intent(this, LoginActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
             }
             .addOnFailureListener{
-                Log.d(TAG, "Updating user failure! ${it.message}")
+                Log.d(tag, "Updating user failure! ${it.message}")
             }
     }
 
