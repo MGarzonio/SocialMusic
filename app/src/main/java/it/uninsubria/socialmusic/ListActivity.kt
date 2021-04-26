@@ -8,20 +8,24 @@ import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
 import kotlinx.android.synthetic.main.activity_list.*
 import kotlinx.android.synthetic.main.list_recyclerview_row.view.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 class ListActivity : AppCompatActivity() {
 
     private var adapter = GroupAdapter<GroupieViewHolder>()
-    //private val user = Firebase.auth.currentUser.uid
     private var items = ArrayList<String>()
-    private var images = ArrayList<Uri>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list)
         var type = intent.getCharExtra("type", ' ')
-        if(type == 'I') getUserInstruments()
-        else if(type == 'G') getUserGenres()
+        items = if(type == 'I'){
+            ArrayList(listOf(*resources.getStringArray(R.array.instruments)))
+        }
+        else{
+            ArrayList(listOf(*resources.getStringArray(R.array.genres)))
+        }
         loadAdapter()
         listView.adapter = adapter
     }
@@ -32,21 +36,6 @@ class ListActivity : AppCompatActivity() {
         }
     }
 
-    private fun getUserInstruments() {
-        // TODO(get instruments to firebase)
-
-        items.add("Drum")
-        items.add("Guitar")
-        items.add("Electric triangle")
-    }
-
-    private fun getUserGenres() {
-        // TODO(get genres to firebase)
-
-        items.add("Rock")
-        items.add("Jazz")
-        items.add("Metal")
-    }
 }
 
 class ListItem(val name : String) : Item<GroupieViewHolder>(){

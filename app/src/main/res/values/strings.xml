@@ -48,4 +48,25 @@
     <string name="search_info">Do not fill in the fields to ignore the search filter</string>
     <string name="edit">edit</string>
 
+    <string-array name="instruments">
+        <item>Drum</item>
+        <item>Guitar</item>
+        <item>Electric guitar</item>
+        <item>Flute</item>
+        <item>Piano</item>
+        <item>Violin</item>
+        <item>Bass</item>
+        <item>Singer</item>
+    </string-array>
+    <string-array name="genres">
+        <item>Rock</item>
+        <item>Metal</item>
+        <item>Pop</item>
+        <item>Jazz</item>
+        <item>Classic</item>
+        <item>Funky</item>
+        <item>Blues</item>
+        <item>Rap</item>
+    </string-array>
+
 </resources>

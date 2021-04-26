@@ -25,8 +25,8 @@ class SearchFragment : Fragment(), View.OnClickListener{
     private lateinit var nameKey: EditText
     private lateinit var instrumentKey: Spinner
     private lateinit var genreKey: Spinner
-    private var selectedInstrument = "None"
-    private var selectedGenre = "None"
+    private var selectedInstrument = ""
+    private var selectedGenre = ""
 
     val defaultID = "6N9HD0c5WgPsakocjfluSiSI0hm2"
 
@@ -39,9 +39,14 @@ class SearchFragment : Fragment(), View.OnClickListener{
         genreKey = viewVal.findViewById(R.id.genre_Spinner_search) as Spinner
         recyclerView = viewVal.findViewById(R.id.user_recyclerView_search) as RecyclerView
 
-        val instrumentAdapter = ArrayAdapter(viewVal.context, R.layout.color_spinner_layout, getInstruments())
+
+        var instrumentList = ArrayList(listOf(*resources.getStringArray(R.array.instruments)))
+        instrumentList.add(0, "")
+        val instrumentAdapter = ArrayAdapter(viewVal.context, R.layout.color_spinner_layout, instrumentList)
+        var genresList = ArrayList(listOf(*resources.getStringArray(R.array.genres)))
+        genresList.add(0, "")
         instrumentAdapter.setDropDownViewResource(R.layout.spinner_dropdown_layout)
-        val genresAdapter = ArrayAdapter(viewVal.context, R.layout.color_spinner_layout, getGenres())
+        val genresAdapter = ArrayAdapter(viewVal.context, R.layout.color_spinner_layout, genresList)
         genresAdapter.setDropDownViewResource(R.layout.spinner_dropdown_layout)
 
         instrumentKey.adapter = instrumentAdapter
@@ -51,7 +56,7 @@ class SearchFragment : Fragment(), View.OnClickListener{
 
         instrumentKey?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
-
+                selectedInstrument = ""
             }
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 selectedInstrument = instrumentKey.selectedItem.toString()
@@ -59,11 +64,10 @@ class SearchFragment : Fragment(), View.OnClickListener{
         }
         genreKey?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
-
+                selectedGenre = ""
             }
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                if(genreKey.selectedItem.toString() != "None")
-                    selectedGenre = genreKey.selectedItem.toString()
+                selectedGenre = genreKey.selectedItem.toString()
             }
         }
 
@@ -76,29 +80,7 @@ class SearchFragment : Fragment(), View.OnClickListener{
         }
     }
 
-    private fun getInstruments(): ArrayList<String> {
-        var list = ArrayList<String>()
-
-        list.add("None")
-        list.add("Drum")
-        list.add("Guitar")
-        list.add("Bass")
-
-        return list
-    }
-
-    private fun getGenres(): ArrayList<String> {
-        var list = ArrayList<String>()
-
-        list.add("None")
-        list.add("Rock")
-        list.add("Metal")
-        list.add("Jazz")
-
-        return list
-    }
-
-    private fun fetchUsers(view: View, selectedName : String) {
+    private fun fetchUsers(view: View, nameKey : String) {
         val ref = FirebaseDatabase.getInstance().getReference("/users")
         val myUid = FirebaseAuth.getInstance().uid
         ref.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -107,11 +89,9 @@ class SearchFragment : Fragment(), View.OnClickListener{
                 snapshot.children.forEach {
                     val user = it.getValue(User::class.java)
                     if (user != null && user.uid != myUid && user.uid != defaultID) {
-                        if(selectedName != ""){
-                            if(user.name == selectedName || user.surname == selectedName || user.username == selectedName)
-                                adapter.add(UserItem(user))
-                        } else
+                        if(viewableUser(user, nameKey)){
                             adapter.add(UserItem(user))
+                        }
                     }
                 }
                 adapter.setOnItemClickListener { item, view ->
@@ -127,6 +107,45 @@ class SearchFragment : Fragment(), View.OnClickListener{
 
             }
         })
+    }
+
+    private fun viewableUser(user: User, selectedName : String): Boolean {
+        if (selectedName == "") {
+            if (selectedInstrument == "") {
+                return if (selectedGenre == "")
+                    true
+                else
+                    inUserList(selectedGenre, user.generes)
+            } else if (inUserList(selectedInstrument, user.instruments)) {
+                return if (selectedGenre == "")
+                    true
+                else
+                    inUserList(selectedGenre, user.generes)
+            } else if (selectedName == user.name || selectedName == user.surname || selectedName == user.username) {
+                if (selectedInstrument == "") {
+                    return if (selectedGenre == "")
+                        true
+                    else
+                        inUserList(selectedGenre, user.generes)
+                } else if (inUserList(selectedGenre, user.generes)) {
+                    return if (selectedGenre == "")
+                        true
+                    else {
+                        inUserList(selectedGenre, user.generes)
+                    }
+                }
+            }
+        }
+        return false
+    }
+
+    private fun inUserList(key : String, list : String) : Boolean {
+        val arrayList = list.split(",")
+        for(s : String in arrayList){
+            if(s == key)
+                return true
+        }
+        return false
     }
 
     private fun doSearch(view: View) {
