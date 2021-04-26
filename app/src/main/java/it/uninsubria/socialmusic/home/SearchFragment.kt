@@ -25,8 +25,8 @@ class SearchFragment : Fragment(), View.OnClickListener{
     private lateinit var nameKey: EditText
     private lateinit var instrumentKey: Spinner
     private lateinit var genreKey: Spinner
-    private var selectedInstrument = 0
-    private var selectedGenre = 0
+    private var selectedInstrument = ""
+    private var selectedGenre = ""
 
     val defaultID = "6N9HD0c5WgPsakocjfluSiSI0hm2"
 
@@ -56,18 +56,18 @@ class SearchFragment : Fragment(), View.OnClickListener{
 
         instrumentKey?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
-
+                selectedInstrument = ""
             }
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                selectedInstrument = instrumentKey.selectedItemPosition
+                selectedInstrument = instrumentKey.selectedItem.toString()
             }
         }
         genreKey?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
-
+                selectedGenre = ""
             }
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                selectedGenre = genreKey.selectedItemPosition
+                selectedGenre = genreKey.selectedItem.toString()
             }
         }
 
@@ -80,7 +80,7 @@ class SearchFragment : Fragment(), View.OnClickListener{
         }
     }
 
-    private fun fetchUsers(view: View, selectedName : String) {
+    private fun fetchUsers(view: View, nameKey : String) {
         val ref = FirebaseDatabase.getInstance().getReference("/users")
         val myUid = FirebaseAuth.getInstance().uid
         ref.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -89,9 +89,7 @@ class SearchFragment : Fragment(), View.OnClickListener{
                 snapshot.children.forEach {
                     val user = it.getValue(User::class.java)
                     if (user != null && user.uid != myUid && user.uid != defaultID) {
-                        if (selectedName != "" && (user.name == selectedName || user.surname == selectedName || user.username == selectedName)) {
-                            adapter.add(UserItem(user))
-                        } else {
+                        if(viewableUser(user, nameKey)){
                             adapter.add(UserItem(user))
                         }
                     }
@@ -109,6 +107,45 @@ class SearchFragment : Fragment(), View.OnClickListener{
 
             }
         })
+    }
+
+    private fun viewableUser(user: User, selectedName : String): Boolean {
+        if (selectedName == "") {
+            if (selectedInstrument == "") {
+                return if (selectedGenre == "")
+                    true
+                else
+                    inUserList(selectedGenre, user.generes)
+            } else if (inUserList(selectedInstrument, user.instruments)) {
+                return if (selectedGenre == "")
+                    true
+                else
+                    inUserList(selectedGenre, user.generes)
+            } else if (selectedName == user.name || selectedName == user.surname || selectedName == user.username) {
+                if (selectedInstrument == "") {
+                    return if (selectedGenre == "")
+                        true
+                    else
+                        inUserList(selectedGenre, user.generes)
+                } else if (inUserList(selectedGenre, user.generes)) {
+                    return if (selectedGenre == "")
+                        true
+                    else {
+                        inUserList(selectedGenre, user.generes)
+                    }
+                }
+            }
+        }
+        return false
+    }
+
+    private fun inUserList(key : String, list : String) : Boolean {
+        val arrayList = list.split(",")
+        for(s : String in arrayList){
+            if(s == key)
+                return true
+        }
+        return false
     }
 
     private fun doSearch(view: View) {
