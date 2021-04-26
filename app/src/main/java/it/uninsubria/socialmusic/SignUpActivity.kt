@@ -10,7 +10,8 @@ import android.util.Log
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
+import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_sign_up.*
@@ -77,6 +78,28 @@ class SignUpActivity : AppCompatActivity() {
                     }
                 }
     }
+
+    private fun checkNickname(): Boolean{
+        nick = nickname_editText_signUp.text.toString()
+        var exist = false
+        val ref = FirebaseDatabase.getInstance().reference.child("users").orderByChild("username").equalTo(nick)
+        //val ref = FirebaseDatabase.getInstance().reference.child("/nicknames").orderByKey().equalTo(nick)
+        //val ref = FirebaseDatabase.getInstance().getReference("/users")
+        ref.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                /*snapshot.children.forEach {
+                    val refUser = it.child("/username")
+                    val nickname = refUser.getValue<String>()
+                    println(nickname)
+                }*/
+                println(snapshot.key)
+                if(snapshot.childrenCount >= 1) exist = true
+            }
+            override fun onCancelled(error: DatabaseError) {}
+        })
+        return exist
+    }
+
     private fun performRegistration(){
         email = email_editText_signUp.text.toString()
         psw = password_editText_signUp.text.toString()
@@ -87,6 +110,11 @@ class SignUpActivity : AppCompatActivity() {
 
         if(email.isEmpty() || psw.isEmpty() || name.isEmpty() || surname.isEmpty() || nick.isEmpty() || location.isEmpty()){
             Toast.makeText(this,"Please, fill all the fields with '*'!", Toast.LENGTH_SHORT).show()
+            return
+        }
+        if(checkNickname() == true){
+            nickname_editText_signUp.error = "Nickname already in use!"
+            Toast.makeText(this,"Nickname already in use!", Toast.LENGTH_SHORT).show()
             return
         }
         //Firebase authentication
@@ -131,10 +159,13 @@ class SignUpActivity : AppCompatActivity() {
                 Log.d(TAG, "Updating image failure! ${it.message}")
             }
     }
+
     private fun saveUserToFirebaseDB(fireImageUrl: String) {
         val uid = FirebaseAuth.getInstance().uid ?: ""
         val fireRef = FirebaseDatabase.getInstance().getReference("/users/$uid")
+        val nickRef = FirebaseDatabase.getInstance().getReference("/nicknames/")
         val user = User(uid, nick, fireImageUrl, name, surname, location, instruments, generes)
+        nickRef.setValue(nick)
         fireRef.setValue(user)
             .addOnSuccessListener {
                 Log.d(TAG, "User updated!")

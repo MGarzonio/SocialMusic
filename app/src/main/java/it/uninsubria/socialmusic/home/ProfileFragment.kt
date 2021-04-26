@@ -36,6 +36,7 @@ import kotlinx.android.synthetic.main.fragment_profile.*
      private lateinit var profilePhoto : de.hdodenhof.circleimageview.CircleImageView
      private  lateinit var btnGenres: Button
      private  lateinit var btnInstruments: Button
+     private var userProfile: User? = null
 
      override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -89,20 +90,25 @@ import kotlinx.android.synthetic.main.fragment_profile.*
          val myUser = Firebase.auth.currentUser
          val userID = myUser.uid
          val ref = FirebaseDatabase.getInstance().getReference("/users/$userID")
-         ref.addListenerForSingleValueEvent(object: ValueEventListener {
+         ref.addListenerForSingleValueEvent(object : ValueEventListener {
              override fun onDataChange(snapshot: DataSnapshot) {
-                 val user = snapshot.getValue(User::class.java)
-                 nickname.setText(user?.username)
-                 name.setText(user?.name)
-                 surname.setText(user?.surname)
-                 city.setText(user?.location)
-                 mail.setText(myUser.email)
-                 if(user?.profile_image_url != "default") {
-                     Picasso.get().load(user?.profile_image_url).into(profilePhoto)
-                     btnPhoto.alpha = 0F
+                 if(snapshot.exists()) {
+                     userProfile = snapshot.getValue(User::class.java)!!
+                     nickname.setText(userProfile?.username)
+                     name.setText(userProfile?.name)
+                     surname.setText(userProfile?.surname)
+                     city.setText(userProfile?.location)
+                     mail.setText(myUser.email)
+                     if (userProfile?.profile_image_url != "default") {
+                         Picasso.get().load(userProfile?.profile_image_url).into(profilePhoto)
+                         btnPhoto.alpha = 0F
+                     }
                  }
              }
+
              override fun onCancelled(error: DatabaseError) {
+                 Toast.makeText(context, "This user has been deleted!", Toast.LENGTH_SHORT)
+                 Log.d("PROFILE", error.toString())
              }
          })
      }
@@ -240,17 +246,22 @@ import kotlinx.android.synthetic.main.fragment_profile.*
          }
      }
      private fun deleteUser(){
-         val user = FirebaseAuth.getInstance().currentUser
-         val refDB = FirebaseDatabase.getInstance().getReference("/users/")
-         //val refStore = FirebaseStorage.getInstance().getReferenceFromUrl(refDB.child("/profile_image_url").toString())
-         refDB.child(user.uid).removeValue()
-         //refStore.delete()
-         user!!.delete()
-             .addOnSuccessListener {
-                 val intent = Intent(activity, LoginActivity::class.java)
-                 startActivity(intent)
+         if(userProfile != null) {
+             val user = FirebaseAuth.getInstance().currentUser!!
+             val refDBUser = FirebaseDatabase.getInstance().getReference("/users/")
+             val refDBNick = FirebaseDatabase.getInstance().getReference("/nicknames/")
+             val refStore = FirebaseStorage.getInstance().getReferenceFromUrl(userProfile!!.profile_image_url)
+             user.delete().addOnSuccessListener {
+                 Log.d("PROFILE", "user ${userProfile!!.username} has been cancelled!")
              }
-
+             refDBUser.child(user.uid).removeValue()
+             refDBNick.child(userProfile!!.username).removeValue()
+             refStore.delete()
+                     .addOnSuccessListener {
+                         val intent = Intent(activity, LoginActivity::class.java)
+                         startActivity(intent)
+                     }
+         }
      }
 
  }
