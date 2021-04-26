@@ -25,8 +25,8 @@ class SearchFragment : Fragment(), View.OnClickListener{
     private lateinit var nameKey: EditText
     private lateinit var instrumentKey: Spinner
     private lateinit var genreKey: Spinner
-    private var selectedInstrument = "None"
-    private var selectedGenre = "None"
+    private var selectedInstrument = 0
+    private var selectedGenre = 0
 
     val defaultID = "6N9HD0c5WgPsakocjfluSiSI0hm2"
 
@@ -39,9 +39,14 @@ class SearchFragment : Fragment(), View.OnClickListener{
         genreKey = viewVal.findViewById(R.id.genre_Spinner_search) as Spinner
         recyclerView = viewVal.findViewById(R.id.user_recyclerView_search) as RecyclerView
 
-        val instrumentAdapter = ArrayAdapter(viewVal.context, R.layout.color_spinner_layout, getInstruments())
+
+        var instrumentList = ArrayList(listOf(*resources.getStringArray(R.array.instruments)))
+        instrumentList.add(0, "")
+        val instrumentAdapter = ArrayAdapter(viewVal.context, R.layout.color_spinner_layout, instrumentList)
+        var genresList = ArrayList(listOf(*resources.getStringArray(R.array.genres)))
+        genresList.add(0, "")
         instrumentAdapter.setDropDownViewResource(R.layout.spinner_dropdown_layout)
-        val genresAdapter = ArrayAdapter(viewVal.context, R.layout.color_spinner_layout, getGenres())
+        val genresAdapter = ArrayAdapter(viewVal.context, R.layout.color_spinner_layout, genresList)
         genresAdapter.setDropDownViewResource(R.layout.spinner_dropdown_layout)
 
         instrumentKey.adapter = instrumentAdapter
@@ -54,7 +59,7 @@ class SearchFragment : Fragment(), View.OnClickListener{
 
             }
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                selectedInstrument = instrumentKey.selectedItem.toString()
+                selectedInstrument = instrumentKey.selectedItemPosition
             }
         }
         genreKey?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
@@ -62,8 +67,7 @@ class SearchFragment : Fragment(), View.OnClickListener{
 
             }
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                if(genreKey.selectedItem.toString() != "None")
-                    selectedGenre = genreKey.selectedItem.toString()
+                selectedGenre = genreKey.selectedItemPosition
             }
         }
 
@@ -76,28 +80,6 @@ class SearchFragment : Fragment(), View.OnClickListener{
         }
     }
 
-    private fun getInstruments(): ArrayList<String> {
-        var list = ArrayList<String>()
-
-        list.add("None")
-        list.add("Drum")
-        list.add("Guitar")
-        list.add("Bass")
-
-        return list
-    }
-
-    private fun getGenres(): ArrayList<String> {
-        var list = ArrayList<String>()
-
-        list.add("None")
-        list.add("Rock")
-        list.add("Metal")
-        list.add("Jazz")
-
-        return list
-    }
-
     private fun fetchUsers(view: View, selectedName : String) {
         val ref = FirebaseDatabase.getInstance().getReference("/users")
         val myUid = FirebaseAuth.getInstance().uid
@@ -107,11 +89,11 @@ class SearchFragment : Fragment(), View.OnClickListener{
                 snapshot.children.forEach {
                     val user = it.getValue(User::class.java)
                     if (user != null && user.uid != myUid && user.uid != defaultID) {
-                        if(selectedName != ""){
-                            if(user.name == selectedName || user.surname == selectedName || user.username == selectedName)
-                                adapter.add(UserItem(user))
-                        } else
+                        if (selectedName != "" && (user.name == selectedName || user.surname == selectedName || user.username == selectedName)) {
                             adapter.add(UserItem(user))
+                        } else {
+                            adapter.add(UserItem(user))
+                        }
                     }
                 }
                 adapter.setOnItemClickListener { item, view ->
