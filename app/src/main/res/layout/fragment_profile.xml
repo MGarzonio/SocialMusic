@@ -45,8 +45,8 @@
         android:minHeight="40dp"
         android:text="X"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/selectPhoto_button_Profile"
         app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintBottom_toBottomOf="@+id/selectPhoto_button_Profile"
         app:layout_constraintEnd_toEndOf="@+id/selectPhoto_button_Profile" />
 
     <EditText

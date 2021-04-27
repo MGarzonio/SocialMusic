@@ -18,6 +18,7 @@ import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_sign_up.*
+import kotlinx.android.synthetic.main.fragment_profile.*
 import java.util.*
 
 
@@ -39,6 +40,7 @@ class SignUpActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
+
         signUp_button_signUp.setOnClickListener{
             performRegistration()
         }
@@ -52,6 +54,10 @@ class SignUpActivity : AppCompatActivity() {
             intent.type = "image/*"
             startActivityForResult(intent, 0)
         }
+        deleteImage_button_signUp.alpha = 0F
+        deleteImage_button_signUp.setOnClickListener {
+            deleteImage()
+        }
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -61,6 +67,7 @@ class SignUpActivity : AppCompatActivity() {
             val bitmapImage = MediaStore.Images.Media.getBitmap(contentResolver, selectedPhotoUri)
             profilePhoto_imageView_signUp.setImageBitmap(bitmapImage)
             selectPhoto_button_signUp.alpha = 0F
+            deleteImage_button_signUp.alpha = 1F
         }
     }
 
@@ -85,7 +92,7 @@ class SignUpActivity : AppCompatActivity() {
                     val user = it.getValue(User::class.java)
                     if (user!!.username == nick) {
                         Log.d("SIGNUP", "This nickname is already taken!")
-                        Toast.makeText(applicationContext, "This nickname is already taken!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(applicationContext, getString(R.string.nick_taken), Toast.LENGTH_SHORT).show()
                         nickname_editText_signUp.error = "Already taken"
                         nickname_editText_signUp.requestFocus()
                         return
@@ -106,7 +113,7 @@ class SignUpActivity : AppCompatActivity() {
         location = location_editText_signUp.text.toString()
 
         if(email.isEmpty() || psw.isEmpty() || name.isEmpty() || surname.isEmpty() || nick.isEmpty() || location.isEmpty()){
-            Toast.makeText(this, "Please, fill all the fields with '*'!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.fill_all_the_fields), Toast.LENGTH_SHORT).show()
             return
         }
         //Firebase authentication
@@ -167,6 +174,13 @@ class SignUpActivity : AppCompatActivity() {
             .addOnFailureListener{
                 Log.d(tag, "Updating user failure! ${it.message}")
             }
+    }
+
+    private fun deleteImage(){
+        profilePhoto_imageView_signUp.setImageResource(R.mipmap.default_profile)
+        selectPhoto_button_signUp.alpha = 1F
+        selectedPhotoUri = null
+        deleteImage_button_signUp.alpha = 0F
     }
 /* PROVA ROTAZIONE IMMAGINI STORTE-------- NON CANCELLARE
 

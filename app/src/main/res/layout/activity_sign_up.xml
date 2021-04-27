@@ -90,6 +90,7 @@
         android:background="@drawable/rounded_selectphoto_button"
         android:text="@string/select_photo"
         android:textColor="@color/black"
+        app:layout_constraintDimensionRatio="H,1:1"
         app:layout_constraintBottom_toTopOf="@+id/nickname_editText_signUp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -106,6 +107,21 @@
         app:layout_constraintEnd_toEndOf="@+id/selectPhoto_button_signUp"
         app:layout_constraintStart_toStartOf="@+id/selectPhoto_button_signUp"
         app:layout_constraintTop_toTopOf="@+id/selectPhoto_button_signUp" />
+
+    <android.widget.Button
+        android:id="@+id/deleteImage_button_signUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_delete_button"
+        android:maxWidth="80dp"
+        android:maxHeight="80dp"
+        android:minWidth="40dp"
+        android:minHeight="40dp"
+        android:text="X"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/selectPhoto_button_signUp"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="@+id/selectPhoto_button_signUp" />
 
     <EditText
         android:id="@+id/name_editText_signUp"

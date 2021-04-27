@@ -83,5 +83,7 @@
     <string name="search_users">Search users</string>
     <string name="profile">Profile</string>
     <string name="google_maps" translatable="false">Google Maps</string>
+    <string name="fill_all_the_fields">Please, fill all the text fields!</string>
+    <string name="nick_taken">This nickname is already taken!</string>
 
 </resources>
