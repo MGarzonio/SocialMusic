@@ -77,4 +77,5 @@
     <string name="search_users">Ricerca utente</string>
     <string name="profile">Profilo</string>
     <string name="musical_instruments">Strumenti</string>
+    <string name="changes_saved">Modifiche salvate</string>
 </resources>

@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ListView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import it.uninsubria.socialmusic.home.HomeActivity
 
@@ -46,7 +47,6 @@ class ListActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         var res = ""
         for(s : String in selectedItem)
             res += "$s,"
-        val intent = Intent(this, HomeActivity::class.java)
-        startActivity(intent)
+        Toast.makeText(view.context, getString(R.string.changes_saved), Toast.LENGTH_LONG).show()
     }
 }

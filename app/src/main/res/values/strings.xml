@@ -82,6 +82,6 @@
     <string name="chat">Chat</string>
     <string name="search_users">Search users</string>
     <string name="profile">Profile</string>
-    <string name="google_maps" translatable="false">Google Maps</string>
+    <string name="changes_saved">Changes saved</string>
 
 </resources>
