@@ -95,63 +95,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name_editText_Profile" />
 
-    <TextView
-        android:id="@+id/instrument_TextView_Profile"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/rounded_edittext"
-        android:paddingLeft="16dp"
-        android:text="@string/musical_instruments"
-        android:gravity="center_vertical"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@id/gen_TextView_Profile"
-        app:layout_constraintEnd_toStartOf="@+id/instrument_button_Profile"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/location_editText_Profile" />
-
-    <TextView
-        android:id="@+id/gen_TextView_Profile"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="8dp"
-        android:gravity="center_vertical"
-        android:background="@drawable/rounded_edittext"
-        android:paddingLeft="16dp"
-        android:text="@string/musical_genres"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toStartOf="@+id/gen_button_Profile"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/instrument_TextView_Profile" />
-
     <android.widget.Button
         android:id="@+id/instrument_button_Profile"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="40dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/rounded_button"
-        android:text="+"
-        android:textSize="24sp"
+        android:text="@string/musical_instruments"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/instrument_TextView_Profile"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/instrument_TextView_Profile"
-        app:layout_constraintTop_toTopOf="@+id/instrument_TextView_Profile" />
+        app:layout_constraintEnd_toStartOf="@id/gen_button_Profile"
+        app:layout_constraintStart_toStartOf="@+id/location_editText_Profile"
+        app:layout_constraintTop_toBottomOf="@+id/location_editText_Profile"
+        app:layout_constraintBottom_toTopOf="@id/email_button_Profile"/>
 
     <android.widget.Button
         android:id="@+id/gen_button_Profile"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginStart="8dp"
         android:background="@drawable/rounded_button"
-        android:text="+"
-        android:textSize="24sp"
+        android:text="@string/musical_genres"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/gen_TextView_Profile"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/gen_TextView_Profile"
-        app:layout_constraintTop_toTopOf="@+id/gen_TextView_Profile"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintEnd_toEndOf="@+id/location_editText_Profile"
+        app:layout_constraintStart_toEndOf="@+id/instrument_button_Profile"
+        app:layout_constraintTop_toTopOf="@id/instrument_button_Profile"
+        app:layout_constraintBottom_toBottomOf="@id/instrument_button_Profile"/>
 
     <android.widget.Button
         android:id="@+id/password_button_profile"
@@ -163,7 +131,7 @@
         android:textColor="#0000FF"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/email_button_Profile"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/gen_button_Profile"
         app:layout_constraintStart_toEndOf="@id/email_button_Profile"
         app:layout_constraintTop_toTopOf="@id/email_button_Profile" />
 
@@ -172,16 +140,15 @@
         android:id="@+id/email_button_Profile"
         android:layout_width="0dp"
         android:layout_height="40dp"
-        android:layout_marginTop="16dp"
         android:background="@drawable/rounded_button"
         android:text="@string/edit_email"
         android:textColor="#0000FF"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/buttonEdit_Profile"
+        app:layout_constraintBottom_toTopOf="@id/buttonLogout_Profile"
         app:layout_constraintEnd_toStartOf="@id/password_button_profile"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/gen_TextView_Profile" />
+        app:layout_constraintStart_toStartOf="@+id/instrument_button_Profile"
+        app:layout_constraintTop_toBottomOf="@+id/instrument_button_Profile" />
 
     <EditText
         android:id="@+id/location_editText_Profile"
@@ -193,7 +160,6 @@
         android:inputType="textPersonName"
         android:paddingLeft="16dp"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@id/instrument_TextView_Profile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/surname_editText_Profile" />
@@ -239,7 +205,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/buttonEdit_Profile"
         app:layout_constraintTop_toTopOf="@+id/buttonEdit_Profile" />
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
