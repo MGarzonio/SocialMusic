@@ -29,6 +29,7 @@
         android:src="@mipmap/default_profile"
         app:civ_border_color="@android:color/holo_blue_dark"
         app:civ_border_width="5dp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/selectPhoto_button_Profile"
         app:layout_constraintEnd_toEndOf="@+id/selectPhoto_button_Profile"
         app:layout_constraintStart_toStartOf="@+id/selectPhoto_button_Profile"
