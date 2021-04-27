@@ -103,6 +103,7 @@
         android:background="@drawable/rounded_edittext"
         android:text="@string/musical_instruments"
         android:textStyle="bold"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toStartOf="@id/gen_button_Profile"
         app:layout_constraintStart_toStartOf="@+id/location_editText_Profile"
         app:layout_constraintTop_toBottomOf="@+id/location_editText_Profile" />
@@ -115,6 +116,7 @@
         android:background="@drawable/rounded_edittext"
         android:text="@string/musical_genres"
         android:textStyle="bold"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="@+id/location_editText_Profile"
         app:layout_constraintStart_toEndOf="@+id/instrument_button_Profile"
         app:layout_constraintTop_toTopOf="@id/instrument_button_Profile"
