@@ -8,10 +8,10 @@
     <string name="forgot_message">Please enter your e-mail address.You\'ll be redirected to another page to chose a new password.</string>
     <string name="submit">Submit</string>
     <string name="profile_picture">Profile picture</string>
-    <string name="username" translatable="false">Nickame</string>
+    <string name="username" translatable="false">Nickname</string>
     <string name="name">Name</string>
     <string name="surname">Surname</string>
-    <string name="musical_instruments">Muscial instruments</string>
+    <string name="musical_instruments">Musical instruments</string>
     <string name="musical_genres">Musical genres</string>
     <string name="mail_error">Please enter a valid email address!</string>
     <string name="mail_sent">Recovery mail sent!</string>
@@ -37,7 +37,7 @@
     <string name="login_failed">Login failed!</string>
     <string name="select_photo">SELECT PHOTO</string>
     <string name="update_success">Image update successfully!</string>
-    <string name="msg_token_fmt" translatable="false"></string>
+    <string name="msg_token_fmt" translatable="false" />
     <string name="sign_up">SIGN UP</string>
     <string name="no_messages">Nothing to show yet!</string>
     <string name="verified">VERIFIED</string>
@@ -45,10 +45,8 @@
     <string name="verify_mail_address">Verify your email address to continue!</string>
     <string name="confirm">Confirm</string>
     <string name="nickname_name_surname_email">Nickname / Name / Surname / Email</string>
-    <string name="search_info">Do not fill in the fields to ignore the search filter</string>
     <string name="edit">edit</string>
-    <string name="edit_email">edit email</string>
-    <string name="change_email_message">Inserisci il tuo nuovo indirizzo Email. Una mail di verifica sarà inviata al tuo account di posta.</string>
+    <string name="edit_email">Edit email</string>
 
     <string-array name="instruments">
         <item>Drum</item>
@@ -71,5 +69,18 @@
         <item>Rap</item>
     </string-array>
     <string name="change_email_message">Insert your new Email Address. A verification email will be send to your inbox.</string>
+    <string name="delete">Delete</string>
+    <string name="none">None</string>
+    <string name="send">Send</string>
+    <string name="write_a_message">Write a message..</string>
+    <string name="word" translatable="false">Word</string>
+    <string name="edit_password">Edit password</string>
+    <string name="maps_image">Maps image</string>
+    <string name="search">Search</string>
+    <string name="message">Message</string>
+    <string name="home">Home page</string>
+    <string name="chat">Chat</string>
+    <string name="search_users">Search users</string>
+    <string name="profile">Profile</string>
 
 </resources>
