@@ -14,7 +14,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:inputType="textMultiLine"
         android:padding="16dp"
         android:text="@string/change_email_message"
         android:textAlignment="center"

@@ -18,14 +18,15 @@
         android:ems="10"
         android:hint="@string/email"
         android:inputType="textEmailAddress"
-        android:paddingLeft="16dp"
+        android:paddingStart="16dp"
         android:textColor="@color/black"
         android:textColorHint="@color/gray_hint"
         app:layout_constraintBottom_toTopOf="@+id/password_editText_login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_imageView_login" />
+        app:layout_constraintTop_toBottomOf="@+id/title_imageView_login"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/password_editText_login"
@@ -38,14 +39,15 @@
         android:ems="10"
         android:hint="@string/password"
         android:inputType="textPassword"
-        android:paddingLeft="16dp"
+        android:paddingStart="16dp"
         android:textColor="@color/black"
         android:textColorHint="@color/gray_hint"
         app:layout_constraintBottom_toTopOf="@id/login_button_login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/email_editText_login" />
+        app:layout_constraintTop_toBottomOf="@+id/email_editText_login"
+        android:autofillHints="" />
 
     <android.widget.Button
         android:id="@+id/login_button_login"
@@ -88,7 +90,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonSignUp_login" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonSignUp_login"
+        tools:ignore="SmallSp" />
 
     <ImageView
         android:id="@+id/logo_imageView_login"
@@ -99,7 +102,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/logo_foreground" />
+        app:srcCompat="@mipmap/logo_foreground"
+        android:contentDescription="@string/logo" />
 
     <ImageView
         android:id="@+id/title_imageView_login"
@@ -110,6 +114,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logo_imageView_login"
-        app:srcCompat="@mipmap/ic_logo_social_foreground" />
+        app:srcCompat="@mipmap/ic_logo_social_foreground"
+        android:contentDescription="@string/word" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

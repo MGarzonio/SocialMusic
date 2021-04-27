@@ -12,14 +12,14 @@ import kotlinx.android.synthetic.main.activity_sign_up.*
 
 class LoginActivity : AppCompatActivity() {
 
-    private val TAG = "LoginActivity"
+    private val tag: String = "LoginActivity"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
         login_button_login.setOnClickListener{
             performLogin()
-            Log.d(TAG, "Logging in...")
+            Log.d(tag, "Logging in...")
         }
         buttonSignUp_login.setOnClickListener {
             openSingUp()
@@ -39,7 +39,7 @@ class LoginActivity : AppCompatActivity() {
         FirebaseAuth.getInstance().signInWithEmailAndPassword(email, psw)
             .addOnCompleteListener {
                 if(!it.isSuccessful) return@addOnCompleteListener
-                if(!it.result!!.user.isEmailVerified){
+                if(!it.result!!.user?.isEmailVerified!!){
                     Toast.makeText(this,getString(R.string.verify_mail_address), Toast.LENGTH_LONG).show()
                     return@addOnCompleteListener
                 }
@@ -57,7 +57,7 @@ class LoginActivity : AppCompatActivity() {
                 if(it.message.equals("The password is invalid or the user does not have a password.")){
                     password_editText_login.error = getString(R.string.invalidPassword)
                 }
-                Log.d(TAG, "Login failed! ${it.message}")
+                Log.d(tag, "Login failed! ${it.message}")
             }
     }
     private fun openSingUp() {
