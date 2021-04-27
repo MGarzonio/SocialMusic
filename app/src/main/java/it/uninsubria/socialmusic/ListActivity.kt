@@ -1,5 +1,6 @@
 package it.uninsubria.socialmusic
 
+import android.content.Context
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.os.Build
@@ -47,11 +48,7 @@ class ListItem(val name : String) : Item<GroupieViewHolder>(){
     private lateinit var item: TextView
 
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
-        item = viewHolder.itemView.itemTextView as TextView
-        item.setOnClickListener {
-            //if(item.background == ContextCompat.getDrawable(context, R.drawable.green_resource))
-        }
-        item.text = name
+        viewHolder.itemView.itemTextView.text = name
     }
 
     override fun getLayout(): Int {
