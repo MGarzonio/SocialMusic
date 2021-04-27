@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -38,9 +39,8 @@ import java.util.*
      private  lateinit var btnGenres: Button
      private  lateinit var btnInstruments: Button
      private lateinit var btnLogout: Button
-     private var userProfile: User? = null
+     private lateinit var userProfile: User
      private var selectedPhotoUri: Uri? = null
-     private var photoUrl: String = "default"
 
      override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -90,19 +90,18 @@ import java.util.*
      private fun loadProfileFromFirebase(){
          switchEditableProfile(false)
          val myUser = Firebase.auth.currentUser
-         val userID = myUser.uid
+         val userID = myUser!!.uid
          val ref = FirebaseDatabase.getInstance().getReference("/users/$userID")
          ref.addListenerForSingleValueEvent(object : ValueEventListener {
              override fun onDataChange(snapshot: DataSnapshot) {
                  if(snapshot.exists()) {
                      userProfile = snapshot.getValue(User::class.java)!!
-                     nickname.setText(userProfile?.username)
-                     name.setText(userProfile?.name)
-                     surname.setText(userProfile?.surname)
-                     city.setText(userProfile?.location)
-                     if (userProfile?.profile_image_url != "default") {
-                         photoUrl = userProfile!!.profile_image_url
-                         Picasso.get().load(userProfile?.profile_image_url).into(profilePhoto)
+                     nickname.setText(userProfile.username)
+                     name.setText(userProfile.name)
+                     surname.setText(userProfile.surname)
+                     city.setText(userProfile.location)
+                     if (userProfile.profile_image_url != "default") {
+                         Picasso.get().load(userProfile.profile_image_url).into(profilePhoto)
                          btnPhoto.alpha = 0F
                      }
                  }
@@ -117,12 +116,20 @@ import java.util.*
 
      private fun editProfile() {
          when(btnEditProfile.text.toString()) {
-             getString(R.string.save) -> saveProfileOnFirebase()
+             getString(R.string.save) -> checkImageChanged()
              getString(R.string.edit_profile) -> switchEditableProfile(true)
          }
      }
 
-     private fun saveProfileOnFirebase() {
+     private fun checkImageChanged() {
+         if(selectedPhotoUri != null) {
+             setImageToFirebase()
+         } else {
+             updateProfileToFirebase(userProfile.profile_image_url)
+         }
+     }
+
+     private fun updateProfileToFirebase(photoUrl: String){
          switchEditableProfile(false)
          val nic = nickname.text.toString()
          val nam = name.text.toString()
@@ -130,32 +137,30 @@ import java.util.*
          val loc = city.text.toString()
          val ins = "none"
          val gen = "none"
-         val uid = FirebaseAuth.getInstance().currentUser.uid
-         if(selectedPhotoUri != null) {
-             updateImageToFirebase()
-         }
+         val uid = FirebaseAuth.getInstance().currentUser!!.uid
          val userClass = User(uid, nic, photoUrl, nam, sur, loc, ins, gen)
          val ref = FirebaseDatabase.getInstance().getReference("users/$uid")
          ref.setValue(userClass)
-             .addOnSuccessListener {
-                 Log.d(tag, "User updated!")
-                 Toast.makeText(context,"User Update", Toast.LENGTH_SHORT).show()
-             }
-             .addOnFailureListener{
-                 Log.d(tag, "Updating user failure! ${it.message}")
-             }
+                 .addOnSuccessListener {
+                     Log.d(tag, "User updated!")
+                     Toast.makeText(context,"User Update", Toast.LENGTH_SHORT).show()
+                 }
+                 .addOnFailureListener{
+                     Log.d(tag, "Updating user failure! ${it.message}")
+                 }
      }
 
-     private fun updateImageToFirebase(){
+     private fun setImageToFirebase(){
          val fileName = UUID.randomUUID().toString()
          val fireRef = FirebaseStorage.getInstance().getReference("/images/$fileName")
          fireRef.putFile(selectedPhotoUri!!)
              .addOnSuccessListener {
                  Log.d(tag, "Successfully update on Firebase Storage image: ${it.metadata?.path}")
                  Toast.makeText(context,getString(R.string.update_success), Toast.LENGTH_SHORT).show()
-                 fireRef.downloadUrl.addOnSuccessListener {url ->
-                     photoUrl = url.toString()
-                     Log.d(tag, "File location: $url")
+                 fireRef.downloadUrl
+                         .addOnSuccessListener {url ->
+                             updateProfileToFirebase(url.toString())
+                             Log.d(tag, "File location: $url")
                  }
              }
              .addOnFailureListener{
@@ -243,23 +248,21 @@ import java.util.*
          startActivity(intent)
      }
 
-     private fun deleteUser(){
-         if(userProfile != null) {
-             val user = FirebaseAuth.getInstance().currentUser!!
-             val refDBUser = FirebaseDatabase.getInstance().getReference("/users/")
-             user.delete().addOnSuccessListener {
-                 Log.d("PROFILE", "user ${userProfile!!.username} has been cancelled!")
-             }
-             if(userProfile!!.profile_image_url != "default") {
-                 val refStore = FirebaseStorage.getInstance().getReferenceFromUrl(userProfile!!.profile_image_url)
-                 refStore.delete()
-             }
-             refDBUser.child(user.uid).removeValue()
+     private fun deleteUser() {
+         val user = FirebaseAuth.getInstance().currentUser
+         val refDBUser = FirebaseDatabase.getInstance().getReference("/users/")
+         user!!.delete().addOnSuccessListener {
+             Log.d("PROFILE", "user ${userProfile.username} has been cancelled!")
+         }
+         if (userProfile.profile_image_url != "default") {
+             val refStore = FirebaseStorage.getInstance().getReferenceFromUrl(userProfile.profile_image_url)
+             refStore.delete()
+         }
+         refDBUser.child(user.uid).removeValue()
                  .addOnSuccessListener {
                      val intent = Intent(activity, LoginActivity::class.java)
                      startActivity(intent)
                  }
-         }
      }
 
  }
