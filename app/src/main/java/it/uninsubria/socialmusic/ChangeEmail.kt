@@ -6,18 +6,14 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_change_email.*
 
 class ChangeEmail : AppCompatActivity() {
-    private lateinit var oldEmail: String
-    private lateinit  var myUser: FirebaseUser
+    val oldEmail = Firebase.auth.currentUser.email
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        myUser = Firebase.auth.currentUser
-        oldEmail = myUser.email
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_change_email)
         confirm_button_change.setOnClickListener{
@@ -32,7 +28,7 @@ class ChangeEmail : AppCompatActivity() {
             Toast.makeText(this, "Insert email address!", Toast.LENGTH_SHORT).show()
         } else {
             user!!.updateEmail(newEmail)
-                .addOnSuccessListener {
+                .addOnSuccessListener { task ->
                     sendEmail(old)
                     Log.d("EMAIL", "User email address updated.")
                 }
@@ -44,14 +40,15 @@ class ChangeEmail : AppCompatActivity() {
     }
 
     private fun sendEmail(old: String) {
-        myUser.sendEmailVerification()
+        val myUser = Firebase.auth.currentUser
+        myUser!!.sendEmailVerification()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     logout()
                     Log.d("EMAIL", "Email sent.")
                 } else {
                     email_editText_change.error = getString(R.string.invalidEmail)
-                    myUser.updateEmail(old)
+                    myUser!!.updateEmail(old)
                     Log.d("EMAIL", "Failed")
                 }
             }

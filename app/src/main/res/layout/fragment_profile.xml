@@ -40,15 +40,12 @@
         android:background="@drawable/rounded_edittext"
         android:ems="10"
         android:inputType="textPersonName"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
+        android:paddingLeft="16dp"
         android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@id/name_editText_Profile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/selectPhoto_button_Profile"
-        android:autofillHints=""
-        tools:ignore="LabelFor" />
+        app:layout_constraintTop_toBottomOf="@+id/selectPhoto_button_Profile" />
 
 
     <EditText
@@ -59,15 +56,12 @@
         android:background="@drawable/rounded_edittext"
         android:ems="10"
         android:inputType="textPersonName"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
+        android:paddingLeft="16dp"
         android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@id/surname_editText_Profile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nickname_editText_Profile"
-        android:autofillHints=""
-        tools:ignore="LabelFor" />
+        app:layout_constraintTop_toBottomOf="@+id/nickname_editText_Profile" />
 
     <EditText
         android:id="@+id/surname_editText_Profile"
@@ -77,42 +71,39 @@
         android:background="@drawable/rounded_edittext"
         android:ems="10"
         android:inputType="textPersonName"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
+        android:paddingLeft="16dp"
         android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/location_editText_Profile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name_editText_Profile"
-        android:autofillHints=""
-        tools:ignore="LabelFor" />
+        app:layout_constraintTop_toBottomOf="@+id/name_editText_Profile" />
 
-    <TextView
+    <EditText
         android:id="@+id/instrument_editText_Profile"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/rounded_edittext"
+        android:editable="false"
         android:inputType="none"
-        android:gravity="center"
+        android:paddingLeft="16dp"
         android:text="@string/musical_instruments"
         android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@id/gen_editText_Profile"
         app:layout_constraintEnd_toStartOf="@+id/instrument_button_Profile"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/location_editText_Profile"
-        android:autofillHints=""
-        tools:ignore="LabelFor" />
+        app:layout_constraintTop_toBottomOf="@id/location_editText_Profile" />
 
-    <TextView
+    <EditText
         android:id="@+id/gen_editText_Profile"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/rounded_edittext"
+        android:editable="false"
         android:inputType="none"
+        android:paddingLeft="16dp"
         android:text="@string/musical_genres"
-        android:gravity="center"
         android:textColor="@color/black"
         app:layout_constraintEnd_toStartOf="@+id/gen_button_Profile"
         app:layout_constraintStart_toStartOf="parent"
@@ -130,8 +121,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/instrument_editText_Profile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/instrument_editText_Profile"
-        app:layout_constraintTop_toTopOf="@+id/instrument_editText_Profile"
-        tools:ignore="HardcodedText" />
+        app:layout_constraintTop_toTopOf="@+id/instrument_editText_Profile" />
 
     <android.widget.Button
         android:id="@+id/gen_button_Profile"
@@ -146,8 +136,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/gen_editText_Profile"
         app:layout_constraintTop_toTopOf="@+id/gen_editText_Profile"
-        app:layout_constraintVertical_bias="0.0"
-        tools:ignore="HardcodedText" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <android.widget.Button
         android:id="@+id/password_button_profile"
@@ -187,15 +176,12 @@
         android:background="@drawable/rounded_edittext"
         android:ems="10"
         android:inputType="textPersonName"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
+        android:paddingLeft="16dp"
         android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@id/instrument_editText_Profile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/surname_editText_Profile"
-        android:autofillHints=""
-        tools:ignore="LabelFor" />
+        app:layout_constraintTop_toBottomOf="@+id/surname_editText_Profile" />
 
     <android.widget.Button
         android:id="@+id/buttonEdit_Profile"
@@ -237,8 +223,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/buttonEdit_Profile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/buttonEdit_Profile"
-        app:layout_constraintTop_toTopOf="@+id/buttonEdit_Profile"
-        android:contentDescription="@string/maps_image" />
+        app:layout_constraintTop_toTopOf="@+id/buttonEdit_Profile" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

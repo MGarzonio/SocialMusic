@@ -18,10 +18,11 @@ class LatestMessageRow(private val chatMessage: ChatMessage): Item<GroupieViewHo
 
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         viewHolder.itemView.lastMess_textView_latestMessage.text = chatMessage.text
-        val chatPartnerID: String = if(chatMessage.fromID == FirebaseAuth.getInstance().uid){
-            chatMessage.toID
+        val chatPartnerID: String
+        if(chatMessage.fromID == FirebaseAuth.getInstance().uid){
+            chatPartnerID = chatMessage.toID
         }else{
-            chatMessage.fromID
+            chatPartnerID = chatMessage.fromID
         }
         val ref = FirebaseDatabase.getInstance().getReference("/users/$chatPartnerID")
         ref.addListenerForSingleValueEvent(object: ValueEventListener {

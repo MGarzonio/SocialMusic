@@ -44,7 +44,6 @@
     <string name="city">Città</string>
     <string name="nickname_name_surname_email">Nickname / Nome / Cognome / Email</string>
     <string name="edit">modifica</string>
-
     <string-array name="instruments">
         <item>Batteria</item>
         <item>Chitarrra</item>

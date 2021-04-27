@@ -20,7 +20,7 @@ import java.util.*
 
 class SignUpActivity : AppCompatActivity() {
     private val tag = "SignUpActivity"
-    private var selectedPhotoUri: Uri? = null
+    var selectedPhotoUri: Uri? = null
     private var email = ""
     private var psw = ""
     private var name = ""

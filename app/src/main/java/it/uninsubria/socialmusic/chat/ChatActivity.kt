@@ -28,7 +28,7 @@ class ChatActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
         chat_recyclerView.adapter = adapter
-        toUser = intent.getParcelableExtra(USER_KEY)
+        toUser = intent.getParcelableExtra<User>(USER_KEY)
         supportActionBar?.title = toUser?.username
         fetchCurrentUser()
         listenForMessages()
@@ -80,7 +80,7 @@ class ChatActivity : AppCompatActivity() {
         val toID = user!!.uid
         val ref = FirebaseDatabase.getInstance().getReference("/user-messages/$fromID/$toID").push()
         val toRef = FirebaseDatabase.getInstance().getReference("/user-messages/$toID/$fromID").push()
-        val chatMessage = ChatMessage(ref.key!!, messageText, fromID!!, toID)
+        val chatMessage = ChatMessage(ref.key!!, messageText, fromID!!, toID, System.currentTimeMillis()/1000)
         ref.setValue(chatMessage)
             .addOnSuccessListener {
                 message_editText_chat.text.clear()

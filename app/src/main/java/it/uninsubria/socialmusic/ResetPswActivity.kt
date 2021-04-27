@@ -41,5 +41,4 @@ class ResetPswActivity : AppCompatActivity() {
             sendRecoveryMail(address)
         }
     }
-
 }

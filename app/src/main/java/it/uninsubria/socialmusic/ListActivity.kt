@@ -2,16 +2,19 @@ package it.uninsubria.socialmusic
 
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.os.Build
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AppCompatActivity
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
 import kotlinx.android.synthetic.main.activity_list.*
 import kotlinx.android.synthetic.main.list_recyclerview_row.view.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 class ListActivity : AppCompatActivity() {
 
@@ -22,7 +25,7 @@ class ListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list)
-        val type = intent.getCharExtra("type", ' ')
+        var type = intent.getCharExtra("type", ' ')
         items = if(type == 'I'){
             ArrayList(listOf(*resources.getStringArray(R.array.instruments)))
         }

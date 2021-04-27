@@ -42,7 +42,7 @@ import java.util.*
      private var selectedPhotoUri: Uri? = null
      private var photoUrl: String = "default"
 
-     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
          val view = inflater.inflate(R.layout.fragment_profile, container, false) as View
          val btnMap = view.findViewById(R.id.mapsButton_Profile) as ImageView
@@ -90,7 +90,7 @@ import java.util.*
      private fun loadProfileFromFirebase(){
          switchEditableProfile(false)
          val myUser = Firebase.auth.currentUser
-         val userID = myUser?.uid
+         val userID = myUser.uid
          val ref = FirebaseDatabase.getInstance().getReference("/users/$userID")
          ref.addListenerForSingleValueEvent(object : ValueEventListener {
              override fun onDataChange(snapshot: DataSnapshot) {
@@ -130,11 +130,11 @@ import java.util.*
          val loc = city.text.toString()
          val ins = "none"
          val gen = "none"
-         val uid = FirebaseAuth.getInstance().currentUser?.uid
+         val uid = FirebaseAuth.getInstance().currentUser.uid
          if(selectedPhotoUri != null) {
              updateImageToFirebase()
          }
-         val userClass = uid?.let { User(it, nic, photoUrl, nam, sur, loc, ins, gen) }
+         val userClass = User(uid, nic, photoUrl, nam, sur, loc, ins, gen)
          val ref = FirebaseDatabase.getInstance().getReference("users/$uid")
          ref.setValue(userClass)
              .addOnSuccessListener {
