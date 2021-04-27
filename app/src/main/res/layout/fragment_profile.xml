@@ -139,6 +139,7 @@
         android:id="@+id/email_button_Profile"
         android:layout_width="0dp"
         android:layout_height="40dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/rounded_button"
         android:text="@string/edit_email"
         android:textColor="#0000FF"
