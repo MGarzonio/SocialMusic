@@ -11,13 +11,13 @@
     <string name="username" translatable="false">Nickname</string>
     <string name="name">Name</string>
     <string name="surname">Surname</string>
-    <string name="musical_instruments">Musical instruments</string>
-    <string name="musical_genres">Musical genres</string>
+    <string name="musical_instruments">Instruments</string>
+    <string name="musical_genres">Genres</string>
     <string name="mail_error">Please enter a valid email address!</string>
     <string name="mail_sent">Recovery mail sent!</string>
     <string name="account_not_found">Account does not exist!</string>
     <string name="invalid_account">Incorrect username or password!</string>
-    <string name="password_error"> The password must contain at least 8 characters!</string>
+    <string name="password_error">The password must contain at least 8 characters!</string>
     <string name="edit_profile">Edit profile</string>
     <string name="logout">Logout</string>
     <string name="city">City</string>

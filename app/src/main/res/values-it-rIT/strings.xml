@@ -12,8 +12,7 @@
     <string name="profile_picture">Foto profilo</string>
     <string name="name">Nome</string>
     <string name="surname">Cognome</string>
-    <string name="musical_instruments">Strumenti musicali</string>
-    <string name="musical_genres">Generi musicali</string>
+    <string name="musical_genres">Generi</string>
     <string name="mail_error">Inserisci un indirizzo di posta elettrionica valido!</string>
     <string name="mail_sent">Mail di recupero inviata!</string>
     <string name="account_not_found">Account inesistente!</string>
@@ -78,4 +77,5 @@
     <string name="chat">Chat</string>
     <string name="search_users">Ricerca utente</string>
     <string name="profile">Profilo</string>
+    <string name="musical_instruments">Strumenti</string>
 </resources>
