@@ -7,7 +7,7 @@
     <string name="sing_up">Registrati</string>
     <string name="forgot_password">Password dimenticata</string>
     <string name="logo">logo</string>
-    <string name="forgot_message">Inserisci il tuo indirizzo di posta elettronica. Sarai reindirizzato alla pagina per inserire la nuova password.</string>
+    <string name="forgot_message">Inserisci il tuo indirizzo di posta elettronica. Verrà inviata una nuova password da utilizzare al primo accesso.</string>
     <string name="submit">Invia</string>
     <string name="profile_picture">Foto profilo</string>
     <string name="name">Nome</string>
@@ -43,8 +43,39 @@
     <string name="confirm">Conferma</string>
     <string name="city">Città</string>
     <string name="nickname_name_surname_email">Nickname / Nome / Cognome / Email</string>
-    <string name="search_info">Lasciare i campi vuoti per ignorare il filtro di ricerca</string>
     <string name="edit">modifica</string>
+    <string-array name="instruments">
+        <item>Batteria</item>
+        <item>Chitarrra</item>
+        <item>Chitarra Elettrica</item>
+        <item>Flauto</item>
+        <item>Piano</item>
+        <item>Violino</item>
+        <item>Basso</item>
+        <item>Cantante</item>
+    </string-array>
+    <string-array name="genres">
+        <item>Rock</item>
+        <item>Metal</item>
+        <item>Pop</item>
+        <item>Jazz</item>
+        <item>Classica</item>
+        <item>Funky</item>
+        <item>Blues</item>
+        <item>Rap</item>
+    </string-array>
     <string name="edit_email">modifica Email</string>
-    <string name="change_email_message">Inserisci il tuo nuovo indirizzo Email. Una mail di verifica sarà inviata al tuo account di posta.</string>
+    <string name="change_email_message">Inserisci il nuovo indirizzo mail. Una mail di verifica sarà inviata alla tua casella di posta elettronica</string>
+    <string name="delete">Cancella</string>
+    <string name="none">Nessuno</string>
+    <string name="send">Invia</string>
+    <string name="write_a_message">Scrivi un messaggio..</string>
+    <string name="edit_password">Modifica password</string>
+    <string name="maps_image">Immagine mappa</string>
+    <string name="search">Ricerca</string>
+    <string name="message">Messaggio</string>
+    <string name="home">Pagina principale</string>
+    <string name="chat">Chat</string>
+    <string name="search_users">Ricerca utente</string>
+    <string name="profile">Profilo</string>
 </resources>

@@ -79,7 +79,7 @@ class SignUpActivity : AppCompatActivity() {
                     val user = it.getValue(User::class.java)
                     if(user!!.username == nick) {
                         Log.d("SIGNUP", "This nickname is already taken!")
-                        Toast.makeText(applicationContext, "This nickname is already taken!", Toast.LENGTH_SHORT)
+                        Toast.makeText(applicationContext, "This nickname is already taken!", Toast.LENGTH_SHORT).show()
                         nickname_editText_signUp.error = "Already taken"
                         nickname_editText_signUp.requestFocus()
                         return
@@ -153,7 +153,7 @@ class SignUpActivity : AppCompatActivity() {
             .addOnSuccessListener {
                 Log.d(tag, "User updated!")
                 sendEmail()
-                Toast.makeText(this,"Email sent!", Toast.LENGTH_SHORT)
+                Toast.makeText(this,"Email sent!", Toast.LENGTH_SHORT).show()
                 val intent = Intent(this, LoginActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)

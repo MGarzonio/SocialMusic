@@ -28,7 +28,7 @@
         android:background="@drawable/rounded_edittext"
         android:maxWidth="240dp"
         android:padding="16dp"
-        android:text="TextView"
+        android:text="@string/message"
         android:textColor="@color/black"
         app:layout_constraintEnd_toStartOf="@+id/chat_to_imageView"
         app:layout_constraintTop_toTopOf="@+id/chat_to_imageView" />

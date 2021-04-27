@@ -174,11 +174,11 @@ import java.util.*
          btnGenres.isClickable = modifiable
          when(modifiable){
              true -> {
-                 btnLogout.text = "delete"
+                 btnLogout.text = getString(R.string.delete)
                  btnEditProfile.text = getString(R.string.save)
              }
              false -> {
-                 btnLogout.text = "logout"
+                 btnLogout.text = getString(R.string.logout)
                  btnEditProfile.text = getString(R.string.edit_profile)
              }
          }
