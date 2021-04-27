@@ -109,7 +109,7 @@ import java.util.*
              }
 
              override fun onCancelled(error: DatabaseError) {
-                 Toast.makeText(context, "This user has been deleted!", Toast.LENGTH_SHORT)
+                 Toast.makeText(context, "This user has been deleted!", Toast.LENGTH_SHORT).show()
                  Log.d("PROFILE", error.toString())
              }
          })
@@ -139,7 +139,7 @@ import java.util.*
          ref.setValue(userClass)
              .addOnSuccessListener {
                  Log.d(tag, "User updated!")
-                 Toast.makeText(context,"User Update", Toast.LENGTH_SHORT)
+                 Toast.makeText(context,"User Update", Toast.LENGTH_SHORT).show()
              }
              .addOnFailureListener{
                  Log.d(tag, "Updating user failure! ${it.message}")
