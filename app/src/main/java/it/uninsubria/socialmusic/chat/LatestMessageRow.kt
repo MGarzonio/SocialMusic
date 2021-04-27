@@ -24,6 +24,7 @@ class LatestMessageRow(private val chatMessage: ChatMessage): Item<GroupieViewHo
         }else{
             chatPartnerID = chatMessage.fromID
         }
+
         val ref = FirebaseDatabase.getInstance().getReference("/users/$chatPartnerID")
         ref.addListenerForSingleValueEvent(object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {

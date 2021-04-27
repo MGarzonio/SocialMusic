@@ -30,7 +30,7 @@ class ChatFragment : Fragment() {
         val recyclerView = viewVal.findViewById<RecyclerView>(R.id.latestMessage_recyclerView)
         listenForLatestMessages()
         recyclerView.adapter = adapter
-        recyclerView.addItemDecoration(DividerItemDecoration(viewVal.context, DividerItemDecoration.VERTICAL))
+        recyclerView.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
         adapter.setOnItemClickListener { item, view ->
             val intent = Intent(view.context, ChatActivity::class.java)
             val row = item as LatestMessageRow
