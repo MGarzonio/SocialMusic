@@ -101,6 +101,7 @@ import java.util.*
                      surname.setText(userProfile?.surname)
                      city.setText(userProfile?.location)
                      if (userProfile?.profile_image_url != "default") {
+                         photoUrl = userProfile!!.profile_image_url
                          Picasso.get().load(userProfile?.profile_image_url).into(profilePhoto)
                          btnPhoto.alpha = 0F
                      }
@@ -130,7 +131,7 @@ import java.util.*
          val ins = "none"
          val gen = "none"
          val uid = FirebaseAuth.getInstance().currentUser.uid
-         if(selectedPhotoUri != null){
+         if(selectedPhotoUri != null) {
              updateImageToFirebase()
          }
          val userClass = User(uid, nic, photoUrl, nam, sur, loc, ins, gen)
@@ -158,6 +159,7 @@ import java.util.*
                  }
              }
              .addOnFailureListener{
+                 Toast.makeText(context,"Unable to load this profile photo!", Toast.LENGTH_SHORT).show()
                  Log.d(tag, "Updating image failure! ${it.message}")
              }
      }
