@@ -2,12 +2,16 @@ package it.uninsubria.socialmusic
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Matrix
+import android.media.ExifInterface
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
@@ -15,6 +19,8 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import java.util.*
+
+
 //import com.google.firebase.auth.ktx.userProfileChangeRequest
 
 
@@ -44,7 +50,7 @@ class SignUpActivity : AppCompatActivity() {
         selectPhoto_button_signUp.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"
-            startActivityForResult(intent,0)
+            startActivityForResult(intent, 0)
         }
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -77,7 +83,7 @@ class SignUpActivity : AppCompatActivity() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 snapshot.children.forEach {
                     val user = it.getValue(User::class.java)
-                    if(user!!.username == nick) {
+                    if (user!!.username == nick) {
                         Log.d("SIGNUP", "This nickname is already taken!")
                         Toast.makeText(applicationContext, "This nickname is already taken!", Toast.LENGTH_SHORT).show()
                         nickname_editText_signUp.error = "Already taken"
@@ -100,7 +106,7 @@ class SignUpActivity : AppCompatActivity() {
         location = location_editText_signUp.text.toString()
 
         if(email.isEmpty() || psw.isEmpty() || name.isEmpty() || surname.isEmpty() || nick.isEmpty() || location.isEmpty()){
-            Toast.makeText(this,"Please, fill all the fields with '*'!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Please, fill all the fields with '*'!", Toast.LENGTH_SHORT).show()
             return
         }
         //Firebase authentication
@@ -108,8 +114,8 @@ class SignUpActivity : AppCompatActivity() {
             .addOnCompleteListener {
                 if(!it.isSuccessful) return@addOnCompleteListener
                 //if successful
-                Toast.makeText(this,getString(R.string.creation_success), Toast.LENGTH_SHORT).show()
-                Log.d(tag,"Successfully created user whit uid: ${it.result?.user?.uid}")
+                Toast.makeText(this, getString(R.string.creation_success), Toast.LENGTH_SHORT).show()
+                Log.d(tag, "Successfully created user whit uid: ${it.result?.user?.uid}")
                 if(selectedPhotoUri == null){
                     saveUserToFirebaseDB("default")
                 } else{
@@ -117,7 +123,7 @@ class SignUpActivity : AppCompatActivity() {
                 }
             }
             .addOnFailureListener {
-                Toast.makeText(this,getString(R.string.creation_failure), Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.creation_failure), Toast.LENGTH_SHORT).show()
                 if(it.message.equals("The email address is badly formatted.")){
                     email_editText_signUp.error = getString(R.string.invalidEmail)
                 }
@@ -134,8 +140,8 @@ class SignUpActivity : AppCompatActivity() {
         fireRef.putFile(selectedPhotoUri!!)
             .addOnSuccessListener {
                 Log.d(tag, "Successfully update on Firebase Storage image: ${it.metadata?.path}")
-                Toast.makeText(this,getString(R.string.update_success), Toast.LENGTH_SHORT).show()
-                fireRef.downloadUrl.addOnSuccessListener {url ->
+                Toast.makeText(this, getString(R.string.update_success), Toast.LENGTH_SHORT).show()
+                fireRef.downloadUrl.addOnSuccessListener { url ->
                     Log.d(tag, "File location: $url")
                     saveUserToFirebaseDB(url.toString())
                 }
@@ -153,7 +159,7 @@ class SignUpActivity : AppCompatActivity() {
             .addOnSuccessListener {
                 Log.d(tag, "User updated!")
                 sendEmail()
-                Toast.makeText(this,"Email sent!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Email sent!", Toast.LENGTH_SHORT).show()
                 val intent = Intent(this, LoginActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
@@ -162,4 +168,28 @@ class SignUpActivity : AppCompatActivity() {
                 Log.d(tag, "Updating user failure! ${it.message}")
             }
     }
+/* PROVA ROTAZIONE IMMAGINI STORTE-------- NON CANCELLARE
+
+    class ImageRotator {
+        fun rotateImage(path: String?): Bitmap {
+            val bitmap = BitmapFactory.decodeFile(path)
+            return rotateImage(bitmap, path)
+        }
+
+        fun rotateImage(bitmap: Bitmap, path: String?): Bitmap {
+            var rotate = 0
+            val exif = ExifInterface(path)
+            val orientation: Int = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL)
+            when (orientation) {
+                ExifInterface.ORIENTATION_ROTATE_270 -> rotate = 270
+                ExifInterface.ORIENTATION_ROTATE_180 -> rotate = 180
+                ExifInterface.ORIENTATION_ROTATE_90 -> rotate = 90
+            }
+            val matrix = Matrix()
+            matrix.postRotate(rotate.toFloat())
+            return Bitmap.createBitmap(bitmap, 0, 0, bitmap.width,
+                    bitmap.height, matrix, true)
+        }
+    }
+    */
 }

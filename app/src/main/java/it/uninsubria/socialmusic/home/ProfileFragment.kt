@@ -2,6 +2,9 @@
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -39,6 +42,7 @@ import java.util.*
      private  lateinit var btnGenres: Button
      private  lateinit var btnInstruments: Button
      private lateinit var btnLogout: Button
+     private lateinit var imageBtnDelete: Button
      private lateinit var userProfile: User
      private var selectedPhotoUri: Uri? = null
 
@@ -59,6 +63,7 @@ import java.util.*
          btnGenres = view.findViewById(R.id.gen_button_Profile) as Button
          btnInstruments = view.findViewById(R.id.instrument_button_Profile) as Button
          btnLogout = view.findViewById(R.id.buttonLogout_Profile) as Button
+         imageBtnDelete = view.findViewById(R.id.deleteImage_button_profile) as Button
 
          btnEditProfile.setOnClickListener(this)
          btnLogout.setOnClickListener(this)
@@ -68,6 +73,7 @@ import java.util.*
          btnGenres.setOnClickListener(this)
          btnInstruments.setOnClickListener(this)
          btnPhoto.setOnClickListener(this)
+         imageBtnDelete.setOnClickListener(this)
 
          loadProfileFromFirebase()
 
@@ -84,6 +90,7 @@ import java.util.*
              R.id.selectPhoto_button_Profile -> loadImageFromGallery(view)
              R.id.email_button_Profile -> editEmail()
              R.id.password_button_profile -> editPassword()
+             R.id.deleteImage_button_profile -> deletePhoto()
          }
      }
 
@@ -122,10 +129,12 @@ import java.util.*
      }
 
      private fun checkImageChanged() {
-         if(selectedPhotoUri != null) {
-             setImageToFirebase()
-         } else {
+         if(selectedPhotoUri.toString() == "deleted"){
+             updateProfileToFirebase("default")
+         }else if(selectedPhotoUri == null) {
              updateProfileToFirebase(userProfile.profile_image_url)
+         } else {
+             setImageToFirebase()
          }
      }
 
@@ -177,12 +186,17 @@ import java.util.*
          btnPhoto.isClickable = modifiable
          btnInstruments.isClickable = modifiable
          btnGenres.isClickable = modifiable
+         imageBtnDelete.isClickable = modifiable
          when(modifiable){
              true -> {
+                 if (userProfile.profile_image_url != "default"){
+                     imageBtnDelete.alpha = 1F
+                 }
                  btnLogout.text = getString(R.string.delete)
                  btnEditProfile.text = getString(R.string.save)
              }
              false -> {
+                 imageBtnDelete.alpha = 0F
                  btnLogout.text = getString(R.string.logout)
                  btnEditProfile.text = getString(R.string.edit_profile)
              }
@@ -231,13 +245,25 @@ import java.util.*
              val bitmapImage = MediaStore.Images.Media.getBitmap(requireContext().contentResolver, selectedPhotoUri)
              profilePhoto_imageView_Profile.setImageBitmap(bitmapImage)
              selectPhoto_button_Profile.alpha = 0f
+             deleteImage_button_profile.alpha = 1f
          }
+     }
+
+     private fun deletePhoto() {
+         profilePhoto.setImageResource(R.mipmap.default_profile)
+         selectPhoto_button_Profile.alpha = 1F
+         selectedPhotoUri = "deleted".toUri()
+         if (userProfile.profile_image_url != "default") {
+             val refStore = FirebaseStorage.getInstance().getReferenceFromUrl(userProfile.profile_image_url)
+             refStore.delete()
+         }
+         deleteImage_button_profile.alpha = 0F
      }
 
      private fun logoutBtnAction(){
          when(btnLogout.text.toString()){
-             "logout" -> doLogout()
-             "delete" -> deleteUser()
+             getString(R.string.logout) -> doLogout()
+             getString(R.string.delete) -> deleteUser()
          }
      }
 
