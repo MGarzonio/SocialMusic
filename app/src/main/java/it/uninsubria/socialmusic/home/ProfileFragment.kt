@@ -184,8 +184,6 @@ import java.util.*
          surname.isEnabled = modifiable
          city.isEnabled = modifiable
          btnPhoto.isClickable = modifiable
-         btnInstruments.isClickable = modifiable
-         btnGenres.isClickable = modifiable
          imageBtnDelete.isClickable = modifiable
          when(modifiable){
              true -> {

@@ -1,5 +1,6 @@
 package it.uninsubria.socialmusic
 
+import android.content.Context
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.os.Build
@@ -7,6 +8,7 @@ import android.os.Bundle
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
@@ -46,11 +48,7 @@ class ListItem(val name : String) : Item<GroupieViewHolder>(){
     private lateinit var item: TextView
 
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
-        item = viewHolder.itemView.itemTextView as TextView
-        item.setOnClickListener {
-            //TODO(change background color)
-        }
-        item.text = name
+        viewHolder.itemView.itemTextView.text = name
     }
 
     override fun getLayout(): Int {
