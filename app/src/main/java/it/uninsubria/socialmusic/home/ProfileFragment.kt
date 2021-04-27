@@ -265,6 +265,11 @@ import java.util.*
          }
      }
 
+     private fun openPopup(){//AGGIUNTO
+         val intent = Intent(activity, PopUpWindow::class.java)
+         startActivity(intent)
+     }
+
      private fun doLogout() {
          FirebaseAuth.getInstance().signOut()
          val intent = Intent(context, LoginActivity::class.java)
