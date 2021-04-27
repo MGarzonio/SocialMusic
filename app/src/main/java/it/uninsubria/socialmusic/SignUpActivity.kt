@@ -11,7 +11,6 @@ import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
-import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_sign_up.*
@@ -28,8 +27,8 @@ class SignUpActivity : AppCompatActivity() {
     private var surname = ""
     private var nick = ""
     private var location = ""
-    private val instruments = "1,4,7"
-    private val genres = "2,3,5"
+    private val instruments = "none"
+    private val genres = "none"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,16 +45,6 @@ class SignUpActivity : AppCompatActivity() {
             val intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"
             startActivityForResult(intent,0)
-        }
-        instrument_button_signUp.setOnClickListener {
-            val intent = Intent(this, ListActivity::class.java)
-            intent.putExtra("type", 'I')
-            startActivity(intent)
-        }
-        gen_button_signUp.setOnClickListener {
-            val intent = Intent(this, ListActivity::class.java)
-            intent.putExtra("type", 'G')
-            startActivity(intent)
         }
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -75,46 +64,43 @@ class SignUpActivity : AppCompatActivity() {
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         Log.d(tag, "Email sent.")
+                    } else {
+                        Log.d(tag, "Email not sent.")
                     }
                 }
     }
 
-    private fun checkNickname(): Boolean{
+    private fun performRegistration(){
         nick = nickname_editText_signUp.text.toString()
-        var exist = false
-        val ref = FirebaseDatabase.getInstance().reference.child("users").orderByChild("username").equalTo(nick)
-        //val ref = FirebaseDatabase.getInstance().reference.child("/nicknames").orderByKey().equalTo(nick)
-        //val ref = FirebaseDatabase.getInstance().getReference("/users")
+        val ref = FirebaseDatabase.getInstance().getReference("/users")
         ref.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                /*snapshot.children.forEach {
-                    val refUser = it.child("/username")
-                    val nickname = refUser.getValue<String>()
-                    println(nickname)
-                }*/
-                println(snapshot.key)
-                if(snapshot.childrenCount >= 1) exist = true
+                snapshot.children.forEach {
+                    val user = it.getValue(User::class.java)
+                    if(user!!.username == nick) {
+                        Log.d("SIGNUP", "This nickname is already taken!")
+                        Toast.makeText(applicationContext, "This nickname is already taken!", Toast.LENGTH_SHORT)
+                        nickname_editText_signUp.error = "Already taken"
+                        nickname_editText_signUp.requestFocus()
+                        return
+                    }
+                }
+                createUser()
             }
+
             override fun onCancelled(error: DatabaseError) {}
         })
-        return exist
     }
 
-    private fun performRegistration(){
+    private fun createUser(){
         email = email_editText_signUp.text.toString()
         psw = password_editText_signUp.text.toString()
         name = name_editText_signUp.text.toString()
         surname = surname_editText_signUp.text.toString()
-        nick = nickname_editText_signUp.text.toString()
         location = location_editText_signUp.text.toString()
 
         if(email.isEmpty() || psw.isEmpty() || name.isEmpty() || surname.isEmpty() || nick.isEmpty() || location.isEmpty()){
             Toast.makeText(this,"Please, fill all the fields with '*'!", Toast.LENGTH_SHORT).show()
-            return
-        }
-        if(checkNickname() == true){
-            nickname_editText_signUp.error = "Nickname already in use!"
-            Toast.makeText(this,"Nickname already in use!", Toast.LENGTH_SHORT).show()
             return
         }
         //Firebase authentication
@@ -129,7 +115,6 @@ class SignUpActivity : AppCompatActivity() {
                 } else{
                     updateImageToFirebase()
                 }
-                sendEmail()
             }
             .addOnFailureListener {
                 Toast.makeText(this,getString(R.string.creation_failure), Toast.LENGTH_SHORT).show()
@@ -163,12 +148,12 @@ class SignUpActivity : AppCompatActivity() {
     private fun saveUserToFirebaseDB(fireImageUrl: String) {
         val uid = FirebaseAuth.getInstance().uid ?: ""
         val fireRef = FirebaseDatabase.getInstance().getReference("/users/$uid")
-        val nickRef = FirebaseDatabase.getInstance().getReference("/nicknames/")
         val user = User(uid, nick, fireImageUrl, name, surname, location, instruments, genres)
-        nickRef.setValue(nick)
         fireRef.setValue(user)
             .addOnSuccessListener {
                 Log.d(tag, "User updated!")
+                sendEmail()
+                Toast.makeText(this,"Email sent!", Toast.LENGTH_SHORT)
                 val intent = Intent(this, LoginActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
@@ -177,20 +162,4 @@ class SignUpActivity : AppCompatActivity() {
                 Log.d(tag, "Updating user failure! ${it.message}")
             }
     }
-
-    /*private fun setNickNImage(){
-        val user = FirebaseAuth.getInstance().currentUser
-
-        val profileUpdates = userProfileChangeRequest {
-            displayName = nick
-            photoUri = selectedPhotoUri
-        }
-
-        user!!.updateProfile(profileUpdates)
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        Log.d(TAG, "User profile updated.")
-                    }
-                }
-    }*/
 }

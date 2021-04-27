@@ -70,16 +70,17 @@
         android:id="@+id/signUp_button_signUp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:minHeight="35dp"
-        android:gravity="center"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/rounded_button"
+        android:gravity="center"
+        android:minHeight="35dp"
         android:text="@string/sign_up"
         android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="@+id/gen_button_signUp"
-        app:layout_constraintStart_toStartOf="@+id/gen_editText_signUp"
-        app:layout_constraintTop_toBottomOf="@+id/gen_editText_signUp"
-        app:layout_constraintBottom_toTopOf="@id/loginPage_textView_signUp"/>
+        app:layout_constraintBottom_toTopOf="@id/loginPage_textView_signUp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/location_editText_signUp" />
 
     <android.widget.Button
         android:id="@+id/selectPhoto_button_signUp"
@@ -145,93 +146,22 @@
         app:layout_constraintBottom_toTopOf="@id/location_editText_signUp" />
 
     <EditText
-        android:id="@+id/instrument_editText_signUp"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:minHeight="35dp"
-        android:gravity="center_vertical"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/rounded_edittext"
-        android:inputType="none"
-        android:paddingLeft="16dp"
-        android:text="@string/musical_instruments"
-        android:enabled="false"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toStartOf="@+id/instrument_button_signUp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/location_editText_signUp"
-        app:layout_constraintBottom_toTopOf="@id/gen_editText_signUp"/>
-
-    <EditText
-        android:id="@+id/gen_editText_signUp"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:minHeight="35dp"
-        android:gravity="center_vertical"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/rounded_edittext"
-        android:inputType="none"
-        android:paddingLeft="16dp"
-        android:enabled="false"
-        android:text="@string/musical_genres"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@id/signUp_button_signUp"
-        app:layout_constraintEnd_toEndOf="@+id/instrument_editText_signUp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/instrument_editText_signUp" />
-
-    <android.widget.Button
-        android:id="@+id/instrument_button_signUp"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:minHeight="35dp"
-        android:gravity="center"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/rounded_button"
-        android:text="+"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/gen_button_signUp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/location_editText_signUp"
-        app:layout_constraintStart_toEndOf="@id/instrument_editText_signUp"/>
-
-    <android.widget.Button
-        android:id="@+id/gen_button_signUp"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:minHeight="35dp"
-        android:gravity="center"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/rounded_button"
-        android:text="+"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/gen_editText_signUp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/gen_editText_signUp"
-        app:layout_constraintTop_toBottomOf="@+id/instrument_button_signUp" />
-
-    <EditText
         android:id="@+id/location_editText_signUp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:minHeight="35dp"
-        android:gravity="center_vertical"
         android:layout_marginTop="8dp"
         android:background="@drawable/rounded_edittext"
         android:ems="10"
+        android:gravity="center_vertical"
         android:hint="Location *"
         android:inputType="textPersonName"
+        android:minHeight="35dp"
         android:paddingLeft="16dp"
         android:textColor="@color/black"
         android:textColorHint="@color/gray_hint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/surname_editText_signUp"
-        app:layout_constraintBottom_toTopOf="@id/instrument_editText_signUp"/>
+        app:layout_constraintTop_toBottomOf="@+id/surname_editText_signUp" />
 
     <TextView
         android:id="@+id/loginPage_textView_signUp"

@@ -5,7 +5,7 @@
     <string name="sing_up">SIGN UP</string>
     <string name="forgot_password">Forgot password</string>
     <string name="logo">logo</string>
-    <string name="forgot_message">Please enter your e-mail address. A new password will be sent to be used on first login.</string>
+    <string name="forgot_message">Please enter your e-mail address.You\'ll be redirected to another page to chose a new password.</string>
     <string name="submit">Submit</string>
     <string name="profile_picture">Profile picture</string>
     <string name="username" translatable="false">Nickame</string>
@@ -47,6 +47,7 @@
     <string name="nickname_name_surname_email">Nickname / Name / Surname / Email</string>
     <string name="search_info">Do not fill in the fields to ignore the search filter</string>
     <string name="edit">edit</string>
+    <string name="edit_email">edit email</string>
 
     <string-array name="instruments">
         <item>Drum</item>
@@ -68,5 +69,6 @@
         <item>Blues</item>
         <item>Rap</item>
     </string-array>
+    <string name="change_email_message">Insert your new Email Address. A verification email will be send to your inbox.</string>
 
 </resources>

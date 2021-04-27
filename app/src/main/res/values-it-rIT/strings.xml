@@ -7,7 +7,7 @@
     <string name="sing_up">Registrati</string>
     <string name="forgot_password">Password dimenticata</string>
     <string name="logo">logo</string>
-    <string name="forgot_message">Inserisci il tuo indirizzo di posta elettronica. Verrà inviata una nuova password da utilizzare al primo accesso.</string>
+    <string name="forgot_message">Inserisci il tuo indirizzo di posta elettronica. Sarai reindirizzato alla pagina per inserire la nuova password.</string>
     <string name="submit">Invia</string>
     <string name="profile_picture">Foto profilo</string>
     <string name="name">Nome</string>
@@ -45,4 +45,6 @@
     <string name="nickname_name_surname_email">Nickname / Nome / Cognome / Email</string>
     <string name="search_info">Lasciare i campi vuoti per ignorare il filtro di ricerca</string>
     <string name="edit">modifica</string>
+    <string name="edit_email">modifica Email</string>
+    <string name="change_email_message">Inserisci il tuo nuovo indirizzo Email. Una mail di verifica sarà inviata al tuo account di posta.</string>
 </resources>

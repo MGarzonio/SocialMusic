@@ -2,6 +2,7 @@
 
 import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -21,6 +22,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
 import it.uninsubria.socialmusic.*
 import kotlinx.android.synthetic.main.fragment_profile.*
+import java.util.*
 
  class ProfileFragment : Fragment(), View.OnClickListener {
 
@@ -28,7 +30,6 @@ import kotlinx.android.synthetic.main.fragment_profile.*
      private lateinit var name: EditText
      private lateinit var surname: EditText
      private lateinit var city: EditText
-     private lateinit var mail: EditText
      private lateinit var btnMail: Button
      private lateinit var btnPassword: Button
      private lateinit var btnEditProfile: Button
@@ -36,19 +37,20 @@ import kotlinx.android.synthetic.main.fragment_profile.*
      private lateinit var profilePhoto : de.hdodenhof.circleimageview.CircleImageView
      private  lateinit var btnGenres: Button
      private  lateinit var btnInstruments: Button
+     private lateinit var btnLogout: Button
      private var userProfile: User? = null
+     private var selectedPhotoUri: Uri? = null
+     private var photoUrl: String = "default"
 
      override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
          val view = inflater.inflate(R.layout.fragment_profile, container, false) as View
          val btnMap = view.findViewById(R.id.mapsButton_Profile) as ImageView
-         val btnLogout = view.findViewById(R.id.buttonLogout_Profile) as Button
 
          nickname = view.findViewById(R.id.nickname_editText_Profile) as EditText
          name = view.findViewById(R.id.name_editText_Profile) as EditText
          surname = view.findViewById(R.id.surname_editText_Profile) as EditText
          city = view.findViewById(R.id.location_editText_Profile) as EditText
-         mail =view.findViewById(R.id.email_editText_profile) as EditText
          btnMail = view.findViewById(R.id.email_button_Profile) as Button
          btnPassword = view.findViewById(R.id.password_button_profile) as Button
          btnEditProfile = view.findViewById(R.id.buttonEdit_Profile) as Button
@@ -56,6 +58,7 @@ import kotlinx.android.synthetic.main.fragment_profile.*
          profilePhoto = view.findViewById(R.id.profilePhoto_imageView_Profile) as de.hdodenhof.circleimageview.CircleImageView
          btnGenres = view.findViewById(R.id.gen_button_Profile) as Button
          btnInstruments = view.findViewById(R.id.instrument_button_Profile) as Button
+         btnLogout = view.findViewById(R.id.buttonLogout_Profile) as Button
 
          btnEditProfile.setOnClickListener(this)
          btnLogout.setOnClickListener(this)
@@ -74,8 +77,8 @@ import kotlinx.android.synthetic.main.fragment_profile.*
      override fun onClick(view: View) {
          when (view.id) {
              R.id.buttonEdit_Profile -> editProfile()
-             R.id.buttonLogout_Profile -> doLogout()
-             R.id.mapsButton_Profile -> deleteUser()
+             R.id.buttonLogout_Profile -> logoutBtnAction()
+             R.id.mapsButton_Profile -> openMaps(view)
              R.id.instrument_button_Profile -> openInstruments(view)
              R.id.gen_button_Profile -> openGenres(view)
              R.id.selectPhoto_button_Profile -> loadImageFromGallery(view)
@@ -86,7 +89,6 @@ import kotlinx.android.synthetic.main.fragment_profile.*
 
      private fun loadProfileFromFirebase(){
          switchEditableProfile(false)
-         setEmailEditable(false)
          val myUser = Firebase.auth.currentUser
          val userID = myUser.uid
          val ref = FirebaseDatabase.getInstance().getReference("/users/$userID")
@@ -98,7 +100,6 @@ import kotlinx.android.synthetic.main.fragment_profile.*
                      name.setText(userProfile?.name)
                      surname.setText(userProfile?.surname)
                      city.setText(userProfile?.location)
-                     mail.setText(myUser.email)
                      if (userProfile?.profile_image_url != "default") {
                          Picasso.get().load(userProfile?.profile_image_url).into(profilePhoto)
                          btnPhoto.alpha = 0F
@@ -115,15 +116,50 @@ import kotlinx.android.synthetic.main.fragment_profile.*
 
      private fun editProfile() {
          when(btnEditProfile.text.toString()) {
-             getString(R.string.save) -> saveProfile()
+             getString(R.string.save) -> saveProfileOnFirebase()
              getString(R.string.edit_profile) -> switchEditableProfile(true)
          }
      }
 
-     private fun saveProfile() {
+     private fun saveProfileOnFirebase() {
          switchEditableProfile(false)
+         val nic = nickname.text.toString()
+         val nam = name.text.toString()
+         val sur = surname.text.toString()
+         val loc = city.text.toString()
+         val ins = "none"
+         val gen = "none"
+         val uid = FirebaseAuth.getInstance().currentUser.uid
+         if(selectedPhotoUri != null){
+             updateImageToFirebase()
+         }
+         val userClass = User(uid, nic, photoUrl, nam, sur, loc, ins, gen)
+         val ref = FirebaseDatabase.getInstance().getReference("users/$uid")
+         ref.setValue(userClass)
+             .addOnSuccessListener {
+                 Log.d(tag, "User updated!")
+                 Toast.makeText(context,"User Update", Toast.LENGTH_SHORT)
+             }
+             .addOnFailureListener{
+                 Log.d(tag, "Updating user failure! ${it.message}")
+             }
+     }
 
-         //TODO(load new values on firebase)
+     private fun updateImageToFirebase(){
+         val fileName = UUID.randomUUID().toString()
+         val fireRef = FirebaseStorage.getInstance().getReference("/images/$fileName")
+         fireRef.putFile(selectedPhotoUri!!)
+             .addOnSuccessListener {
+                 Log.d(tag, "Successfully update on Firebase Storage image: ${it.metadata?.path}")
+                 Toast.makeText(context,getString(R.string.update_success), Toast.LENGTH_SHORT).show()
+                 fireRef.downloadUrl.addOnSuccessListener {url ->
+                     photoUrl = url.toString()
+                     Log.d(tag, "File location: $url")
+                 }
+             }
+             .addOnFailureListener{
+                 Log.d(tag, "Updating image failure! ${it.message}")
+             }
      }
 
      private fun switchEditableProfile(modifiable: Boolean) {
@@ -136,72 +172,24 @@ import kotlinx.android.synthetic.main.fragment_profile.*
          btnGenres.isClickable = modifiable
          when(modifiable){
              true -> {
+                 btnLogout.text = "delete"
                  btnEditProfile.text = getString(R.string.save)
              }
              false -> {
+                 btnLogout.text = "logout"
                  btnEditProfile.text = getString(R.string.edit_profile)
              }
          }
      }
 
-     private fun editEmail(){
-         val oldEmail = mail.text.toString()
-         when(btnMail.text.toString()) {
-             getString(R.string.save) -> updateEmail(oldEmail)
-             getString(R.string.edit) -> setEmailEditable(true)
-         }
-     }
-
-     private fun setEmailEditable(editable: Boolean){
-         mail.isEnabled = editable
-         when(editable){
-             true -> {
-                 btnMail.text = getString(R.string.save)
-                 mail.text.clear()
-             }
-             false -> {
-                 btnMail.text = getString(R.string.edit)
-             }
-         }
-     }
-
-     private fun updateEmail(old: String){
-         val user = Firebase.auth.currentUser
-         val newEmail = mail.text.toString()
-         if(newEmail.isEmpty()) {
-             Toast.makeText(context, "Insert email address!", Toast.LENGTH_SHORT).show()
-         } else{
-             user!!.updateEmail(newEmail)
-                     .addOnSuccessListener{ task ->
-                             sendEmail(old)
-                             Log.d("EMAIL", "User email address updated.")
-                     }
-                     .addOnFailureListener {
-                         mail.error = getString(R.string.invalidEmail)
-                         Log.d("EMAIL", "Failed ${it.toString()}")
-                     }
-         }
-     }
-
-     private fun editPassword(){
-         val intent = Intent(activity, ForgotActivity::class.java)
+     private fun editEmail() {
+         val intent = Intent(activity, ChangeEmail::class.java)
          startActivity(intent)
      }
 
-     private fun sendEmail(old: String){
-         val myUser = Firebase.auth.currentUser
-         myUser!!.sendEmailVerification()
-                 .addOnCompleteListener { task ->
-                     if (task.isSuccessful) {
-                         doLogout()
-                         Log.d("EMAIL", "Email sent.")
-                     } else{
-                         mail.error = getString(R.string.invalidEmail)
-                         mail.setText(old)
-                         myUser!!.updateEmail(old)
-                         Log.d("EMAIL", "Failed")
-                     }
-                 }
+     private fun editPassword(){
+         val intent = Intent(activity, ResetPswActivity::class.java)
+         startActivity(intent)
      }
 
      private fun openGenres(view: View) {
@@ -223,13 +211,6 @@ import kotlinx.android.synthetic.main.fragment_profile.*
          startActivity(intent)
      }
 
-     private fun doLogout() {
-         FirebaseAuth.getInstance().signOut()
-         val intent = Intent(context, LoginActivity::class.java)
-         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
-         startActivity(intent)
-     }
-
      private fun loadImageFromGallery(view: View){
          val intent = Intent(Intent.ACTION_PICK)
          intent.type = "image/*"
@@ -239,28 +220,43 @@ import kotlinx.android.synthetic.main.fragment_profile.*
      override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
          super.onActivityResult(requestCode, resultCode, data)
          if(requestCode == 0 && resultCode == Activity.RESULT_OK && data != null){
-             val selectedPhotoUri = data.data
+             selectedPhotoUri = data.data
              val bitmapImage = MediaStore.Images.Media.getBitmap(requireContext().contentResolver, selectedPhotoUri)
              profilePhoto_imageView_Profile.setImageBitmap(bitmapImage)
              selectPhoto_button_Profile.alpha = 0f
          }
      }
+
+     private fun logoutBtnAction(){
+         when(btnLogout.text.toString()){
+             "logout" -> doLogout()
+             "delete" -> deleteUser()
+         }
+     }
+
+     private fun doLogout() {
+         FirebaseAuth.getInstance().signOut()
+         val intent = Intent(context, LoginActivity::class.java)
+         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+         startActivity(intent)
+     }
+
      private fun deleteUser(){
          if(userProfile != null) {
              val user = FirebaseAuth.getInstance().currentUser!!
              val refDBUser = FirebaseDatabase.getInstance().getReference("/users/")
-             val refDBNick = FirebaseDatabase.getInstance().getReference("/nicknames/")
-             val refStore = FirebaseStorage.getInstance().getReferenceFromUrl(userProfile!!.profile_image_url)
              user.delete().addOnSuccessListener {
                  Log.d("PROFILE", "user ${userProfile!!.username} has been cancelled!")
              }
+             if(userProfile!!.profile_image_url != "default") {
+                 val refStore = FirebaseStorage.getInstance().getReferenceFromUrl(userProfile!!.profile_image_url)
+                 refStore.delete()
+             }
              refDBUser.child(user.uid).removeValue()
-             refDBNick.child(userProfile!!.username).removeValue()
-             refStore.delete()
-                     .addOnSuccessListener {
-                         val intent = Intent(activity, LoginActivity::class.java)
-                         startActivity(intent)
-                     }
+                 .addOnSuccessListener {
+                     val intent = Intent(activity, LoginActivity::class.java)
+                     startActivity(intent)
+                 }
          }
      }
 

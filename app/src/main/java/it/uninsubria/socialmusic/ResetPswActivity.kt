@@ -10,10 +10,10 @@ import android.widget.Toast
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
-class ForgotActivity : AppCompatActivity() {
+class ResetPswActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_forgot)
+        setContentView(R.layout.activity_reset_psw)
     }
 
     private fun sendRecoveryMail(to: String) {

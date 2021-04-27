@@ -66,7 +66,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun openForgot() {
-        val intent = Intent(this, ForgotActivity::class.java)
+        val intent = Intent(this, ResetPswActivity::class.java)
         startActivity(intent)
     }
 }
