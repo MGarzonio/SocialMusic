@@ -30,13 +30,6 @@ class ListActivity : AppCompatActivity() {
             ArrayList(listOf(*resources.getStringArray(R.array.genres)))
         }
         loadAdapter()
-        adapter.setOnItemClickListener { item, _ ->
-            val selection = item as ListItem
-            if(selection.getTextViewColor() == ColorDrawable(getColor(android.R.color.white)))
-                selection.setTextViewColor(getColor(android.R.color.holo_blue_light))
-            else
-                selection.setTextViewColor(getColor(android.R.color.white))
-        }
         listView.adapter = adapter
     }
 
@@ -54,18 +47,13 @@ class ListItem(val name : String) : Item<GroupieViewHolder>(){
 
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         item = viewHolder.itemView.itemTextView as TextView
+        item.setOnClickListener {
+            //TODO(change background color)
+        }
         item.text = name
     }
 
     override fun getLayout(): Int {
         return R.layout.list_recyclerview_row
-    }
-
-    fun getTextViewColor() : Drawable {
-        return item.background
-    }
-
-    fun setTextViewColor(color : Int){
-        item.background = ColorDrawable(color)
     }
 }
