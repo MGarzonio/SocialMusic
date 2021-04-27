@@ -18,7 +18,6 @@
     <string name="account_not_found">Account inesistente!</string>
     <string name="invalid_account">Username o password non corretti!</string>
     <string name="password_error">La password deve contenere almeno 8 caratteri!</string>
-    <string name="logout">Disconnettiti</string>
     <string name="sing_in_done">Registrazione effettuata, controlla la tua casella di posta elettronica!</string>
     <string name="empty_string">Questo campo non può essere vuoto!</string>
     <string name="edit_profile">Modifica profilo</string>

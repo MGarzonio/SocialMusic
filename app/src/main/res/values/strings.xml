@@ -19,7 +19,7 @@
     <string name="invalid_account">Incorrect username or password!</string>
     <string name="password_error">The password must contain at least 8 characters!</string>
     <string name="edit_profile">Edit profile</string>
-    <string name="logout">Logout</string>
+    <string name="logout" translatable="false">Logout</string>
     <string name="city">City</string>
     <string name="sing_in_done">Registered, check your e-mail box!</string>
     <string name="empty_string">This field cannot be empty!</string>

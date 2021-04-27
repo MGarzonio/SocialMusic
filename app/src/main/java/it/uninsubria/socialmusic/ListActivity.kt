@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
@@ -48,7 +49,7 @@ class ListItem(val name : String) : Item<GroupieViewHolder>(){
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         item = viewHolder.itemView.itemTextView as TextView
         item.setOnClickListener {
-            //TODO(change background color)
+            //if(item.background == ContextCompat.getDrawable(context, R.drawable.green_resource))
         }
         item.text = name
     }
