@@ -15,7 +15,7 @@
         android:roundIcon="@mipmap/icon_social_music_app_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SocialMusic">
-        <activity android:name=".PopUpWindow"></activity>
+        <activity android:name=".PopUpWindow" />
         <activity android:name=".ChangeEmail" />
 
         <meta-data
