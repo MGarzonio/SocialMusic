@@ -48,5 +48,6 @@ class ListActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         for(s : String in selectedItem)
             res += "$s,"
         Toast.makeText(view.context, getString(R.string.changes_saved), Toast.LENGTH_LONG).show()
+        finish()
     }
 }
