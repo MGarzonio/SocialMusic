@@ -29,13 +29,15 @@
         android:hint="@string/nickname_name_surname_email"
         android:inputType="textPersonName"
         android:minHeight="35dp"
-        android:paddingLeft="16dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
         android:textColor="@color/black"
         android:textColorHint="@color/gray_hint"
         app:layout_constraintBottom_toTopOf="@id/genre_Spinner_search"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/user_recyclerView_search" />
+        app:layout_constraintTop_toBottomOf="@+id/user_recyclerView_search"
+        android:autofillHints="" />
 
     <TextView
         android:id="@+id/genres_textView_search"
@@ -105,29 +107,15 @@
         android:id="@+id/search_button_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
         android:background="@drawable/rounded_button"
         android:gravity="center"
         android:minHeight="35dp"
-        android:text="search"
+        android:text="@string/search"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@id/info_textView_search"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/instrument_Spinner_search"
         app:layout_constraintStart_toStartOf="@+id/instrument_Spinner_search"
         app:layout_constraintTop_toBottomOf="@+id/instrument_Spinner_search" />
-
-    <TextView
-        android:id="@+id/info_textView_search"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="35dp"
-        android:text="@string/search_info"
-        android:gravity="center"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/search_button_search"
-        app:layout_constraintStart_toStartOf="@+id/search_button_search"
-        app:layout_constraintTop_toBottomOf="@id/search_button_search" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -42,7 +42,7 @@ import java.util.*
      private var selectedPhotoUri: Uri? = null
      private var photoUrl: String = "default"
 
-     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
 
          val view = inflater.inflate(R.layout.fragment_profile, container, false) as View
          val btnMap = view.findViewById(R.id.mapsButton_Profile) as ImageView
@@ -90,7 +90,7 @@ import java.util.*
      private fun loadProfileFromFirebase(){
          switchEditableProfile(false)
          val myUser = Firebase.auth.currentUser
-         val userID = myUser.uid
+         val userID = myUser?.uid
          val ref = FirebaseDatabase.getInstance().getReference("/users/$userID")
          ref.addListenerForSingleValueEvent(object : ValueEventListener {
              override fun onDataChange(snapshot: DataSnapshot) {
@@ -109,7 +109,7 @@ import java.util.*
              }
 
              override fun onCancelled(error: DatabaseError) {
-                 Toast.makeText(context, "This user has been deleted!", Toast.LENGTH_SHORT)
+                 Toast.makeText(context, "This user has been deleted!", Toast.LENGTH_SHORT).show()
                  Log.d("PROFILE", error.toString())
              }
          })
@@ -130,16 +130,16 @@ import java.util.*
          val loc = city.text.toString()
          val ins = "none"
          val gen = "none"
-         val uid = FirebaseAuth.getInstance().currentUser.uid
+         val uid = FirebaseAuth.getInstance().currentUser?.uid
          if(selectedPhotoUri != null) {
              updateImageToFirebase()
          }
-         val userClass = User(uid, nic, photoUrl, nam, sur, loc, ins, gen)
+         val userClass = uid?.let { User(it, nic, photoUrl, nam, sur, loc, ins, gen) }
          val ref = FirebaseDatabase.getInstance().getReference("users/$uid")
          ref.setValue(userClass)
              .addOnSuccessListener {
                  Log.d(tag, "User updated!")
-                 Toast.makeText(context,"User Update", Toast.LENGTH_SHORT)
+                 Toast.makeText(context,"User Update", Toast.LENGTH_SHORT).show()
              }
              .addOnFailureListener{
                  Log.d(tag, "Updating user failure! ${it.message}")
@@ -174,11 +174,11 @@ import java.util.*
          btnGenres.isClickable = modifiable
          when(modifiable){
              true -> {
-                 btnLogout.text = "delete"
+                 btnLogout.text = getString(R.string.delete)
                  btnEditProfile.text = getString(R.string.save)
              }
              false -> {
-                 btnLogout.text = "logout"
+                 btnLogout.text = getString(R.string.logout)
                  btnEditProfile.text = getString(R.string.edit_profile)
              }
          }

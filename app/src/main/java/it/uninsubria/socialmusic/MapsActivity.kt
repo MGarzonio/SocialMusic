@@ -36,15 +36,15 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         getCoordinates(this)
         val myPosition = LatLng(latitude, longitude)
         mMap.addMarker(MarkerOptions().position(myPosition).title(nickname))
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myPosition, 13.0f));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myPosition, 13.0f))
     }
 
     private fun getCoordinates(context: Context) {
-        var addressList = Geocoder(context, Locale.getDefault()).getFromLocationName(city, 1)
+        val addressList = Geocoder(context, Locale.getDefault()).getFromLocationName(city, 1)
         if (addressList != null && addressList.size > 0) {
-            val address = addressList[0];
-            longitude = address.longitude;
-            latitude = address.latitude;
+            val address = addressList[0]
+            longitude = address.longitude
+            latitude = address.latitude
         }
     }
 }

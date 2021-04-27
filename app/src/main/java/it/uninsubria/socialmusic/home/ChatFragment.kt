@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
@@ -20,12 +19,12 @@ import it.uninsubria.socialmusic.chat.LatestMessageRow
 
 class ChatFragment : Fragment() {
     companion object{
-        val USER_KEY = "USER_KEY"
+        const val user_key = "USER_KEY"
     }
     private val adapter = GroupAdapter<GroupieViewHolder>()
     val messagesMap = HashMap<String, ChatMessage>()
-    val fromID = FirebaseAuth.getInstance().uid
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    private val fromID = FirebaseAuth.getInstance().uid
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val viewVal = inflater.inflate(R.layout.fragment_chat, container, false) as View
         val recyclerView = viewVal.findViewById<RecyclerView>(R.id.latestMessage_recyclerView)
         listenForLatestMessages()
@@ -34,11 +33,8 @@ class ChatFragment : Fragment() {
         adapter.setOnItemClickListener { item, view ->
             val intent = Intent(view.context, ChatActivity::class.java)
             val row = item as LatestMessageRow
-            intent.putExtra(USER_KEY, row.chatPartnerUser)
+            intent.putExtra(user_key, row.chatPartnerUser)
             startActivity(intent)
-        }
-        if(adapter == null){
-            Toast.makeText(viewVal.context,getString(R.string.no_messages), Toast.LENGTH_SHORT).show()
         }
         return viewVal
     }

@@ -18,15 +18,17 @@
         android:layout_marginTop="16dp"
         android:background="@drawable/rounded_edittext"
         android:ems="10"
-        android:hint="Nickname *"
+        android:hint="@string/username"
         android:inputType="textPersonName"
-        android:paddingLeft="16dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
         android:textColor="@color/black"
         android:textColorHint="@color/gray_hint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/selectPhoto_button_signUp"
-        app:layout_constraintBottom_toTopOf="@id/email_editText_signUp"/>
+        app:layout_constraintBottom_toTopOf="@id/email_editText_signUp"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/password_editText_signUp"
@@ -37,15 +39,17 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/rounded_edittext"
         android:ems="10"
-        android:hint="Password *"
+        android:hint="@string/password"
         android:inputType="textPassword"
-        android:paddingLeft="16dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
         android:textColor="@color/black"
         android:textColorHint="@color/gray_hint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/email_editText_signUp"
-        app:layout_constraintBottom_toTopOf="@id/name_editText_signUp"/>
+        app:layout_constraintBottom_toTopOf="@id/name_editText_signUp"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/email_editText_signUp"
@@ -56,15 +60,17 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/rounded_edittext"
         android:ems="10"
-        android:hint="Email address *"
+        android:hint="@string/email"
         android:inputType="textEmailAddress"
-        android:paddingLeft="16dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
         android:textColor="@color/black"
         android:textColorHint="@color/gray_hint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nickname_editText_signUp"
-        app:layout_constraintBottom_toTopOf="@id/password_editText_signUp"/>
+        app:layout_constraintBottom_toTopOf="@id/password_editText_signUp"
+        android:autofillHints="" />
 
     <android.widget.Button
         android:id="@+id/signUp_button_signUp"
@@ -116,15 +122,17 @@
         android:gravity="center_vertical"
         android:background="@drawable/rounded_edittext"
         android:ems="10"
-        android:hint="Name *"
+        android:hint="@string/name"
         android:inputType="textPersonName"
-        android:paddingLeft="16dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
         android:textColor="@color/black"
         android:textColorHint="@color/gray_hint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password_editText_signUp"
-        app:layout_constraintBottom_toTopOf="@id/surname_editText_signUp"/>
+        app:layout_constraintBottom_toTopOf="@id/surname_editText_signUp"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/surname_editText_signUp"
@@ -135,15 +143,17 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/rounded_edittext"
         android:ems="10"
-        android:hint="Surname *"
+        android:hint="@string/surname"
         android:inputType="textPersonName"
-        android:paddingLeft="16dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
         android:textColor="@color/black"
         android:textColorHint="@color/gray_hint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name_editText_signUp"
-        app:layout_constraintBottom_toTopOf="@id/location_editText_signUp" />
+        app:layout_constraintBottom_toTopOf="@id/location_editText_signUp"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/location_editText_signUp"
@@ -153,15 +163,17 @@
         android:background="@drawable/rounded_edittext"
         android:ems="10"
         android:gravity="center_vertical"
-        android:hint="Location *"
+        android:hint="@string/city"
         android:inputType="textPersonName"
         android:minHeight="35dp"
-        android:paddingLeft="16dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
         android:textColor="@color/black"
         android:textColorHint="@color/gray_hint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/surname_editText_signUp" />
+        app:layout_constraintTop_toBottomOf="@+id/surname_editText_signUp"
+        android:autofillHints="" />
 
     <TextView
         android:id="@+id/loginPage_textView_signUp"

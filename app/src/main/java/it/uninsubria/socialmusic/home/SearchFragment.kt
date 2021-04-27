@@ -30,7 +30,7 @@ class SearchFragment : Fragment(), View.OnClickListener{
 
     val defaultID = "6N9HD0c5WgPsakocjfluSiSI0hm2"
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
 
         val viewVal = inflater.inflate(R.layout.fragment_search, container, false) as View
         val btnSearch = viewVal.findViewById(R.id.search_button_search) as Button
@@ -39,10 +39,10 @@ class SearchFragment : Fragment(), View.OnClickListener{
         genreKey = viewVal.findViewById(R.id.genre_Spinner_search) as Spinner
         recyclerView = viewVal.findViewById(R.id.user_recyclerView_search) as RecyclerView
 
-        var instrumentList = ArrayList(listOf(*resources.getStringArray(R.array.instruments)))
-        instrumentList.add(0, "")
+        val instrumentList = ArrayList(listOf(*resources.getStringArray(R.array.instruments)))
+        instrumentList.add(0, getString(R.string.none))
         val instrumentAdapter = ArrayAdapter(viewVal.context, R.layout.color_spinner_layout, instrumentList)
-        var genresList = ArrayList(listOf(*resources.getStringArray(R.array.genres)))
+        val genresList = ArrayList(listOf(*resources.getStringArray(R.array.genres)))
         genresList.add(0, "")
         instrumentAdapter.setDropDownViewResource(R.layout.spinner_dropdown_layout)
         val genresAdapter = ArrayAdapter(viewVal.context, R.layout.color_spinner_layout, genresList)
@@ -53,7 +53,7 @@ class SearchFragment : Fragment(), View.OnClickListener{
 
         btnSearch.setOnClickListener(this)
 
-        instrumentKey?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+        instrumentKey.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 selectedInstrument = ""
             }
@@ -61,7 +61,7 @@ class SearchFragment : Fragment(), View.OnClickListener{
                 selectedInstrument = instrumentKey.selectedItem.toString()
             }
         }
-        genreKey?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+        genreKey.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 selectedGenre = ""
             }
@@ -95,7 +95,7 @@ class SearchFragment : Fragment(), View.OnClickListener{
                 adapter.setOnItemClickListener { item, view ->
                     val userItem = item as UserItem
                     val intent = Intent(view.context, ChatActivity::class.java)
-                    intent.putExtra(ChatFragment.USER_KEY, userItem.user)
+                    intent.putExtra(ChatFragment.user_key, userItem.user)
                     startActivity(intent)
                 }
                 recyclerView.adapter = adapter
@@ -154,7 +154,7 @@ class SearchFragment : Fragment(), View.OnClickListener{
         override fun bind(viewHolder: GroupieViewHolder, position: Int) {
             val target = viewHolder.itemView.circle_user_ImageView
             viewHolder.itemView.user_textView.text = user.username
-            val imageUrl = user?.profile_image_url
+            val imageUrl = user.profile_image_url
             if(imageUrl != "default") {
                 Picasso.get().load(imageUrl).into(target)
             }
