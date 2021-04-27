@@ -49,7 +49,7 @@ import java.util.*
      override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
          val view = inflater.inflate(R.layout.fragment_profile, container, false) as View
-         val btnMap = view.findViewById(R.id.mapsButton_Profile) as ImageView
+         val btnMap = view.findViewById(R.id.mapsButton_Profile) as Button
 
          nickname = view.findViewById(R.id.nickname_editText_Profile) as EditText
          name = view.findViewById(R.id.name_editText_Profile) as EditText

@@ -196,11 +196,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/buttonEdit_Profile" />
 
-    <ImageView
+    <android.widget.Button
         android:id="@+id/mapsButton_Profile"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:src="@mipmap/google_maps_foreground"
+        android:background="@color/white"
+        android:text="Google Maps"
+        android:textColor="@color/dark_green"
         app:layout_constraintBottom_toBottomOf="@+id/buttonEdit_Profile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/buttonEdit_Profile"
