@@ -39,7 +39,6 @@ class SearchFragment : Fragment(), View.OnClickListener{
         genreKey = viewVal.findViewById(R.id.genre_Spinner_search) as Spinner
         recyclerView = viewVal.findViewById(R.id.user_recyclerView_search) as RecyclerView
 
-
         var instrumentList = ArrayList(listOf(*resources.getStringArray(R.array.instruments)))
         instrumentList.add(0, "")
         val instrumentAdapter = ArrayAdapter(viewVal.context, R.layout.color_spinner_layout, instrumentList)
@@ -70,7 +69,6 @@ class SearchFragment : Fragment(), View.OnClickListener{
                 selectedGenre = genreKey.selectedItem.toString()
             }
         }
-
         return viewVal
     }
 

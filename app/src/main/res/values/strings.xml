@@ -48,6 +48,7 @@
     <string name="search_info">Do not fill in the fields to ignore the search filter</string>
     <string name="edit">edit</string>
     <string name="edit_email">edit email</string>
+    <string name="change_email_message">Inserisci il tuo nuovo indirizzo Email. Una mail di verifica sarà inviata al tuo account di posta.</string>
 
     <string-array name="instruments">
         <item>Drum</item>
