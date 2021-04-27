@@ -79,4 +79,5 @@
     <string name="musical_instruments">Strumenti</string>
     <string name="fill_all_the_fields">Inserisci tutti i dati richiesti!</string>
     <string name="nick_taken">Nickname giù in uso da un altro utente!</string>
+    <string name="changes_saved">Modifiche salvate</string>
 </resources>
