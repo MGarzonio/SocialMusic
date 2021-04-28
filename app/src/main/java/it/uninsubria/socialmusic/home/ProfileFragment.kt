@@ -126,6 +126,40 @@ import java.util.*
          }
      }
 
+     private fun logoutBtnAction(){
+         when(btnLogout.text.toString()){
+             getString(R.string.logout) -> doLogout()
+             getString(R.string.delete) -> openPopup()
+         }
+     }
+
+     private fun switchEditableProfile(modifiable: Boolean) {
+         nickname.isEnabled = modifiable
+         name.isEnabled = modifiable
+         surname.isEnabled = modifiable
+         city.isEnabled = modifiable
+         btnPhoto.isClickable = modifiable
+         imageBtnDelete.isClickable = modifiable
+         when(modifiable){
+             true -> {
+                 if (userProfile.profile_image_url != "default"){
+                     imageBtnDelete.alpha = 1F
+                 }
+                 btnLogout.text = getString(R.string.delete)
+                 btnLogout.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_baseline_delete_forever_24, 0, 0);
+                 btnEditProfile.text = getString(R.string.save)
+                 btnEditProfile.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_baseline_save_alt_24, 0, 0);
+             }
+             false -> {
+                 imageBtnDelete.alpha = 0F
+                 btnLogout.text = getString(R.string.logout)
+                 btnLogout.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_baseline_logout_24, 0, 0);
+                 btnEditProfile.text = getString(R.string.edit_profile)
+                 btnEditProfile.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_baseline_edit_24, 0, 0);
+             }
+         }
+     }
+
      private fun checkImageChanged() {
          if(selectedPhotoUri.toString() == "deleted"){
              updateProfileToFirebase("default")
@@ -176,39 +210,6 @@ import java.util.*
              }
      }
 
-     private fun switchEditableProfile(modifiable: Boolean) {
-         nickname.isEnabled = modifiable
-         name.isEnabled = modifiable
-         surname.isEnabled = modifiable
-         city.isEnabled = modifiable
-         btnPhoto.isClickable = modifiable
-         imageBtnDelete.isClickable = modifiable
-         when(modifiable){
-             true -> {
-                 if (userProfile.profile_image_url != "default"){
-                     imageBtnDelete.alpha = 1F
-                 }
-                 btnLogout.text = getString(R.string.delete)
-                 btnEditProfile.text = getString(R.string.save)
-             }
-             false -> {
-                 imageBtnDelete.alpha = 0F
-                 btnLogout.text = getString(R.string.logout)
-                 btnEditProfile.text = getString(R.string.edit_profile)
-             }
-         }
-     }
-
-     private fun editEmail() {
-         val intent = Intent(activity, ChangeEmail::class.java)
-         startActivity(intent)
-     }
-
-     private fun editPassword(){
-         val intent = Intent(activity, ResetPswActivity::class.java)
-         startActivity(intent)
-     }
-
      private fun openGenres(view: View) {
          val intent = Intent(activity, ListActivity::class.java)
          intent.putExtra("type", 'G')
@@ -225,6 +226,16 @@ import java.util.*
          val intent = Intent(activity, MapsActivity::class.java)
          intent.putExtra("city", city.text.toString())
          intent.putExtra("nickname", nickname.text.toString())
+         startActivity(intent)
+     }
+
+     private fun editEmail() {
+         val intent = Intent(activity, ChangeEmail::class.java)
+         startActivity(intent)
+     }
+
+     private fun editPassword(){
+         val intent = Intent(activity, ResetPswActivity::class.java)
          startActivity(intent)
      }
 
@@ -256,29 +267,17 @@ import java.util.*
          deleteImage_button_profile.alpha = 0F
      }
 
-     private fun logoutBtnAction(){
-         when(btnLogout.text.toString()){
-             getString(R.string.logout) -> doLogout()
-             getString(R.string.delete) -> deleteUser()
-         }
-     }
-
-     private fun openPopup(){//AGGIUNTO
+     private fun openPopup(){
          val builder = AlertDialog.Builder(context)
-         builder.setTitle("Androidly Alert")
-         builder.setMessage("We have a message")
+         builder.setIcon(android.R.drawable.ic_dialog_alert)
+         builder.setTitle("SocialMusic Alert")
+         builder.setMessage(getString(R.string.delete_alert_message))
         //builder.setPositiveButton("OK", DialogInterface.OnClickListener(function = x))
-
          builder.setPositiveButton(android.R.string.yes) { dialog, which ->
-             Toast.makeText(context, android.R.string.yes, Toast.LENGTH_SHORT).show()
+             deleteUser()
          }
-
          builder.setNegativeButton(android.R.string.no) { dialog, which ->
              Toast.makeText(context, android.R.string.no, Toast.LENGTH_SHORT).show()
-         }
-
-         builder.setNeutralButton("Maybe") { dialog, which ->
-             Toast.makeText(context, "Maybe", Toast.LENGTH_SHORT).show()
          }
          builder.show()
      }
