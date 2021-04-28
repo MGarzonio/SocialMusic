@@ -1,10 +1,8 @@
  package it.uninsubria.socialmusic.home
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -268,8 +266,23 @@ import java.util.*
      }
 
      private fun openPopup(){//AGGIUNTO
-         val intent = Intent(activity, PopUpWindow::class.java)
-         startActivity(intent)
+         val builder = AlertDialog.Builder(context)
+         builder.setTitle("Androidly Alert")
+         builder.setMessage("We have a message")
+        //builder.setPositiveButton("OK", DialogInterface.OnClickListener(function = x))
+
+         builder.setPositiveButton(android.R.string.yes) { dialog, which ->
+             Toast.makeText(context, android.R.string.yes, Toast.LENGTH_SHORT).show()
+         }
+
+         builder.setNegativeButton(android.R.string.no) { dialog, which ->
+             Toast.makeText(context, android.R.string.no, Toast.LENGTH_SHORT).show()
+         }
+
+         builder.setNeutralButton("Maybe") { dialog, which ->
+             Toast.makeText(context, "Maybe", Toast.LENGTH_SHORT).show()
+         }
+         builder.show()
      }
 
      private fun doLogout() {
