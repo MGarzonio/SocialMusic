@@ -15,8 +15,10 @@
         android:roundIcon="@mipmap/icon_social_music_app_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SocialMusic">
-        <activity android:name=".PopUpWindow" />
-        <activity android:name=".ChangeEmail" />
+        <activity
+            android:name=".PopUpWindow" />
+        <activity
+            android:name=".ChangeEmail" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -25,7 +27,8 @@
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".ListActivity" />
+        <activity
+            android:name=".ListActivity" />
         <activity
             android:name=".home.HomeActivity"
             android:label="@string/title_activity_home">
@@ -35,12 +38,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".chat.ChatActivity" />
+        <activity
+            android:name=".LoginActivity" />
+        <activity
+            android:name=".chat.ChatActivity" />
         <activity
             android:name=".SignUpActivity"
             android:label="@string/app_name" />
-        <activity android:name=".ResetPswActivity">
+        <activity
+            android:name=".ResetPswActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".LoginActivity" />

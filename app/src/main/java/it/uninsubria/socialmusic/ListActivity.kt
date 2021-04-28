@@ -8,43 +8,67 @@ import android.widget.ListView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
+import kotlin.properties.Delegates
 
 class ListActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
 
-    private var items = ArrayList<String>()
-    private var listView: ListView? = null
-    private var arrayAdapter : ArrayAdapter<String>? = null
-    private var selectedItems = ArrayList<String>()
-    private var type = ' '
+    private lateinit var items : ArrayList<String>
+    private lateinit var listView: ListView
+    private lateinit var arrayAdapter : ArrayAdapter<String>
+    private lateinit var selectedItems : ArrayList<String>
+    private var type by Delegates.notNull<Char>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list)
-        listView = findViewById(R.id.items_ListView_List)
+
+        selectedItems = ArrayList()
         type = intent.getCharExtra("type", ' ')
-        var data = intent.getStringExtra("data")
-        items = if(type == 'I')
+        val uid = FirebaseAuth.getInstance().currentUser!!.uid
+
+        items = if (type == 'I') {
             ArrayList(listOf(*resources.getStringArray(R.array.instruments)))
-        else
+        } else {
             ArrayList(listOf(*resources.getStringArray(R.array.genres)))
-        if(data != "none"){
-            loadSelection(data)
         }
-        selectedItems.clear()
+
         arrayAdapter = ArrayAdapter(this, R.layout.list_row, items)
-        listView?.adapter = arrayAdapter
-        listView?.choiceMode = ListView.CHOICE_MODE_MULTIPLE
-        listView?.onItemClickListener = this
+
+        listView = findViewById(R.id.items_ListView_List)
+        listView.adapter = arrayAdapter
+        listView.choiceMode = ListView.CHOICE_MODE_MULTIPLE
+        listView.onItemClickListener = this
+
+        if (type == 'I') {
+            loadData(uid, "instruments")
+        } else {
+            loadData(uid, "genres")
+        }
     }
 
-    private fun loadSelection(data : String){
-        // TODO(load selection doesn't work)
-        selectedItems = data.split(",") as ArrayList<String>
-        for(item : String in selectedItems){
-            if(item in items) {
-                listView?.setSelection(items.indexOf(item))
+    private fun loadData(id: String, path: String) {
+        val res = FirebaseDatabase.getInstance().getReference("users/$id").child(path)
+
+        res.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                loadSelection(snapshot.value as String)
             }
+
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
+    }
+
+    private fun loadSelection(data : String) {
+        val values = data.split(",")
+        for(s : String in values) {
+            if(s in items) {
+                selectedItems.add(s)
+            }
+        }
+        for (item: String in selectedItems) {
+            listView.setItemChecked(items.indexOf(item), true)
         }
     }
 
@@ -58,17 +82,21 @@ class ListActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
     }
 
     fun confirmChange(view: View) {
-        var res = ""
-        for(s : String in selectedItems)
-            res += "$s,"
-        val uid = FirebaseAuth.getInstance().currentUser.uid
-        val ref = if(type == 'I')
+        var ris = ""
+        if (selectedItems.isEmpty()) {
+            ris = "none"
+        } else {
+            for (s: String in selectedItems) {
+                ris += "$s,"
+            }
+        }
+        val uid = FirebaseAuth.getInstance().currentUser!!.uid
+        val ref = if (type == 'I') {
             FirebaseDatabase.getInstance().getReference("users/$uid/instruments")
-        else
+        } else {
             FirebaseDatabase.getInstance().getReference("users/$uid/genres")
-        if(res == "")
-            res = "none"
-        ref.setValue(res)
+        }
+        ref.setValue(ris)
         Toast.makeText(view.context, getString(R.string.changes_saved), Toast.LENGTH_LONG).show()
         finish()
     }
