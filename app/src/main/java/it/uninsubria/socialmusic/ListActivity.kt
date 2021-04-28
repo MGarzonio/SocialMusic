@@ -1,6 +1,7 @@
 package it.uninsubria.socialmusic
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -9,6 +10,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import java.lang.Integer.parseInt
+import kotlin.math.log
 import kotlin.properties.Delegates
 
 class ListActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
@@ -62,9 +65,9 @@ class ListActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
 
     private fun loadSelection(data : String) {
         val values = data.split(",")
-        for(s : String in values) {
-            if(s in items) {
-                selectedItems.add(s)
+        for(s in values) {
+            if(s != "") {
+                selectedItems.add(items[parseInt(s)])
             }
         }
         for (item: String in selectedItems) {
@@ -86,8 +89,14 @@ class ListActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         if (selectedItems.isEmpty()) {
             ris = "none"
         } else {
-            for (s: String in selectedItems) {
-                ris += "$s,"
+            if(type == 'I') {
+                for (s: String in selectedItems) {
+                    ris += ArrayList(listOf(*resources.getStringArray(R.array.instruments))).indexOf(s).toString()+","
+                }
+            } else {
+                for (s: String in selectedItems) {
+                    ris += ArrayList(listOf(*resources.getStringArray(R.array.genres))).indexOf(s).toString()+","
+                }
             }
         }
         val uid = FirebaseAuth.getInstance().currentUser!!.uid
