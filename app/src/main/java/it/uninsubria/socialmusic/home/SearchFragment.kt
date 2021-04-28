@@ -113,23 +113,23 @@ class SearchFragment : Fragment(), View.OnClickListener{
                 return if (selectedGenre == "")
                     true
                 else
-                    inUserList(selectedGenre, user.generes)
+                    inUserList(selectedGenre, user.genres)
             } else if (inUserList(selectedInstrument, user.instruments)) {
                 return if (selectedGenre == "")
                     true
                 else
-                    inUserList(selectedGenre, user.generes)
+                    inUserList(selectedGenre, user.genres)
             } else if (selectedName == user.name || selectedName == user.surname || selectedName == user.username) {
                 if (selectedInstrument == "") {
                     return if (selectedGenre == "")
                         true
                     else
-                        inUserList(selectedGenre, user.generes)
-                } else if (inUserList(selectedGenre, user.generes)) {
+                        inUserList(selectedGenre, user.genres)
+                } else if (inUserList(selectedGenre, user.genres)) {
                     return if (selectedGenre == "")
                         true
                     else {
-                        inUserList(selectedGenre, user.generes)
+                        inUserList(selectedGenre, user.genres)
                     }
                 }
             }
