@@ -64,7 +64,7 @@ class ListActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
     private fun loadSelection(data : String) {
         val values = data.split(",")
         for(s in values) {
-            if(s != "") {
+            if(s != "" && s!= "none") {
                 selectedItems.add(items[parseInt(s)])
             }
         }
