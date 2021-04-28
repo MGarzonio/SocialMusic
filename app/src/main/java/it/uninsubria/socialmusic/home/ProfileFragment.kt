@@ -214,12 +214,14 @@ import java.util.*
      private fun openGenres(view: View) {
          val intent = Intent(activity, ListActivity::class.java)
          intent.putExtra("type", 'G')
+         intent.putExtra("data", userProfile?.genres)
          startActivity(intent)
      }
 
      private fun openInstruments(view: View) {
          val intent = Intent(activity, ListActivity::class.java)
          intent.putExtra("type", 'I')
+         intent.putExtra("data", userProfile?.instruments)
          startActivity(intent)
      }
 
