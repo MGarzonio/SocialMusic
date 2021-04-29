@@ -2,10 +2,6 @@ package it.uninsubria.socialmusic
 
 import android.app.Activity
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.Matrix
-import android.media.ExifInterface
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -42,7 +38,7 @@ class SignUpActivity : AppCompatActivity() {
         setContentView(R.layout.activity_sign_up)
 
         signUp_button_signUp.setOnClickListener{
-            performRegistration()
+            checkNicknameUnique()
         }
         loginPage_textView_signUp.setOnClickListener{
             Log.d(tag, "Accessing login page")
@@ -83,7 +79,7 @@ class SignUpActivity : AppCompatActivity() {
                 }
     }
 
-    private fun performRegistration(){
+    private fun checkNicknameUnique(){
         nick = nickname_editText_signUp.text.toString()
         val ref = FirebaseDatabase.getInstance().getReference("/users")
         ref.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -98,14 +94,14 @@ class SignUpActivity : AppCompatActivity() {
                         return
                     }
                 }
-                createUser()
+                performRegistration()
             }
 
             override fun onCancelled(error: DatabaseError) {}
         })
     }
 
-    private fun createUser(){
+    private fun performRegistration(){
         email = email_editText_signUp.text.toString()
         psw = password_editText_signUp.text.toString()
         name = name_editText_signUp.text.toString()

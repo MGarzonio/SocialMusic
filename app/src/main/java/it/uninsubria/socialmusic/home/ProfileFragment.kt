@@ -23,6 +23,7 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
 import it.uninsubria.socialmusic.*
+import kotlinx.android.synthetic.main.activity_sign_up.*
 import kotlinx.android.synthetic.main.fragment_profile.*
 import java.util.*
 
@@ -73,7 +74,7 @@ import java.util.*
          btnPhoto.setOnClickListener(this)
          imageBtnDelete.setOnClickListener(this)
 
-         loadProfileFromFirebase()
+         loadProfileFromFirebase(true)
 
          return view
      }
@@ -92,7 +93,7 @@ import java.util.*
          }
      }
 
-     private fun loadProfileFromFirebase(){
+     private fun loadProfileFromFirebase(setNick: Boolean){
          switchEditableProfile(false)
          val myUser = Firebase.auth.currentUser
          val userID = myUser!!.uid
@@ -101,14 +102,16 @@ import java.util.*
              override fun onDataChange(snapshot: DataSnapshot) {
                  if(snapshot.exists()) {
                      userProfile = snapshot.getValue(User::class.java)!!
-                     nickname.setText(userProfile.username)
+                     if(setNick){
+                         nickname.setText(userProfile.username)
+                         if (userProfile.profile_image_url != "default") {
+                             Picasso.get().load(userProfile.profile_image_url).into(profilePhoto)
+                             btnPhoto.alpha = 0F
+                         }
+                     }
                      name.setText(userProfile.name)
                      surname.setText(userProfile.surname)
                      city.setText(userProfile.location)
-                     if (userProfile.profile_image_url != "default") {
-                         Picasso.get().load(userProfile.profile_image_url).into(profilePhoto)
-                         btnPhoto.alpha = 0F
-                     }
                  }
              }
 
@@ -172,22 +175,60 @@ import java.util.*
 
      private fun updateProfileToFirebase(photoUrl: String){
          switchEditableProfile(false)
+         loadProfileFromFirebase(false)
          val nic = nickname.text.toString()
          val nam = name.text.toString()
          val sur = surname.text.toString()
          val loc = city.text.toString()
-         val ins = "none"
-         val gen = "none"
+         if(userProfile!!.profile_image_url != photoUrl){
+             setDataToFirebase("profile_photo_url", photoUrl)
+         }
+         if(userProfile!!.username != nic){
+             checkNicknameUnique(nic)
+         }
+         if(userProfile!!.name != nam){
+             setDataToFirebase("name", nam)
+         }
+         if(userProfile!!.surname != sur){
+             setDataToFirebase("surname", sur)
+         }
+         if(userProfile!!.location != loc){
+             setDataToFirebase("location", loc)
+         }
+     }
+
+     private fun checkNicknameUnique(nick: String){
+         val ref = FirebaseDatabase.getInstance().getReference("/users")
+         ref.addListenerForSingleValueEvent(object : ValueEventListener {
+             override fun onDataChange(snapshot: DataSnapshot) {
+                 snapshot.children.forEach {
+                     val user = it.getValue(User::class.java)
+                     if (user!!.username == nick) {
+                         Log.d("SIGNUP", "This nickname is already taken!")
+                         Toast.makeText(context, getString(R.string.nick_taken), Toast.LENGTH_SHORT).show()
+                         nickname_editText_Profile.error = "Already taken"
+                         nickname_editText_Profile.requestFocus()
+                         switchEditableProfile(true)
+                         return
+                     }
+                 }
+                 setDataToFirebase("username", nick)
+             }
+             override fun onCancelled(error: DatabaseError) {}
+         })
+     }
+
+     private fun setDataToFirebase(child: String, value: String){
          val uid = FirebaseAuth.getInstance().currentUser!!.uid
-         val userClass = User(uid, nic, photoUrl, nam, sur, loc, ins, gen)
-         val ref = FirebaseDatabase.getInstance().getReference("users/$uid")
-         ref.setValue(userClass)
+         val ref = FirebaseDatabase.getInstance().getReference("users/$uid/$child")
+         ref.setValue(value)
                  .addOnSuccessListener {
-                     Log.d(tag, "User updated!")
-                     Toast.makeText(context,"User Update", Toast.LENGTH_SHORT).show()
+                     Log.d(tag, "$child updated!")
+                     Toast.makeText(context,"$child Update", Toast.LENGTH_SHORT).show()
                  }
                  .addOnFailureListener{
-                     Log.d(tag, "Updating user failure! ${it.message}")
+                     Log.d(tag, "Updating $child failure! ${it.message}")
+                     Toast.makeText(context,"Updating $child failure!", Toast.LENGTH_SHORT).show()
                  }
      }
 
