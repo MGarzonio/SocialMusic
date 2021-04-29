@@ -37,6 +37,8 @@ class UsersProfileActivity : AppCompatActivity() {
         return list
     }
 
-    fun openChat(view: View) {}
+    fun openChat(view: View) {
+
+    }
 
 }
