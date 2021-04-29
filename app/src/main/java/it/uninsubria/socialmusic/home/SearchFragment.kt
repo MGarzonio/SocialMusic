@@ -2,6 +2,7 @@ package it.uninsubria.socialmusic.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +19,9 @@ import it.uninsubria.socialmusic.R
 import it.uninsubria.socialmusic.User
 import it.uninsubria.socialmusic.chat.ChatActivity
 import kotlinx.android.synthetic.main.user_row.view.*
+import java.lang.Integer.parseInt
+import java.util.*
+import kotlin.collections.ArrayList
 
 class SearchFragment : Fragment(), View.OnClickListener{
 
@@ -25,8 +29,10 @@ class SearchFragment : Fragment(), View.OnClickListener{
     private lateinit var nameKey: EditText
     private lateinit var instrumentKey: Spinner
     private lateinit var genreKey: Spinner
-    private var selectedInstrument = ""
-    private var selectedGenre = ""
+    private lateinit var genresList: ArrayList<String>
+    private lateinit var instrumentList: ArrayList<String>
+    private var selectedInstrument = -1
+    private var selectedGenre = -1
 
     val defaultID = "6N9HD0c5WgPsakocjfluSiSI0hm2"
 
@@ -39,10 +45,10 @@ class SearchFragment : Fragment(), View.OnClickListener{
         genreKey = viewVal.findViewById(R.id.genre_Spinner_search) as Spinner
         recyclerView = viewVal.findViewById(R.id.user_recyclerView_search) as RecyclerView
 
-        var instrumentList = ArrayList(listOf(*resources.getStringArray(R.array.instruments)))
+        instrumentList = ArrayList(listOf(*resources.getStringArray(R.array.instruments)))
         instrumentList.add(0, "")
         val instrumentAdapter = ArrayAdapter(viewVal.context, R.layout.color_spinner_layout, instrumentList)
-        var genresList = ArrayList(listOf(*resources.getStringArray(R.array.genres)))
+        genresList = ArrayList(listOf(*resources.getStringArray(R.array.genres)))
         genresList.add(0, "")
         instrumentAdapter.setDropDownViewResource(R.layout.spinner_dropdown_layout)
         val genresAdapter = ArrayAdapter(viewVal.context, R.layout.color_spinner_layout, genresList)
@@ -53,20 +59,22 @@ class SearchFragment : Fragment(), View.OnClickListener{
 
         btnSearch.setOnClickListener(this)
 
-        instrumentKey?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+        instrumentKey.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
-                selectedInstrument = ""
+                selectedInstrument = -1
             }
+
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                selectedInstrument = instrumentKey.selectedItem.toString()
+                selectedInstrument = instrumentKey.selectedItemPosition - 1
             }
         }
-        genreKey?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+        genreKey.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
-                selectedGenre = ""
+                selectedGenre = -1
             }
+
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                selectedGenre = genreKey.selectedItem.toString()
+                selectedGenre = genreKey.selectedItemPosition - 1
             }
         }
         return viewVal
@@ -74,11 +82,11 @@ class SearchFragment : Fragment(), View.OnClickListener{
 
     override fun onClick(v: View) {
         when (v.id) {
-            R.id.search_button_search -> doSearch(v)
+            R.id.search_button_search -> fetchUsers(v, nameKey.text.toString().toLowerCase(Locale.ROOT))
         }
     }
 
-    private fun fetchUsers(view: View, nameKey : String) {
+    private fun fetchUsers(view: View, name : String) {
         val ref = FirebaseDatabase.getInstance().getReference("/users")
         val myUid = FirebaseAuth.getInstance().uid
         ref.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -87,7 +95,7 @@ class SearchFragment : Fragment(), View.OnClickListener{
                 snapshot.children.forEach {
                     val user = it.getValue(User::class.java)
                     if (user != null && user.uid != myUid && user.uid != defaultID) {
-                        if(viewableUser(user, nameKey)){
+                        if(viewableUser(user, name)){
                             adapter.add(UserItem(user))
                         }
                     }
@@ -108,53 +116,38 @@ class SearchFragment : Fragment(), View.OnClickListener{
     }
 
     private fun viewableUser(user: User, selectedName : String): Boolean {
-        if (selectedName == "") {
-            if (selectedInstrument == "") {
-                return if (selectedGenre == "")
-                    true
-                else
-                    inUserList(selectedGenre, user.genres)
-            } else if (inUserList(selectedInstrument, user.instruments)) {
-                return if (selectedGenre == "")
-                    true
-                else
-                    inUserList(selectedGenre, user.genres)
-            } else if (selectedName == user.name || selectedName == user.surname || selectedName == user.username) {
-                if (selectedInstrument == "") {
-                    return if (selectedGenre == "")
-                        true
-                    else
-                        inUserList(selectedGenre, user.genres)
-                } else if (inUserList(selectedGenre, user.genres)) {
-                    return if (selectedGenre == "")
-                        true
-                    else {
-                        inUserList(selectedGenre, user.genres)
-                    }
+        val genreCheck =
+                if (selectedGenre == -1) true
+                else inUserList(genresList[selectedGenre], user.genres, genresList)
+        var instrumentCheck =
+                if (selectedInstrument == -1) true
+                else inUserList(instrumentList[selectedInstrument], user.instruments, instrumentList)
+        var nameCheck =
+                if (selectedName.isEmpty()) true
+                else selectedName == user.name || selectedName == user.username || selectedName == user.surname
+        return genreCheck && instrumentCheck && nameCheck
+    }
+
+    private fun inUserList(key : String, list : String, items: ArrayList<String>) : Boolean {
+        val indexList = list.split(",")
+        if (indexList[0] == "none" || indexList.isEmpty() || indexList[0] == "") {
+            return false
+        }
+        for (i in indexList) {
+            if(i != "") {
+                if (key == items[parseInt(i)]) {
+                    return true
                 }
             }
         }
         return false
     }
 
-    private fun inUserList(key : String, list : String) : Boolean {
-        val arrayList = list.split(",")
-        for(s : String in arrayList){
-            if(s == key)
-                return true
-        }
-        return false
-    }
-
-    private fun doSearch(view: View) {
-        fetchUsers(view, nameKey.text.toString())
-    }
-
     class UserItem(val user: User) : Item<GroupieViewHolder>() {
         override fun bind(viewHolder: GroupieViewHolder, position: Int) {
             val target = viewHolder.itemView.circle_user_ImageView
             viewHolder.itemView.user_textView.text = user.username
-            val imageUrl = user?.profile_image_url
+            val imageUrl = user.profile_image_url
             if(imageUrl != "default") {
                 Picasso.get().load(imageUrl).into(target)
             }
