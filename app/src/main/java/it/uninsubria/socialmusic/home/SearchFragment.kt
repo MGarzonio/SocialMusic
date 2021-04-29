@@ -16,7 +16,9 @@ import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
 import it.uninsubria.socialmusic.R
 import it.uninsubria.socialmusic.User
+import it.uninsubria.socialmusic.UsersProfileActivity
 import it.uninsubria.socialmusic.chat.ChatActivity
+import it.uninsubria.socialmusic.chat.LatestMessageRow
 import kotlinx.android.synthetic.main.user_row.view.*
 import java.lang.Integer.parseInt
 import java.util.*
@@ -46,9 +48,10 @@ class SearchFragment : Fragment(), View.OnClickListener{
 
         instrumentList = ArrayList(listOf(*resources.getStringArray(R.array.instruments)))
         instrumentList.add(0, "")
-        val instrumentAdapter = ArrayAdapter(viewVal.context, R.layout.color_spinner_layout, instrumentList)
         genresList = ArrayList(listOf(*resources.getStringArray(R.array.genres)))
         genresList.add(0, "")
+
+        val instrumentAdapter = ArrayAdapter(viewVal.context, R.layout.color_spinner_layout, instrumentList)
         instrumentAdapter.setDropDownViewResource(R.layout.spinner_dropdown_layout)
         val genresAdapter = ArrayAdapter(viewVal.context, R.layout.color_spinner_layout, genresList)
         genresAdapter.setDropDownViewResource(R.layout.spinner_dropdown_layout)
@@ -106,6 +109,13 @@ class SearchFragment : Fragment(), View.OnClickListener{
                     startActivity(intent)
                 }
                 recyclerView.adapter = adapter
+                adapter.setOnItemClickListener { item, view ->
+                    val intent = Intent(view.context, UsersProfileActivity::class.java)
+                    val selectedUser = item as UserItem
+                    intent.putExtra("userID", selectedUser.user.uid)
+                    startActivity(intent)
+                }
+
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -143,11 +153,12 @@ class SearchFragment : Fragment(), View.OnClickListener{
     }
 
     class UserItem(val user: User) : Item<GroupieViewHolder>() {
+
         override fun bind(viewHolder: GroupieViewHolder, position: Int) {
             val target = viewHolder.itemView.circle_user_ImageView
             viewHolder.itemView.user_textView.text = user.username
             val imageUrl = user.profile_image_url
-            if(imageUrl != "default") {
+            if (imageUrl != "default") {
                 Picasso.get().load(imageUrl).into(target)
             }
         }

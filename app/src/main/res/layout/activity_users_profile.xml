@@ -71,6 +71,34 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name_editText_UsersProfile" />
 
+    <TextView
+        android:id="@+id/genres_textView_UserProfile"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center"
+        android:minHeight="35dp"
+        android:text="@string/musical_genres"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/gen_spinner_UsersProfile"
+        app:layout_constraintEnd_toStartOf="@id/gen_spinner_UsersProfile"
+        app:layout_constraintStart_toStartOf="@+id/location_editText_UsersProfile"
+        app:layout_constraintTop_toTopOf="@+id/gen_spinner_UsersProfile" />
+
+    <TextView
+        android:id="@+id/instruments_textView_UserProfile"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center"
+        android:minHeight="35dp"
+        android:text="@string/musical_instruments"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/instrument_spinner_UsersProfile"
+        app:layout_constraintEnd_toStartOf="@+id/instrument_spinner_UsersProfile"
+        app:layout_constraintStart_toStartOf="@+id/location_editText_UsersProfile"
+        app:layout_constraintTop_toTopOf="@+id/instrument_spinner_UsersProfile" />
+
     <Spinner
         android:id="@+id/instrument_spinner_UsersProfile"
         android:layout_width="0dp"
@@ -78,11 +106,13 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/rounded_edittext"
-        android:spinnerMode="dropdown"
         android:gravity="center_vertical"
+        android:paddingLeft="8dp"
+        android:spinnerMode="dropdown"
         app:layout_constraintBottom_toTopOf="@+id/gen_spinner_UsersProfile"
         app:layout_constraintEnd_toEndOf="@+id/location_editText_UsersProfile"
-        app:layout_constraintStart_toStartOf="@+id/location_editText_UsersProfile"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/genres_textView_UserProfile"
         app:layout_constraintTop_toBottomOf="@+id/location_editText_UsersProfile" />
 
     <Spinner
@@ -90,6 +120,7 @@
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginBottom="24dp"
+        android:paddingLeft="8dp"
         android:background="@drawable/rounded_edittext"
         android:spinnerMode="dropdown"
         android:gravity="center_vertical"
@@ -106,9 +137,9 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/rounded_edittext"
         android:ems="10"
+        android:enabled="false"
         android:inputType="textPersonName"
         android:paddingLeft="16dp"
-        android:enabled="false"
         android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@id/instrument_spinner_UsersProfile"
         app:layout_constraintEnd_toEndOf="parent"
@@ -123,6 +154,7 @@
         android:background="@color/white"
         android:foreground="@mipmap/icon_google_maps_foreground"
         android:foregroundGravity="center"
+        android:onClick="openMaps"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/gen_spinner_UsersProfile"
         app:layout_constraintStart_toEndOf="@+id/chat_button_UserProfile"
@@ -139,7 +171,7 @@
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="@+id/mapsButton_UsersProfile"
         app:layout_constraintEnd_toStartOf="@id/mapsButton_UsersProfile"
-        app:layout_constraintStart_toStartOf="@+id/gen_spinner_UsersProfile"
+        app:layout_constraintStart_toStartOf="@+id/genres_textView_UserProfile"
         app:layout_constraintTop_toTopOf="@+id/mapsButton_UsersProfile" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
