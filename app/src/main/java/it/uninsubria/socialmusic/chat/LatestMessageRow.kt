@@ -1,5 +1,9 @@
 package it.uninsubria.socialmusic.chat
 
+import android.content.Intent
+import android.view.View
+import android.widget.Button
+import androidx.core.content.ContextCompat.startActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -8,11 +12,12 @@ import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
+import it.uninsubria.socialmusic.PopUpWindow
 import it.uninsubria.socialmusic.R
 import it.uninsubria.socialmusic.User
 import kotlinx.android.synthetic.main.latestmessage_row.view.*
 
-class LatestMessageRow(private val chatMessage: ChatMessage): Item<GroupieViewHolder>(){
+class LatestMessageRow(private val chatMessage: ChatMessage, val view: View): Item<GroupieViewHolder>(){
 
     var chatPartnerUser: User? = null
 
@@ -43,5 +48,16 @@ class LatestMessageRow(private val chatMessage: ChatMessage): Item<GroupieViewHo
 
     override fun getLayout(): Int {
         return R.layout.latestmessage_row
+    }
+
+    private fun showImagePopup(image: Button){
+        image.setOnClickListener {
+            val intent = Intent(view.context, PopUpWindow::class.java)
+            intent.putExtra("popuptitle", "Error")
+            intent.putExtra("popuptext", "Sorry, that email address is already used!")
+            intent.putExtra("popupbtn", "OK")
+            intent.putExtra("darkstatusbar", false)
+            //startActivity(intent)
+        }
     }
 }
