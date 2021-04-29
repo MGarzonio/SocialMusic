@@ -28,7 +28,7 @@ class ChatActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
         chat_recyclerView.adapter = adapter
-        toUser = intent.getParcelableExtra<User>(USER_KEY)
+        toUser = intent.getParcelableExtra(USER_KEY)
         supportActionBar?.title = toUser?.username
         fetchCurrentUser()
         listenForMessages()
