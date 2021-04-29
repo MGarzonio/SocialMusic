@@ -2,7 +2,6 @@ package it.uninsubria.socialmusic.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -119,12 +118,12 @@ class SearchFragment : Fragment(), View.OnClickListener{
         val genreCheck =
                 if (selectedGenre == -1) true
                 else inUserList(genresList[selectedGenre], user.genres, genresList)
-        var instrumentCheck =
+        val instrumentCheck =
                 if (selectedInstrument == -1) true
                 else inUserList(instrumentList[selectedInstrument], user.instruments, instrumentList)
-        var nameCheck =
+        val nameCheck =
                 if (selectedName.isEmpty()) true
-                else selectedName == user.name || selectedName == user.username || selectedName == user.surname
+                else selectedName == user.name.toLowerCase(Locale.ROOT) || selectedName == user.username.toLowerCase(Locale.ROOT) || selectedName == user.surname.toLowerCase(Locale.ROOT)
         return genreCheck && instrumentCheck && nameCheck
     }
 
