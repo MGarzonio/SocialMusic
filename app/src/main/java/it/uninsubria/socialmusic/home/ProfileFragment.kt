@@ -54,7 +54,7 @@ import java.util.*
          surname = view.findViewById(R.id.surname_editText_Profile) as EditText
          city = view.findViewById(R.id.location_editText_Profile) as EditText
          btnMail = view.findViewById(R.id.email_button_Profile) as Button
-         btnPassword = view.findViewById(R.id.password_button_profile) as Button
+         btnPassword = view.findViewById(R.id.password_button_Profile) as Button
          btnEditProfile = view.findViewById(R.id.buttonEdit_Profile) as Button
          btnPhoto = view.findViewById(R.id.selectPhoto_button_Profile) as Button
          profilePhoto = view.findViewById(R.id.profilePhoto_imageView_Profile) as de.hdodenhof.circleimageview.CircleImageView
@@ -87,7 +87,7 @@ import java.util.*
              R.id.gen_button_Profile -> openGenres(view)
              R.id.selectPhoto_button_Profile -> loadImageFromGallery(view)
              R.id.email_button_Profile -> editEmail()
-             R.id.password_button_profile -> editPassword()
+             R.id.password_button_Profile -> editPassword()
              R.id.deleteImage_button_profile -> deletePhoto()
          }
      }

@@ -122,7 +122,7 @@
         app:layout_constraintBottom_toBottomOf="@id/instrument_button_Profile"/>
 
     <android.widget.Button
-        android:id="@+id/password_button_profile"
+        android:id="@+id/password_button_Profile"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginStart="8dp"
@@ -147,7 +147,7 @@
         android:textColor="#0000FF"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/buttonLogout_Profile"
-        app:layout_constraintEnd_toStartOf="@id/password_button_profile"
+        app:layout_constraintEnd_toStartOf="@id/password_button_Profile"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="@+id/instrument_button_Profile"
         app:layout_constraintTop_toBottomOf="@+id/instrument_button_Profile" />
@@ -183,7 +183,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/mapsButton_Profile"
         app:layout_constraintStart_toEndOf="@id/buttonLogout_Profile"
-        app:layout_constraintTop_toBottomOf="@+id/password_button_profile" />
+        app:layout_constraintTop_toBottomOf="@+id/password_button_Profile" />
 
 
     <android.widget.Button

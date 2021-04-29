@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:padding="24dp"
+    tools:context=".home.ProfileFragment">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profilePhoto_imageView_UsersProfile"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@mipmap/default_profile"
+        app:civ_border_color="@android:color/holo_blue_dark"
+        app:civ_border_width="5dp"
+        app:layout_constraintDimensionRatio="H,1:1"
+        app:layout_constraintBottom_toTopOf="@+id/nickname_editText_UsersProfile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/nickname_editText_UsersProfile"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/rounded_edittext"
+        android:ems="10"
+        android:enabled="false"
+        android:inputType="textPersonName"
+        android:paddingLeft="16dp"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@id/name_editText_UsersProfile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profilePhoto_imageView_UsersProfile" />
+
+
+    <EditText
+        android:id="@+id/name_editText_UsersProfile"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/rounded_edittext"
+        android:ems="10"
+        android:enabled="false"
+        android:inputType="textPersonName"
+        android:paddingLeft="16dp"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@id/surname_editText_UsersProfile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nickname_editText_UsersProfile" />
+
+    <EditText
+        android:id="@+id/surname_editText_UsersProfile"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/rounded_edittext"
+        android:ems="10"
+        android:enabled="false"
+        android:inputType="textPersonName"
+        android:paddingLeft="16dp"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/location_editText_UsersProfile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name_editText_UsersProfile" />
+
+    <Spinner
+        android:id="@+id/instrument_spinner_UsersProfile"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/rounded_edittext"
+        android:spinnerMode="dropdown"
+        android:gravity="center_vertical"
+        app:layout_constraintBottom_toTopOf="@+id/gen_spinner_UsersProfile"
+        app:layout_constraintEnd_toEndOf="@+id/location_editText_UsersProfile"
+        app:layout_constraintStart_toStartOf="@+id/location_editText_UsersProfile"
+        app:layout_constraintTop_toBottomOf="@+id/location_editText_UsersProfile" />
+
+    <Spinner
+        android:id="@+id/gen_spinner_UsersProfile"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/rounded_edittext"
+        android:spinnerMode="dropdown"
+        android:gravity="center_vertical"
+        app:layout_constraintBottom_toTopOf="@+id/mapsButton_UsersProfile"
+        app:layout_constraintEnd_toEndOf="@+id/instrument_spinner_UsersProfile"
+        app:layout_constraintStart_toStartOf="@+id/instrument_spinner_UsersProfile"
+        app:layout_constraintTop_toBottomOf="@id/instrument_spinner_UsersProfile" />
+
+
+    <EditText
+        android:id="@+id/location_editText_UsersProfile"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/rounded_edittext"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:paddingLeft="16dp"
+        android:enabled="false"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@id/instrument_spinner_UsersProfile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/surname_editText_UsersProfile" />
+
+
+    <android.widget.Button
+        android:id="@+id/mapsButton_UsersProfile"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        android:foreground="@mipmap/icon_google_maps_foreground"
+        android:foregroundGravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/gen_spinner_UsersProfile"
+        app:layout_constraintStart_toEndOf="@+id/chat_button_UserProfile"
+        app:layout_constraintTop_toBottomOf="@id/gen_spinner_UsersProfile" />
+
+    <android.widget.Button
+        android:id="@+id/chat_button_UserProfile"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/rounded_button"
+        android:onClick="openChat"
+        android:text="@string/chat"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/mapsButton_UsersProfile"
+        app:layout_constraintEnd_toStartOf="@id/mapsButton_UsersProfile"
+        app:layout_constraintStart_toStartOf="@+id/gen_spinner_UsersProfile"
+        app:layout_constraintTop_toTopOf="@+id/mapsButton_UsersProfile" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
