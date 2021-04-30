@@ -143,7 +143,6 @@ class SignUpActivity : AppCompatActivity() {
         fireRef.putFile(selectedPhotoUri!!)
             .addOnSuccessListener {
                 Log.d(tag, "Successfully update on Firebase Storage image: ${it.metadata?.path}")
-                Toast.makeText(this, getString(R.string.update_success), Toast.LENGTH_SHORT).show()
                 fireRef.downloadUrl.addOnSuccessListener { url ->
                     Log.d(tag, "File location: $url")
                     saveUserToFirebaseDB(url.toString())
@@ -162,7 +161,7 @@ class SignUpActivity : AppCompatActivity() {
             .addOnSuccessListener {
                 Log.d(tag, "User updated!")
                 sendEmail()
-                Toast.makeText(this, "Email sent!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.sing_in_done), Toast.LENGTH_SHORT).show()
                 val intent = Intent(this, LoginActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
