@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
@@ -47,7 +46,7 @@ class ChatFragment : Fragment() {
     private fun refreshRView(view: View){
         adapter.clear()
         messagesMap.values.forEach{
-            adapter.add(LatestMessageRow(it, view))
+            adapter.add(LatestMessageRow(it))
         }
     }
 
