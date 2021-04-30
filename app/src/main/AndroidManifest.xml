@@ -10,17 +10,13 @@
         android:roundIcon="@mipmap/icon_social_music_app_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SocialMusic">
-        <activity
-            android:name=".UsersProfileActivity" />
-        <activity
-            android:name=".PopUpWindow" />
-        <activity
-            android:name=".ChangeEmail" />
+        <activity android:name=".UsersProfileActivity" />
+        <activity android:name=".PopupUpdate"
+            android:theme="@style/AppTheme.PopUpWindowTheme"/>
 
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />

@@ -23,7 +23,6 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
 import it.uninsubria.socialmusic.*
-import kotlinx.android.synthetic.main.activity_sign_up.*
 import kotlinx.android.synthetic.main.fragment_profile.*
 import java.util.*
 
@@ -87,8 +86,8 @@ import java.util.*
              R.id.instrument_button_Profile -> openInstruments(view)
              R.id.gen_button_Profile -> openGenres(view)
              R.id.selectPhoto_button_Profile -> loadImageFromGallery(view)
-             R.id.email_button_Profile -> editEmail()
-             R.id.password_button_Profile -> editPassword()
+             R.id.email_button_Profile -> editEmail(view)
+             R.id.password_button_Profile -> editPassword(view)
              R.id.deleteImage_button_profile -> deletePhoto()
          }
      }
@@ -270,13 +269,21 @@ import java.util.*
          startActivity(intent)
      }
 
-     private fun editEmail() {
-         val intent = Intent(activity, ChangeEmail::class.java)
+     private fun editEmail(view: View) {
+         val intent = Intent(view.context, PopupUpdate::class.java)
+         intent.putExtra("type", "email")
+         intent.putExtra("popuptext", getString(R.string.change_email_message))
+         intent.putExtra("popupbtn", getString(R.string.send))
+         intent.putExtra("darkstatusbar", false)
          startActivity(intent)
      }
 
-     private fun editPassword(){
-         val intent = Intent(activity, ResetPswActivity::class.java)
+     private fun editPassword(view: View){
+         val intent = Intent(view.context, PopupUpdate::class.java)
+         intent.putExtra("type", "psw")
+         intent.putExtra("popuptext", getString(R.string.forgot_psw_message))
+         intent.putExtra("popupbtn", getString(R.string.submit))
+         intent.putExtra("darkstatusbar", false)
          startActivity(intent)
      }
 

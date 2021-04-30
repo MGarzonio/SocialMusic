@@ -5,7 +5,7 @@
     <string name="sing_up">SIGN UP</string>
     <string name="forgot_password">Forgot password</string>
     <string name="logo">logo</string>
-    <string name="forgot_message">Please enter your e-mail address.You\'ll be redirected to another page to chose a new password.</string>
+    <string name="forgot_psw_message">Please enter your e-mail address.A link to change your password will be send to your inbox.</string>
     <string name="submit">Submit</string>
     <string name="profile_picture">Profile picture</string>
     <string name="username" translatable="false">Nickname</string>

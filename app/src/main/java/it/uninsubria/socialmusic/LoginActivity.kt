@@ -66,7 +66,11 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun openForgot() {
-        val intent = Intent(this, ResetPswActivity::class.java)
+        val intent = Intent(this, PopupUpdate::class.java)
+        intent.putExtra("type", "psw")
+        intent.putExtra("popuptext", getString(R.string.forgot_psw_message))
+        intent.putExtra("popupbtn", getString(R.string.submit))
+        intent.putExtra("darkstatusbar", false)
         startActivity(intent)
     }
 }
