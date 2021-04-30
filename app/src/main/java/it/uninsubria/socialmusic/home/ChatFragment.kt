@@ -28,7 +28,7 @@ class ChatFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val viewVal = inflater.inflate(R.layout.fragment_chat, container, false) as View
         val recyclerView = viewVal.findViewById<RecyclerView>(R.id.latestMessage_recyclerView)
-        listenForLatestMessages()
+        listenForLatestMessages(viewVal)
         recyclerView.adapter = adapter
         recyclerView.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
         adapter.setOnItemClickListener { item, view ->
@@ -43,25 +43,25 @@ class ChatFragment : Fragment() {
         return viewVal
     }
 
-    private fun refreshRView(){
+    private fun refreshRView(view: View){
         adapter.clear()
         messagesMap.values.forEach{
-            adapter.add(LatestMessageRow(it))
+            adapter.add(LatestMessageRow(it, view))
         }
     }
 
-    private fun listenForLatestMessages(){
+    private fun listenForLatestMessages(view: View){
         val ref = FirebaseDatabase.getInstance().getReference("/latest-message/$fromID")
         ref.addChildEventListener(object: ChildEventListener{
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                 val chatMessage = snapshot.getValue(ChatMessage::class.java) ?: return //elvis operator '?: return' instead of '!!'
                 messagesMap[snapshot.key!!] = chatMessage
-                    refreshRView()
+                    refreshRView(view)
             }
             override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
                 val chatMessage = snapshot.getValue(ChatMessage::class.java) ?: return
                 messagesMap[snapshot.key!!] = chatMessage
-                refreshRView()
+                refreshRView(view)
             }
             //Not used, but needed
             override fun onChildRemoved(snapshot: DataSnapshot) {

@@ -32,6 +32,7 @@ class SearchFragment : Fragment(), View.OnClickListener{
     private lateinit var genreKey: Spinner
     private lateinit var genresList: ArrayList<String>
     private lateinit var instrumentList: ArrayList<String>
+    private var viewAll = true
     private var selectedInstrument = -1
     private var selectedGenre = -1
 
@@ -79,18 +80,25 @@ class SearchFragment : Fragment(), View.OnClickListener{
                 selectedGenre = genreKey.selectedItemPosition - 1
             }
         }
+
+        fetchUsers(viewVal)
+
         return viewVal
     }
 
     override fun onClick(v: View) {
         when (v.id) {
-            R.id.search_button_search -> fetchUsers(v, nameKey.text.toString().toLowerCase(Locale.ROOT))
+            R.id.search_button_search -> {
+                fetchUsers(v)
+                viewAll = false
+            }
         }
     }
 
-    private fun fetchUsers(view: View, name : String) {
+    private fun fetchUsers(view: View) {
         val ref = FirebaseDatabase.getInstance().getReference("/users")
         val myUid = FirebaseAuth.getInstance().uid
+        val name = nameKey.text.toString().toLowerCase(Locale.ROOT)
         ref.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val adapter = GroupAdapter<GroupieViewHolder>()
@@ -113,6 +121,7 @@ class SearchFragment : Fragment(), View.OnClickListener{
                     val intent = Intent(view.context, UsersProfileActivity::class.java)
                     val selectedUser = item as UserItem
                     intent.putExtra("userID", selectedUser.user.uid)
+                    viewAll = true
                     startActivity(intent)
                 }
 
