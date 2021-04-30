@@ -83,8 +83,12 @@ class UsersProfileActivity : AppCompatActivity() {
         val genresList = ArrayList(listOf(*resources.getStringArray(R.array.genres)))
         var arrayList = ArrayList<String>()
         for (index in list)
-            if (index.isNotEmpty())
-                arrayList.add(genresList[parseInt(index)])
+            if (index.isNotEmpty()) {
+                if (index != "none")
+                    arrayList.add(genresList[parseInt(index)])
+                else
+                    arrayList.add(resources.getString(R.string.none))
+            }
         return arrayList
     }
 
@@ -93,8 +97,12 @@ class UsersProfileActivity : AppCompatActivity() {
         val instrumentList = ArrayList(listOf(*resources.getStringArray(R.array.instruments)))
         var arrayList = ArrayList<String>()
         for (index in list)
-            if (index.isNotEmpty())
-                arrayList.add(instrumentList[parseInt(index)])
+            if (index.isNotEmpty()) {
+                if (index != "none")
+                    arrayList.add(instrumentList[parseInt(index)])
+                else
+                    arrayList.add(resources.getString(R.string.none))
+            }
         return arrayList
     }
 
