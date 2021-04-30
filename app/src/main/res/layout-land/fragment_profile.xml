@@ -14,10 +14,11 @@
         android:layout_height="0dp"
         android:background="@drawable/rounded_selectphoto_button"
         android:text="@string/select_photo"
+        android:layout_marginRight="12dp"
         android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@id/buttonEdit_Profile"
         app:layout_constraintDimensionRatio="H,1:1"
-        app:layout_constraintBottom_toTopOf="@+id/nickname_editText_Profile"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/nickname_editText_Profile"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -52,16 +53,16 @@
         android:id="@+id/nickname_editText_Profile"
         android:layout_width="0dp"
         android:layout_height="40dp"
-        android:layout_marginTop="16dp"
         android:background="@drawable/rounded_edittext"
         android:ems="10"
+        android:layout_marginLeft="12dp"
         android:inputType="textPersonName"
         android:paddingLeft="16dp"
         android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@id/name_editText_Profile"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/selectPhoto_button_Profile" />
+        app:layout_constraintStart_toStartOf="@+id/guideline_Profile"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <EditText
@@ -142,12 +143,12 @@
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginTop="24dp"
-        android:gravity="center"
         android:background="@drawable/rounded_button"
+        android:gravity="center"
         android:text="@string/edit_email"
         android:textColor="#0000FF"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/buttonEdit_Profile"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/password_button_Profile"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="@+id/instrument_button_Profile"
@@ -173,7 +174,6 @@
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:background="@color/white"
         android:paddingTop="3dp"
@@ -185,7 +185,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/mapsButton_Profile"
         app:layout_constraintStart_toEndOf="@id/buttonLogout_Profile"
-        app:layout_constraintTop_toBottomOf="@+id/password_button_Profile" />
+        app:layout_constraintTop_toBottomOf="@+id/selectPhoto_button_Profile" />
 
 
     <android.widget.Button
@@ -201,7 +201,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/buttonEdit_Profile"
         app:layout_constraintEnd_toStartOf="@id/buttonEdit_Profile"
-        app:layout_constraintStart_toStartOf="@+id/email_button_Profile"
+        app:layout_constraintStart_toStartOf="@+id/selectPhoto_button_Profile"
         app:layout_constraintTop_toTopOf="@+id/buttonEdit_Profile" />
 
     <android.widget.Button
@@ -212,8 +212,15 @@
         android:foreground="@mipmap/icon_google_maps_foreground"
         android:foregroundGravity="center"
         app:layout_constraintBottom_toBottomOf="@+id/buttonEdit_Profile"
-        app:layout_constraintEnd_toEndOf="@+id/password_button_Profile"
+        app:layout_constraintEnd_toEndOf="@+id/selectPhoto_button_Profile"
         app:layout_constraintStart_toEndOf="@+id/buttonEdit_Profile"
         app:layout_constraintTop_toTopOf="@+id/buttonEdit_Profile" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_Profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
