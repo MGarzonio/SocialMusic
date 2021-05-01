@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SocialMusic">
         <activity android:name=".UsersProfileActivity" />
-        <activity android:name=".PopupUpdate"
+        <activity android:name=".PopupActivity"
             android:theme="@style/AppTheme.PopUpWindowTheme"/>
 
         <meta-data

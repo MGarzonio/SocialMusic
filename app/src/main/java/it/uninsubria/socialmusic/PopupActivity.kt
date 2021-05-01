@@ -19,9 +19,9 @@ import androidx.core.graphics.ColorUtils
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import kotlinx.android.synthetic.main.activity_popup_update.*
+import kotlinx.android.synthetic.main.activity_popup.*
 
-class PopupUpdate : AppCompatActivity() {
+class PopupActivity : AppCompatActivity() {
     val oldEmail = Firebase.auth.currentUser!!.email
     private var popupText = ""
     private var popupButton = ""
@@ -32,7 +32,7 @@ class PopupUpdate : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         overridePendingTransition(0, 0)
-        setContentView(R.layout.activity_popup_update)
+        setContentView(R.layout.activity_popup)
         showPopUp()
     }
 

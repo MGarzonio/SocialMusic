@@ -270,7 +270,7 @@ import java.util.*
      }
 
      private fun editEmail(view: View) {
-         val intent = Intent(view.context, PopupUpdate::class.java)
+         val intent = Intent(view.context, PopupActivity::class.java)
          intent.putExtra("type", "email")
          intent.putExtra("popuptext", getString(R.string.change_email_message))
          intent.putExtra("popupbtn", getString(R.string.send))
@@ -279,7 +279,7 @@ import java.util.*
      }
 
      private fun editPassword(view: View){
-         val intent = Intent(view.context, PopupUpdate::class.java)
+         val intent = Intent(view.context, PopupActivity::class.java)
          intent.putExtra("type", "psw")
          intent.putExtra("popuptext", getString(R.string.forgot_psw_message))
          intent.putExtra("popupbtn", getString(R.string.submit))
