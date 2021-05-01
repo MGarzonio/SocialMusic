@@ -39,7 +39,7 @@ class LoginActivity : AppCompatActivity() {
         FirebaseAuth.getInstance().signInWithEmailAndPassword(email, psw)
             .addOnCompleteListener {
                 if(!it.isSuccessful) return@addOnCompleteListener
-                if(!it.result!!.user.isEmailVerified){
+                if(!it.result!!.user!!.isEmailVerified){
                     Toast.makeText(this,getString(R.string.verify_mail_address), Toast.LENGTH_LONG).show()
                     return@addOnCompleteListener
                 }

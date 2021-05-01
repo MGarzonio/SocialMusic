@@ -2,11 +2,11 @@ package it.uninsubria.socialmusic.home
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
@@ -18,7 +18,6 @@ import it.uninsubria.socialmusic.R
 import it.uninsubria.socialmusic.User
 import it.uninsubria.socialmusic.UsersProfileActivity
 import it.uninsubria.socialmusic.chat.ChatActivity
-import it.uninsubria.socialmusic.chat.LatestMessageRow
 import kotlinx.android.synthetic.main.user_row.view.*
 import java.lang.Integer.parseInt
 import java.util.*
@@ -35,8 +34,6 @@ class SearchFragment : Fragment(), View.OnClickListener{
     private var viewAll = true
     private var selectedInstrument = -1
     private var selectedGenre = -1
-
-    val defaultID = "6N9HD0c5WgPsakocjfluSiSI0hm2"
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -104,8 +101,8 @@ class SearchFragment : Fragment(), View.OnClickListener{
                 val adapter = GroupAdapter<GroupieViewHolder>()
                 snapshot.children.forEach {
                     val user = it.getValue(User::class.java)
-                    if (user != null && user.uid != myUid && user.uid != defaultID) {
-                        if(viewableUser(user, name)){
+                    if (user != null && user.uid != myUid) {
+                        if (viewableUser(user, name)) {
                             adapter.add(UserItem(user))
                         }
                     }
@@ -133,7 +130,7 @@ class SearchFragment : Fragment(), View.OnClickListener{
         })
     }
 
-    private fun viewableUser(user: User, selectedName : String): Boolean {
+    private fun viewableUser(user: User, selectedName: String): Boolean {
         val genreCheck =
                 if (selectedGenre == -1) true
                 else inUserList(genresList[selectedGenre], user.genres, genresList)
@@ -146,7 +143,7 @@ class SearchFragment : Fragment(), View.OnClickListener{
         return genreCheck && instrumentCheck && nameCheck
     }
 
-    private fun inUserList(key : String, list : String, items: ArrayList<String>) : Boolean {
+    private fun inUserList(key: String, list: String, items: ArrayList<String>) : Boolean {
         val indexList = list.split(",")
         if (indexList[0] == "none" || indexList.isEmpty() || indexList[0] == "") {
             return false
