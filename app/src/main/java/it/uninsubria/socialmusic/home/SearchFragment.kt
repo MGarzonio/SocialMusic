@@ -101,7 +101,7 @@ class SearchFragment : Fragment(), View.OnClickListener{
                 val adapter = GroupAdapter<GroupieViewHolder>()
                 snapshot.children.forEach {
                     val user = it.getValue(User::class.java)
-                    if (user != null && user.uid != myUid) {
+                    if (user != null && user.uid != myUid && user.verified == "yes") {
                         if (viewableUser(user, name)) {
                             adapter.add(UserItem(user))
                         }

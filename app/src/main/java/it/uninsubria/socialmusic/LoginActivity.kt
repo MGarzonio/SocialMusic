@@ -6,6 +6,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import it.uninsubria.socialmusic.home.HomeActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_sign_up.*
@@ -43,6 +44,13 @@ class LoginActivity : AppCompatActivity() {
                     Toast.makeText(this,getString(R.string.verify_mail_address), Toast.LENGTH_LONG).show()
                     return@addOnCompleteListener
                 }
+                val uid = FirebaseAuth.getInstance().currentUser!!.uid
+                val ref = FirebaseDatabase.getInstance().getReference("users/$uid/verified")
+                ref.setValue("yes")
+                        .addOnSuccessListener {
+                            Log.d("email", "Email address verified")
+                            Toast.makeText(this,"Email address verified", Toast.LENGTH_SHORT).show()
+                        }
                 val intent = Intent(this, HomeActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)

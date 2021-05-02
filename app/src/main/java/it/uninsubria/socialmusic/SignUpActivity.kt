@@ -32,6 +32,7 @@ class SignUpActivity : AppCompatActivity() {
     private var location = ""
     private val instruments = "none"
     private val genres = "none"
+    private val verified = "no"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -156,7 +157,7 @@ class SignUpActivity : AppCompatActivity() {
     private fun saveUserToFirebaseDB(fireImageUrl: String) {
         val uid = FirebaseAuth.getInstance().uid ?: ""
         val fireRef = FirebaseDatabase.getInstance().getReference("/users/$uid")
-        val user = User(uid, nick, fireImageUrl, name, surname, location, instruments, genres)
+        val user = User(uid, nick, fireImageUrl, name, surname, location, instruments, genres, verified)
         fireRef.setValue(user)
             .addOnSuccessListener {
                 Log.d(tag, "User updated!")
