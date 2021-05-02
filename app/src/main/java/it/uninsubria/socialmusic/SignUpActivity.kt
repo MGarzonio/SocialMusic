@@ -1,13 +1,16 @@
 package it.uninsubria.socialmusic
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.location.Geocoder
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
@@ -102,6 +105,20 @@ class SignUpActivity : AppCompatActivity() {
         })
     }
 
+    private fun getPosition(context: Context, city : String): LatLng? {
+        val addressList = Geocoder(context, Locale.getDefault()).getFromLocationName(city, 1)
+        var latitude : Double = -1.0
+        var longitude : Double = -1.0
+        if (addressList != null && addressList.size > 0) {
+            val address = addressList[0]
+            longitude = address.longitude
+            latitude = address.latitude
+        }
+        if(latitude != -1.0 && longitude != -1.0)
+            return LatLng(latitude, longitude)
+        return null
+    }
+
     private fun performRegistration(){
         email = email_editText_signUp.text.toString()
         psw = password_editText_signUp.text.toString()
@@ -113,6 +130,11 @@ class SignUpActivity : AppCompatActivity() {
             Toast.makeText(this, getString(R.string.fill_all_the_fields), Toast.LENGTH_SHORT).show()
             return
         }
+        if(getPosition(this, location) == null){
+            Toast.makeText(this, getString(R.string.location_error), Toast.LENGTH_SHORT).show()
+            return
+        }
+
         //Firebase authentication
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, psw)
             .addOnCompleteListener {

@@ -81,4 +81,5 @@
     <string name="nick_taken">Nickname giù in uso da un altro utente!</string>
     <string name="changes_saved">Modifiche salvate</string>
     <string name="delete_alert_message">Sei sicuro di voler cancellare il tuo account? Questa operazione non può essere annullata!</string>
+    <string name="location_error">"Errore di localizzazione, controlla l'indirizzo inserito "</string>
 </resources>

@@ -87,5 +87,6 @@
     <string name="nick_taken">This nickname is already taken!</string>
     <string name="changes_saved">Changes saved</string>
     <string name="delete_alert_message">Are you sure you want delete your account? This operation cannot be undone!</string>
+    <string name="location_error">Localization error, please check the address entered</string>
 
 </resources>

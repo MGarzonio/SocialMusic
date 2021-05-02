@@ -180,7 +180,7 @@ import java.util.*
          val sur = surname.text.toString()
          val loc = city.text.toString()
          if(userProfile!!.profile_image_url != photoUrl){
-             setDataToFirebase("profile_photo_url", photoUrl)
+             setDataToFirebase("profile_image_url", photoUrl)
          }
          if(userProfile!!.username != nic){
              checkNicknameUnique(nic)
