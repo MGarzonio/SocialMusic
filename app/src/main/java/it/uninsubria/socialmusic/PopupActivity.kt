@@ -22,7 +22,6 @@ import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_popup.*
 
 class PopupActivity : AppCompatActivity() {
-    val oldEmail = Firebase.auth.currentUser!!.email
     private var popupText = ""
     private var popupButton = ""
     private var darkStatusBar = false
@@ -158,8 +157,10 @@ class PopupActivity : AppCompatActivity() {
         // Close the Popup Window when you press the button
         confirm_button_change.setOnClickListener{
             when(type){
-                "email" ->
+                "email" -> {
+                    val oldEmail = Firebase.auth.currentUser!!.email!!
                     updateEmail(oldEmail)
+                }
                 "psw" ->
                     openReset()
             }
