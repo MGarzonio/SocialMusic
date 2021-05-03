@@ -1,7 +1,9 @@
 package it.uninsubria.socialmusic
 
 import android.content.Intent
+import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -15,6 +17,7 @@ import kotlinx.android.synthetic.main.home_post_row.view.*
 
 class PostRow (private val post: HomePost): Item<GroupieViewHolder>(){
     var postFromUser: User? = null
+    val currentUserID = FirebaseAuth.getInstance().currentUser!!.uid
 
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         val v = viewHolder.itemView
@@ -22,11 +25,6 @@ class PostRow (private val post: HomePost): Item<GroupieViewHolder>(){
         v.post_textView_post.text = post.text
         v.like_textView_post.text = post.like.toString()
         v.notLike_textView_post.text = post.unlike.toString()
-        v.chat_button_post.setOnClickListener {
-            val intent = Intent(it.context, ChatActivity::class.java)
-            intent.putExtra(ChatFragment.USER_KEY, postFromUser)
-            startActivity(it.context, intent,null)
-        }
 
         val refUser = FirebaseDatabase.getInstance().getReference("/users/${post.fromID}")
         refUser.addListenerForSingleValueEvent(object: ValueEventListener {
@@ -42,6 +40,16 @@ class PostRow (private val post: HomePost): Item<GroupieViewHolder>(){
             override fun onCancelled(error: DatabaseError) {
             }
         })
+        v.chat_button_post.setOnClickListener {
+            if(currentUserID != postFromUser!!.uid){
+                val intent = Intent(it.context, ChatActivity::class.java)
+                intent.putExtra(ChatFragment.USER_KEY, postFromUser)
+                startActivity(it.context, intent,null)
+            } else {
+                Toast.makeText(it.context, it.context.getString(R.string.post_yours), Toast.LENGTH_SHORT).show()
+            }
+
+        }
     }
 
     override fun getLayout(): Int {
