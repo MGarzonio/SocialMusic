@@ -37,7 +37,7 @@ class ChatFragment : Fragment() {
             intent.putExtra(USER_KEY, row.chatPartnerUser)
             startActivity(intent)
         }
-        if (adapter.itemCount == 0) {
+        if (adapter == null) {
             Toast.makeText(viewVal.context, getString(R.string.no_messages), Toast.LENGTH_SHORT).show()
         }
         return viewVal
