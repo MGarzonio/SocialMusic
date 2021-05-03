@@ -45,9 +45,9 @@ class SearchFragment : Fragment(), View.OnClickListener{
         recyclerView = viewVal.findViewById(R.id.user_recyclerView_search) as RecyclerView
 
         instrumentList = ArrayList(listOf(*resources.getStringArray(R.array.instruments)))
-        instrumentList.add(0, "")
+        instrumentList.add(0, resources.getString(R.string.all))
         genresList = ArrayList(listOf(*resources.getStringArray(R.array.genres)))
-        genresList.add(0, "")
+        genresList.add(0, resources.getString(R.string.all))
 
         val instrumentAdapter = ArrayAdapter(viewVal.context, R.layout.color_spinner_layout, instrumentList)
         instrumentAdapter.setDropDownViewResource(R.layout.spinner_dropdown_layout)
