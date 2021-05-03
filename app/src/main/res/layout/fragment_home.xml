@@ -1,25 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".home.HomeFragment"
     android:background="@color/white"
-    android:padding="16dp">
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp"
+    tools:context=".home.HomeFragment">
 
-   <androidx.recyclerview.widget.RecyclerView
-       android:id="@+id/recyclerView_home"
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       android:scrollbars="vertical"
-       android:background="@color/white"
-       app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-       app:layout_constraintBottom_toBottomOf="parent"
-       app:layout_constraintEnd_toEndOf="parent"
-       app:layout_constraintStart_toStartOf="parent"
-       app:layout_constraintTop_toTopOf="parent" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView_home"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/white"
+        android:scrollbars="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@+id/add_button_home"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <android.widget.Button
         android:id="@+id/add_button_home"
@@ -33,4 +35,32 @@
         app:layout_constraintDimensionRatio="1"
         app:layout_constraintEnd_toEndOf="parent" />
 
-</FrameLayout>
+    <EditText
+        android:id="@+id/message_editText_home"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_edittext"
+        android:ems="10"
+        android:hint="@string/what_s_on_your_mind"
+        android:inputType="textPersonName"
+        android:minHeight="50dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/gray_hint"
+        app:layout_constraintBottom_toBottomOf="@+id/add_button_home"
+        app:layout_constraintEnd_toStartOf="@+id/add_button_home"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/add_button_home" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="?android:attr/listDivider"
+        android:backgroundTint="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/recyclerView_home"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

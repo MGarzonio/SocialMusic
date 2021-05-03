@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.Toast
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.ChildEventListener
@@ -23,34 +23,46 @@ import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() {
     private val adapter = GroupAdapter<GroupieViewHolder>()
-    val userID = FirebaseAuth.getInstance().currentUser.uid
+    val userID = FirebaseAuth.getInstance().currentUser!!.uid
+    val postsMap = HashMap<String, HomePost>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val viewVal = inflater.inflate(R.layout.fragment_home, container, false) as View
         val recyclerView = viewVal.findViewById<RecyclerView>(R.id.recyclerView_home)
         listenForPosts(viewVal)
         recyclerView.adapter = adapter
-        recyclerView.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
         if (adapter == null) {
             Toast.makeText(viewVal.context, getString(R.string.no_messages), Toast.LENGTH_SHORT).show()
         }
         val addButton = viewVal.findViewById<Button>(R.id.add_button_home)
+        val text = viewVal.findViewById<EditText>(R.id.message_editText_home)
         addButton.setOnClickListener {
-            createPost()
+            if(text.text.isNotEmpty()) {
+                createPost(viewVal)
+                text.text.clear()
+            }
         }
         return viewVal
     }
+    private fun refreshList(){
+        adapter.clear()
+        postsMap.values.forEach{
+            adapter.add(PostRow(it))
+        }
 
+    }
     private fun listenForPosts(view: View){
         val ref = FirebaseDatabase.getInstance().getReference("/posts")
         ref.addChildEventListener(object: ChildEventListener {
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                 val post = snapshot.getValue(HomePost::class.java) ?: return
-                adapter.add(PostRow(post))
+                postsMap[snapshot.key!!] = post
+                refreshList()
             }
             override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
                 val post = snapshot.getValue(HomePost::class.java) ?: return
-                adapter.add(PostRow(post))
+                postsMap[snapshot.key!!] = post
+                refreshList()
 
             }
             override fun onChildRemoved(snapshot: DataSnapshot) {}
@@ -58,12 +70,13 @@ class HomeFragment : Fragment() {
             override fun onCancelled(error: DatabaseError) {}
         })
     }
-    private fun createPost(){
+    private fun createPost(view: View){
         val ref = FirebaseDatabase.getInstance().getReference("/posts").push()
-        val post = HomePost(ref.key!!,"ciao a tutti", userID, System.currentTimeMillis()/1000, 1, 5)
+        val message = view.findViewById<EditText>(R.id.message_editText_home).text.toString()
+        val post = HomePost(ref.key!!, message, userID, System.currentTimeMillis()/1000, 0, 0)
         ref.setValue(post)
                 .addOnSuccessListener {
-                    recyclerView_home.scrollToPosition(adapter.itemCount -1)
+                    recyclerView_home!!.scrollToPosition(adapter.itemCount -1)
                 }
 
     }

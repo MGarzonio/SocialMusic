@@ -1,6 +1,8 @@
 package it.uninsubria.socialmusic
 
 import android.content.Intent
+import android.view.View
+import android.widget.Button
 import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -20,6 +22,14 @@ class PostRow (private val post: HomePost): Item<GroupieViewHolder>(){
     val currentUserID = FirebaseAuth.getInstance().currentUser!!.uid
 
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
+        val delButton = viewHolder.itemView.findViewById<Button>(R.id.delete_button_post)
+        if(currentUserID == post.fromID){
+            delButton.isClickable = true
+            delButton.alpha = 1f
+        } else {
+            delButton.isClickable = false
+            delButton.alpha = 0f
+        }
         val v = viewHolder.itemView
         v.chat_button_post.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_baseline_send_24, 0, 0);
         v.post_textView_post.text = post.text
@@ -30,8 +40,8 @@ class PostRow (private val post: HomePost): Item<GroupieViewHolder>(){
         refUser.addListenerForSingleValueEvent(object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 postFromUser = snapshot.getValue(User::class.java)
-                viewHolder.itemView.user_textView_post.text = postFromUser?.username
-                val target = viewHolder.itemView.user_imageView_post
+                v.user_textView_post.text = postFromUser?.username
+                val target = v.user_imageView_post
                 val imageUrl = postFromUser?.profile_image_url
                 if(imageUrl != "default") {
                     Picasso.get().load(imageUrl).into(target)
@@ -48,7 +58,18 @@ class PostRow (private val post: HomePost): Item<GroupieViewHolder>(){
             } else {
                 Toast.makeText(it.context, it.context.getString(R.string.post_yours), Toast.LENGTH_SHORT).show()
             }
-
+        }
+        v.like_button_post.setOnClickListener {
+            val ref = FirebaseDatabase.getInstance().getReference("/posts/${post.id}")
+            ref.child("like").setValue(post.like + 1)
+        }
+        v.notLike_button_post.setOnClickListener {
+            val ref = FirebaseDatabase.getInstance().getReference("/posts/${post.id}")
+            ref.child("unlike").setValue(post.unlike + 1)
+        }
+        v.delete_button_post.setOnClickListener {
+            val ref = FirebaseDatabase.getInstance().getReference("/posts/${post.id}")
+            ref.removeValue()
         }
     }
 

@@ -12,6 +12,7 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
         android:src="@mipmap/default_profile"
         app:civ_border_color="@color/dark_green"
         app:civ_border_width="2dp"
@@ -50,4 +51,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/user_imageView_latestMessage"
         app:layout_constraintTop_toBottomOf="@+id/user_textView_latestMessage" />
+
+    <View
+        android:id="@+id/row_divider_latestMessage"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="?android:attr/listDivider"
+        android:backgroundTint="@color/black"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

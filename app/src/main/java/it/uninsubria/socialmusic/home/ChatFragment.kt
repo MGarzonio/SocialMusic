@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
@@ -30,7 +29,6 @@ class ChatFragment : Fragment() {
         val recyclerView = viewVal.findViewById<RecyclerView>(R.id.latestMessage_recyclerView)
         listenForLatestMessages(viewVal)
         recyclerView.adapter = adapter
-        recyclerView.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
         adapter.setOnItemClickListener { item, view ->
             val intent = Intent(view.context, ChatActivity::class.java)
             val row = item as LatestMessageRow
