@@ -2,7 +2,9 @@
 
 import android.app.Activity
 import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
+import android.location.Geocoder
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -13,6 +15,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
+import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
@@ -262,11 +265,31 @@ import java.util.*
          startActivity(intent)
      }
 
+     private fun getPosition(context: Context, city : String): LatLng? {
+         val addressList = Geocoder(context, Locale.getDefault()).getFromLocationName(city, 1)
+         var latitude : Double = -1.0
+         var longitude : Double = -1.0
+         if (addressList != null && addressList.size > 0) {
+             val address = addressList[0]
+             longitude = address.longitude
+             latitude = address.latitude
+         }
+         if(latitude != -1.0 && longitude != -1.0)
+             return LatLng(latitude, longitude)
+         return null
+     }
+
      private fun openMaps(view: View) {
          val intent = Intent(activity, MapsActivity::class.java)
-         intent.putExtra("city", city.text.toString())
-         intent.putExtra("nickname", nickname.text.toString())
-         startActivity(intent)
+         val position = getPosition(view.context, city.text.toString())
+         if (position != null) {
+             intent.putExtra("city", city.text.toString())
+             intent.putExtra("nickname", nickname.text.toString())
+             startActivity(intent)
+         } else {
+             Toast.makeText(context, R.string.location_error, Toast.LENGTH_LONG).show()
+             return
+         }
      }
 
      private fun editEmail(view: View) {
