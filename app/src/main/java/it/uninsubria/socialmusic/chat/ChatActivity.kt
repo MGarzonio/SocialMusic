@@ -3,6 +3,8 @@ package it.uninsubria.socialmusic.chat
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.startActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.squareup.picasso.Picasso
@@ -11,6 +13,7 @@ import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
 import it.uninsubria.socialmusic.R
 import it.uninsubria.socialmusic.User
+import it.uninsubria.socialmusic.home.ChatFragment
 import kotlinx.android.synthetic.main.activity_chat.*
 import kotlinx.android.synthetic.main.from_chat_row.view.*
 import kotlinx.android.synthetic.main.to_chat_row.view.*

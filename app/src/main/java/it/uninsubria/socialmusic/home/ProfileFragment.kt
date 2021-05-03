@@ -343,7 +343,6 @@ import java.util.*
          builder.setIcon(android.R.drawable.ic_dialog_alert)
          builder.setTitle("SocialMusic Alert")
          builder.setMessage(getString(R.string.delete_alert_message))
-        //builder.setPositiveButton("OK", DialogInterface.OnClickListener(function = x))
          builder.setPositiveButton(android.R.string.yes) { dialog, which ->
              deleteUser()
          }
