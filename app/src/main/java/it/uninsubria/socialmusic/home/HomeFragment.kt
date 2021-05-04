@@ -7,7 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.get
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.ChildEventListener
@@ -20,10 +23,10 @@ import it.uninsubria.socialmusic.HomePost
 import it.uninsubria.socialmusic.PostRow
 import it.uninsubria.socialmusic.R
 import kotlinx.android.synthetic.main.fragment_home.*
+import org.w3c.dom.Text
 
 class HomeFragment : Fragment() {
     private val adapter = GroupAdapter<GroupieViewHolder>()
-    val userID = FirebaseAuth.getInstance().currentUser!!.uid
     val postsMap = HashMap<String, HomePost>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -31,25 +34,32 @@ class HomeFragment : Fragment() {
         val recyclerView = viewVal.findViewById<RecyclerView>(R.id.recyclerView_home)
         listenForPosts(viewVal)
         recyclerView.adapter = adapter
-        if (adapter == null) {
-            Toast.makeText(viewVal.context, getString(R.string.no_messages), Toast.LENGTH_SHORT).show()
-        }
         val addButton = viewVal.findViewById<Button>(R.id.add_button_home)
         val text = viewVal.findViewById<EditText>(R.id.message_editText_home)
         addButton.setOnClickListener {
             if(text.text.isNotEmpty()) {
                 createPost(viewVal)
                 text.text.clear()
+            } else {
+                Toast.makeText(viewVal.context, getString(R.string.write_something), Toast.LENGTH_SHORT).show()
             }
         }
         return viewVal
     }
-    private fun refreshList(){
+    private fun refreshList(view: View){
         adapter.clear()
         postsMap.values.forEach{
             adapter.add(PostRow(it))
         }
-
+        if(adapter.itemCount == 0){
+            view.findViewById<TextView>(R.id.emoji_textView_nothing).alpha = 0.5f
+            view.findViewById<TextView>(R.id.message_textView_nothing).alpha = 0.5f
+            view.findViewById<RecyclerView>(R.id.recyclerView_home).alpha = 0f
+        } else {
+            view.findViewById<TextView>(R.id.emoji_textView_nothing).alpha = 0f
+            view.findViewById<TextView>(R.id.message_textView_nothing).alpha = 0f
+            view.findViewById<RecyclerView>(R.id.recyclerView_home).alpha = 1f
+        }
     }
     private fun listenForPosts(view: View){
         val ref = FirebaseDatabase.getInstance().getReference("/posts")
@@ -57,20 +67,24 @@ class HomeFragment : Fragment() {
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                 val post = snapshot.getValue(HomePost::class.java) ?: return
                 postsMap[snapshot.key!!] = post
-                refreshList()
+                refreshList(view)
             }
             override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
                 val post = snapshot.getValue(HomePost::class.java) ?: return
                 postsMap[snapshot.key!!] = post
-                refreshList()
+                refreshList(view)
 
             }
-            override fun onChildRemoved(snapshot: DataSnapshot) {}
+            override fun onChildRemoved(snapshot: DataSnapshot) {
+                postsMap.remove(snapshot.key)
+                refreshList(view)
+            }
             override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {}
             override fun onCancelled(error: DatabaseError) {}
         })
     }
     private fun createPost(view: View){
+        val userID = FirebaseAuth.getInstance().currentUser!!.uid
         val ref = FirebaseDatabase.getInstance().getReference("/posts").push()
         val message = view.findViewById<EditText>(R.id.message_editText_home).text.toString()
         val post = HomePost(ref.key!!, message, userID, System.currentTimeMillis()/1000, 0, 0)

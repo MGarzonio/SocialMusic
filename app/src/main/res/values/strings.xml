@@ -91,4 +91,9 @@
     <string name="post_yours">This post is yours!</string>
     <string name="what_s_on_your_mind">What\'s on your mind?</string>
     <string name="all">All</string>
+    <string name="open_chat">open chat</string>
+    <string name="alert_title">SocialMusic Alert</string>
+    <string name="r_u_sure">Are you sure?</string>
+    <string name="time_format">dd/MM/yy hh:mm a</string>
+    <string name="write_something">Write something to post!</string>
 </resources>

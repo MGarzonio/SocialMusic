@@ -340,7 +340,7 @@ import java.util.*
 
      private fun openPopup(){
          val builder = AlertDialog.Builder(context)
-         builder.setIcon(android.R.drawable.ic_dialog_alert)
+         builder.setIcon(R.drawable.ic_round_warning_24)
          builder.setTitle("SocialMusic Alert")
          builder.setMessage(getString(R.string.delete_alert_message))
          builder.setPositiveButton(android.R.string.yes) { dialog, which ->

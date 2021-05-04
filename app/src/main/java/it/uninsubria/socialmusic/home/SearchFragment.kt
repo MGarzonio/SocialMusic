@@ -31,6 +31,8 @@ class SearchFragment : Fragment(), View.OnClickListener{
     private lateinit var genreKey: Spinner
     private lateinit var genresList: ArrayList<String>
     private lateinit var instrumentList: ArrayList<String>
+    private lateinit var monkey: TextView
+    private lateinit var textNothing: TextView
     private var viewAll = true
     private var selectedInstrument = -1
     private var selectedGenre = -1
@@ -43,7 +45,8 @@ class SearchFragment : Fragment(), View.OnClickListener{
         instrumentKey = viewVal.findViewById(R.id.instrument_Spinner_search) as Spinner
         genreKey = viewVal.findViewById(R.id.genre_Spinner_search) as Spinner
         recyclerView = viewVal.findViewById(R.id.user_recyclerView_search) as RecyclerView
-
+        monkey = viewVal.findViewById(R.id.emoji_textView_search) as TextView
+        textNothing = viewVal.findViewById(R.id.message_textView_search) as TextView
         instrumentList = ArrayList(listOf(*resources.getStringArray(R.array.instruments)))
         instrumentList.add(0, resources.getString(R.string.all))
         genresList = ArrayList(listOf(*resources.getStringArray(R.array.genres)))
@@ -112,6 +115,15 @@ class SearchFragment : Fragment(), View.OnClickListener{
                     val intent = Intent(view.context, ChatActivity::class.java)
                     intent.putExtra(ChatFragment.USER_KEY, userItem.user)
                     startActivity(intent)
+                }
+                if(adapter.itemCount == 0){
+                    monkey.alpha = 0.5f
+                    textNothing.alpha = 0.5f
+                    recyclerView.alpha = 0f
+                } else {
+                    monkey.alpha = 0f
+                    textNothing.alpha = 0f
+                    recyclerView.alpha = 1f
                 }
                 recyclerView.adapter = adapter
                 adapter.setOnItemClickListener { item, view ->

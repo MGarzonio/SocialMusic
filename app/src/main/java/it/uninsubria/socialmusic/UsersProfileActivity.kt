@@ -3,12 +3,10 @@ package it.uninsubria.socialmusic
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.ContactsContract
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.Spinner
-import android.widget.Toast
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -16,7 +14,6 @@ import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
 import it.uninsubria.socialmusic.chat.ChatActivity
 import it.uninsubria.socialmusic.chat.ChatActivity.Companion.USER_KEY
-import kotlinx.coroutines.selects.select
 import java.lang.Integer.parseInt
 
 class UsersProfileActivity : AppCompatActivity() {

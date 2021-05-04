@@ -24,9 +24,9 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(activity_home)
         verifyUserLoggedIn()
         fetchCurrentUser()
+        setContentView(activity_home)
         val controllerNavigation = findNavController(R.id.fragmentView)
         val bottomView = findViewById<BottomNavigationView>(R.id.BottomMenu)
 
@@ -51,6 +51,7 @@ class HomeActivity : AppCompatActivity() {
             val intent = Intent(this, LoginActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
+            return
         }
     }
 }

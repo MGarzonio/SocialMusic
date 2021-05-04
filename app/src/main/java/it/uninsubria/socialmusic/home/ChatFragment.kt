@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
@@ -35,9 +36,6 @@ class ChatFragment : Fragment() {
             intent.putExtra(USER_KEY, row.chatPartnerUser)
             startActivity(intent)
         }
-        if (adapter == null) {
-            Toast.makeText(viewVal.context, getString(R.string.no_messages), Toast.LENGTH_SHORT).show()
-        }
         return viewVal
     }
 
@@ -45,6 +43,15 @@ class ChatFragment : Fragment() {
         adapter.clear()
         messagesMap.values.forEach{
             adapter.add(LatestMessageRow(it))
+        }
+        if(adapter.itemCount == 0){
+            view.findViewById<TextView>(R.id.emoji_textView_latestMessage).alpha = 0.5f
+            view.findViewById<TextView>(R.id.message_textView_latestMessage).alpha = 0.5f
+            view.findViewById<RecyclerView>(R.id.latestMessage_recyclerView).alpha = 0f
+        } else {
+            view.findViewById<TextView>(R.id.emoji_textView_latestMessage).alpha = 0f
+            view.findViewById<TextView>(R.id.message_textView_latestMessage).alpha = 0f
+            view.findViewById<RecyclerView>(R.id.latestMessage_recyclerView).alpha = 1f
         }
     }
 

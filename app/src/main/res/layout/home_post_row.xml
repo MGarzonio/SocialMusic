@@ -58,7 +58,7 @@
         android:paddingTop="2dp"
         android:paddingRight="8dp"
         android:paddingBottom="2dp"
-        android:text="open chat"
+        android:text="@string/open_chat"
         android:textColor="@color/white"
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="@+id/like_button_post"
@@ -69,7 +69,7 @@
         android:id="@+id/like_button_post"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="@android:color/transparent"
         android:foreground="@drawable/ic_baseline_thumb_up_24"
         android:foregroundGravity="center"
         android:minWidth="35dp"
@@ -83,8 +83,8 @@
         android:id="@+id/notLike_button_post"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:background="@color/white"
+        android:layout_marginTop="16dp"
+        android:background="@android:color/transparent"
         android:foreground="@drawable/ic_baseline_thumb_down_24"
         android:foregroundGravity="center"
         android:minWidth="35dp"
@@ -97,7 +97,6 @@
         android:id="@+id/notLike_textView_post"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="0"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="@+id/notLike_button_post"
         app:layout_constraintEnd_toStartOf="@+id/notLike_button_post"
@@ -107,7 +106,6 @@
         android:id="@+id/like_textView_post"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="0"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="@+id/like_button_post"
         app:layout_constraintEnd_toStartOf="@+id/like_button_post"
@@ -130,7 +128,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:background="@color/white"
+        android:background="@android:color/transparent"
         android:foreground="@drawable/ic_baseline_delete_forever_24"
         android:foregroundTint="@android:color/holo_red_dark"
         android:minWidth="35dp"
@@ -138,6 +136,16 @@
         app:layout_constraintBottom_toBottomOf="@+id/like_button_post"
         app:layout_constraintEnd_toStartOf="@+id/like_textView_post"
         app:layout_constraintTop_toTopOf="@+id/like_button_post" />
+
+    <TextView
+        android:id="@+id/time_textView_post"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="time"
+        android:textColor="@color/gray_hint"
+        app:layout_constraintBottom_toBottomOf="@+id/user_textView_post"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/user_textView_post" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
