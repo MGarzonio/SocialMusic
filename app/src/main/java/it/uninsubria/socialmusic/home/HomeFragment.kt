@@ -9,8 +9,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.get
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.ChildEventListener
@@ -23,11 +21,11 @@ import it.uninsubria.socialmusic.HomePost
 import it.uninsubria.socialmusic.PostRow
 import it.uninsubria.socialmusic.R
 import kotlinx.android.synthetic.main.fragment_home.*
-import org.w3c.dom.Text
+import java.util.*
 
 class HomeFragment : Fragment() {
     private val adapter = GroupAdapter<GroupieViewHolder>()
-    val postsMap = HashMap<String, HomePost>()
+    val treePostsMap = TreeMap<Long, HomePost>().toSortedMap(reverseOrder())
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val viewVal = inflater.inflate(R.layout.fragment_home, container, false) as View
@@ -48,7 +46,7 @@ class HomeFragment : Fragment() {
     }
     private fun refreshList(view: View){
         adapter.clear()
-        postsMap.values.forEach{
+        treePostsMap.values.forEach{
             adapter.add(PostRow(it))
         }
         if(adapter.itemCount == 0){
@@ -66,17 +64,18 @@ class HomeFragment : Fragment() {
         ref.addChildEventListener(object: ChildEventListener {
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                 val post = snapshot.getValue(HomePost::class.java) ?: return
-                postsMap[snapshot.key!!] = post
+                treePostsMap[post.timestamp] = post
                 refreshList(view)
             }
             override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
                 val post = snapshot.getValue(HomePost::class.java) ?: return
-                postsMap[snapshot.key!!] = post
+                treePostsMap[post.timestamp] = post
                 refreshList(view)
 
             }
             override fun onChildRemoved(snapshot: DataSnapshot) {
-                postsMap.remove(snapshot.key)
+                val post = snapshot.getValue(HomePost::class.java) ?: return
+                treePostsMap.remove(post.timestamp)
                 refreshList(view)
             }
             override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {}

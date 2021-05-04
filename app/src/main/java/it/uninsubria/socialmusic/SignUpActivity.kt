@@ -200,28 +200,4 @@ class SignUpActivity : AppCompatActivity() {
         selectedPhotoUri = null
         deleteImage_button_signUp.alpha = 0F
     }
-/* PROVA ROTAZIONE IMMAGINI STORTE-------- NON CANCELLARE
-
-    class ImageRotator {
-        fun rotateImage(path: String?): Bitmap {
-            val bitmap = BitmapFactory.decodeFile(path)
-            return rotateImage(bitmap, path)
-        }
-
-        fun rotateImage(bitmap: Bitmap, path: String?): Bitmap {
-            var rotate = 0
-            val exif = ExifInterface(path)
-            val orientation: Int = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL)
-            when (orientation) {
-                ExifInterface.ORIENTATION_ROTATE_270 -> rotate = 270
-                ExifInterface.ORIENTATION_ROTATE_180 -> rotate = 180
-                ExifInterface.ORIENTATION_ROTATE_90 -> rotate = 90
-            }
-            val matrix = Matrix()
-            matrix.postRotate(rotate.toFloat())
-            return Bitmap.createBitmap(bitmap, 0, 0, bitmap.width,
-                    bitmap.height, matrix, true)
-        }
-    }
-    */
 }
