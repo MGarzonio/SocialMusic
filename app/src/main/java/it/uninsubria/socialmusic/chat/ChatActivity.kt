@@ -101,7 +101,6 @@ class ChatFromItem(val text: String, val user: User): Item<GroupieViewHolder>(){
         val photoUri = user.profile_image_url
         if(photoUri != "default") {
             val target = viewHolder.itemView.chat_from_imageView
-            //Picasso.get().load(photoUri).into(target)
             Glide.with(viewHolder.itemView.context).load(photoUri).into(target)
         }
     }
@@ -115,7 +114,7 @@ class ChatToItem(val text: String, val user: User): Item<GroupieViewHolder>(){
         val photoUri = user.profile_image_url
         if(photoUri != "default") {
             val target = viewHolder.itemView.chat_to_imageView
-            Picasso.get().load(photoUri).into(target)
+            Glide.with(viewHolder.itemView.context).load(photoUri).into(target)
         }
 
     }
