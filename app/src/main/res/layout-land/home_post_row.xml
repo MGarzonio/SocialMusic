@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="16dp"
+    android:foregroundGravity="center"
+    android:foregroundTint="@color/black">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/user_imageView_post"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@mipmap/default_profile"
+        app:civ_border_color="@android:color/holo_blue_dark"
+        app:civ_border_width="2dp"
+        app:layout_constraintBottom_toBottomOf="@+id/post_textView_post"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/user_textView_post" />
+
+    <TextView
+        android:id="@+id/user_textView_post"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/username"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/user_imageView_post"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/post_textView_post"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:minHeight="50dp"
+        android:text="@string/message"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/user_imageView_post"
+        app:layout_constraintTop_toBottomOf="@+id/user_textView_post" />
+
+    <android.widget.Button
+        android:id="@+id/chat_button_post"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_button"
+        android:minWidth="35dp"
+        android:minHeight="35dp"
+        android:paddingLeft="8dp"
+        android:paddingTop="2dp"
+        android:paddingRight="8dp"
+        android:paddingBottom="2dp"
+        android:text="@string/open_chat"
+        android:textColor="@color/white"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@+id/like_button_post"
+        app:layout_constraintStart_toStartOf="@+id/user_imageView_post"
+        app:layout_constraintTop_toTopOf="@+id/like_button_post" />
+
+    <android.widget.Button
+        android:id="@+id/like_button_post"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:foreground="@drawable/ic_baseline_thumb_up_24"
+        android:foregroundGravity="center"
+        android:minWidth="35dp"
+        android:minHeight="35dp"
+        app:layout_constraintBottom_toBottomOf="@+id/notLike_button_post"
+        app:layout_constraintDimensionRatio="1"
+        app:layout_constraintEnd_toStartOf="@+id/notLike_textView_post"
+        app:layout_constraintTop_toTopOf="@+id/notLike_button_post" />
+
+    <android.widget.Button
+        android:id="@+id/notLike_button_post"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@android:color/transparent"
+        android:foreground="@drawable/ic_baseline_thumb_down_24"
+        android:foregroundGravity="center"
+        android:minWidth="35dp"
+        android:minHeight="35dp"
+        app:layout_constraintDimensionRatio="1"
+        app:layout_constraintEnd_toEndOf="@+id/post_textView_post"
+        app:layout_constraintTop_toBottomOf="@+id/post_textView_post" />
+
+    <TextView
+        android:id="@+id/notLike_textView_post"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/notLike_button_post"
+        app:layout_constraintEnd_toStartOf="@+id/notLike_button_post"
+        app:layout_constraintTop_toTopOf="@+id/notLike_button_post" />
+
+    <TextView
+        android:id="@+id/like_textView_post"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/like_button_post"
+        app:layout_constraintEnd_toStartOf="@+id/like_button_post"
+        app:layout_constraintTop_toTopOf="@+id/like_button_post" />
+
+    <View
+        android:id="@+id/row_divider_post"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="8dp"
+        android:background="?android:attr/listDivider"
+        android:backgroundTint="@color/black"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/notLike_button_post" />
+
+    <android.widget.Button
+        android:id="@+id/delete_button_post"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:background="@android:color/transparent"
+        android:foreground="@drawable/ic_baseline_delete_forever_24"
+        android:foregroundTint="@android:color/holo_red_dark"
+        android:minWidth="35dp"
+        android:minHeight="35dp"
+        app:layout_constraintBottom_toBottomOf="@+id/like_button_post"
+        app:layout_constraintEnd_toStartOf="@+id/like_textView_post"
+        app:layout_constraintTop_toTopOf="@+id/like_button_post" />
+
+    <TextView
+        android:id="@+id/time_textView_post"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="time"
+        android:textColor="@color/gray_hint"
+        app:layout_constraintBottom_toBottomOf="@+id/user_textView_post"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/user_textView_post" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

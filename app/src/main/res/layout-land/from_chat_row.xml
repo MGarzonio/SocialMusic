@@ -10,8 +10,7 @@
         android:id="@+id/chat_from_imageView"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="5dp"
         android:src="@mipmap/default_profile"
         app:civ_border_color="@android:color/holo_blue_dark"
         app:civ_border_width="1dp"
@@ -22,7 +21,7 @@
         android:id="@+id/chat_from_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
         android:background="@drawable/rounded_edittext"
         android:maxWidth="240dp"
         android:padding="16dp"
@@ -30,4 +29,15 @@
         android:textColor="@color/black"
         app:layout_constraintStart_toEndOf="@+id/chat_from_imageView"
         app:layout_constraintTop_toTopOf="@+id/chat_from_imageView" />
+
+    <TextView
+        android:id="@+id/time_from_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="TextView"
+        android:textColor="@color/gray_hint"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="@+id/chat_from_textView"
+        app:layout_constraintTop_toBottomOf="@+id/chat_from_textView" />
 </androidx.constraintlayout.widget.ConstraintLayout>
