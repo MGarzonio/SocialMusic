@@ -2,6 +2,7 @@ package it.uninsubria.socialmusic.chat
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.ContactsContract
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
@@ -13,6 +14,8 @@ import it.uninsubria.socialmusic.User
 import kotlinx.android.synthetic.main.activity_chat.*
 import kotlinx.android.synthetic.main.from_chat_row.view.*
 import kotlinx.android.synthetic.main.to_chat_row.view.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 class ChatActivity : AppCompatActivity() {
 
@@ -57,11 +60,12 @@ class ChatActivity : AppCompatActivity() {
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                 val chatMessage = snapshot.getValue(ChatMessage::class.java)
                 if(chatMessage != null){
+                    val time = getDateFromTimestamp(chatMessage.timestamp)
                     if(chatMessage.fromID == FirebaseAuth.getInstance().uid) {
                         val currentUser = currentUser
-                        adapter.add(ChatToItem(chatMessage.text, currentUser!!))
+                        adapter.add(ChatToItem(chatMessage.text, currentUser!!, time))
                     }else{
-                        adapter.add(ChatFromItem(chatMessage.text, toUser!!))
+                        adapter.add(ChatFromItem(chatMessage.text, toUser!!, time))
                     }
                 }
                 chat_recyclerView.scrollToPosition(adapter.itemCount -1)
@@ -71,6 +75,12 @@ class ChatActivity : AppCompatActivity() {
             override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {}
             override fun onCancelled(error: DatabaseError) {}
         })
+    }
+    private fun getDateFromTimestamp(timestamp: Long): String{
+        val sdf = SimpleDateFormat.getDateTimeInstance()
+        val time = timestamp * 1000
+        val netDate = Date(time)
+        return sdf.format(netDate)
     }
 
     private fun sendMessage() {
@@ -94,7 +104,7 @@ class ChatActivity : AppCompatActivity() {
     }
 }
 
-class ChatFromItem(val text: String, val user: User): Item<GroupieViewHolder>(){
+class ChatFromItem(val text: String, val user: User, val time: String): Item<GroupieViewHolder>(){
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         viewHolder.itemView.chat_from_textView.text = text
         val photoUri = user.profile_image_url
@@ -102,12 +112,13 @@ class ChatFromItem(val text: String, val user: User): Item<GroupieViewHolder>(){
             val target = viewHolder.itemView.chat_from_imageView
             Glide.with(viewHolder.itemView.context).load(photoUri).into(target)
         }
+        viewHolder.itemView.time_from_textView.text = time
     }
     override fun getLayout(): Int {
         return R.layout.from_chat_row
     }
 }
-class ChatToItem(val text: String, val user: User): Item<GroupieViewHolder>(){
+class ChatToItem(val text: String, val user: User, val time: String): Item<GroupieViewHolder>(){
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         viewHolder.itemView.chat_to_textView.text = text
         val photoUri = user.profile_image_url
@@ -115,6 +126,7 @@ class ChatToItem(val text: String, val user: User): Item<GroupieViewHolder>(){
             val target = viewHolder.itemView.chat_to_imageView
             Glide.with(viewHolder.itemView.context).load(photoUri).into(target)
         }
+        viewHolder.itemView.time_to_textView.text = time
     }
     override fun getLayout(): Int {
         return R.layout.to_chat_row
