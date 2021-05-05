@@ -10,6 +10,7 @@ import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -19,10 +20,6 @@ import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import kotlinx.android.synthetic.main.fragment_profile.*
 import java.util.*
-
-
-//import com.google.firebase.auth.ktx.userProfileChangeRequest
-
 
 class SignUpActivity : AppCompatActivity() {
     private val tag = "SignUpActivity"
@@ -65,7 +62,7 @@ class SignUpActivity : AppCompatActivity() {
             selectedPhotoUri = data.data
             Log.d(tag, "photo was selected")
             val bitmapImage = MediaStore.Images.Media.getBitmap(contentResolver, selectedPhotoUri)
-            profilePhoto_imageView_signUp.setImageBitmap(bitmapImage)
+            Glide.with(this).load(bitmapImage).into(profilePhoto_imageView_signUp)
             selectPhoto_button_signUp.alpha = 0F
             deleteImage_button_signUp.alpha = 1F
         }

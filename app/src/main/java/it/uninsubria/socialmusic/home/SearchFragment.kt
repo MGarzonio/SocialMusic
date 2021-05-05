@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.squareup.picasso.Picasso
@@ -177,7 +178,8 @@ class SearchFragment : Fragment(), View.OnClickListener{
             viewHolder.itemView.user_textView.text = user.username
             val imageUrl = user.profile_image_url
             if (imageUrl != "default") {
-                Picasso.get().load(imageUrl).into(target)
+                //Picasso.get().load(imageUrl).into(target)
+                Glide.with(viewHolder.itemView.context).load(imageUrl).into(target)
             }
         }
 

@@ -1,10 +1,8 @@
 package it.uninsubria.socialmusic.chat
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.startActivity
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.squareup.picasso.Picasso
@@ -13,7 +11,6 @@ import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
 import it.uninsubria.socialmusic.R
 import it.uninsubria.socialmusic.User
-import it.uninsubria.socialmusic.home.ChatFragment
 import kotlinx.android.synthetic.main.activity_chat.*
 import kotlinx.android.synthetic.main.from_chat_row.view.*
 import kotlinx.android.synthetic.main.to_chat_row.view.*
@@ -104,7 +101,8 @@ class ChatFromItem(val text: String, val user: User): Item<GroupieViewHolder>(){
         val photoUri = user.profile_image_url
         if(photoUri != "default") {
             val target = viewHolder.itemView.chat_from_imageView
-            Picasso.get().load(photoUri).into(target)
+            //Picasso.get().load(photoUri).into(target)
+            Glide.with(viewHolder.itemView.context).load(photoUri).into(target)
         }
     }
     override fun getLayout(): Int {

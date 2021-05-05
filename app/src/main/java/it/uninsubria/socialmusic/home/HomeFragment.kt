@@ -11,10 +11,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.ChildEventListener
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import it.uninsubria.socialmusic.HomePost
@@ -84,7 +81,7 @@ class HomeFragment : Fragment() {
     }
     private fun createPost(view: View){
         val userID = FirebaseAuth.getInstance().currentUser!!.uid
-        val ref = FirebaseDatabase.getInstance().getReference("/posts").push()
+        val ref = FirebaseDatabase.getInstance().getReference("/posts/").push()
         val message = view.findViewById<EditText>(R.id.message_editText_home).text.toString()
         val post = HomePost(ref.key!!, message, userID, System.currentTimeMillis()/1000, 0, 0)
         ref.setValue(post)

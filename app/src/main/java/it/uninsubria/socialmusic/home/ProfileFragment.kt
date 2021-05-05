@@ -15,17 +15,17 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
 import it.uninsubria.socialmusic.*
+import it.uninsubria.socialmusic.R
+import kotlinx.android.synthetic.main.activity_sign_up.*
 import kotlinx.android.synthetic.main.fragment_profile.*
 import java.util.*
 
@@ -107,7 +107,8 @@ import java.util.*
                      if(setNick){
                          nickname.setText(userProfile.username)
                          if (userProfile.profile_image_url != "default") {
-                             Picasso.get().load(userProfile.profile_image_url).into(profilePhoto)
+                             //Picasso.get().load(userProfile.profile_image_url).into(profilePhoto)
+                             Glide.with(context!!).load(userProfile.profile_image_url).into(profilePhoto)
                              btnPhoto.alpha = 0F
                          }
                      }
@@ -364,49 +365,58 @@ import java.util.*
          val refDBUser = FirebaseDatabase.getInstance().getReference("/users/")
          val refDBLatest = FirebaseDatabase.getInstance().getReference("/latest-message/")
          val refDBMess = FirebaseDatabase.getInstance().getReference("/user-messages/")
+         val refDBPost = FirebaseDatabase.getInstance().getReference("/posts/")
+         val refStore = FirebaseStorage.getInstance().getReferenceFromUrl(userProfile.profile_image_url)
+         //USER FROM AUTHENTICATION
          user!!.delete().addOnSuccessListener {
              Log.d("PROFILE", "user ${userProfile.username} has been cancelled!")
          }
+         //IMAGE FROM STORE
          if (userProfile.profile_image_url != "default") {
-             val refStore = FirebaseStorage.getInstance().getReferenceFromUrl(userProfile.profile_image_url)
              refStore.delete()
          }
-         refDBLatest.child(user.uid).removeValue()
-             .addOnSuccessListener {
-                 Log.d("PROFILE", "user ${userProfile.username}'s latest messages have been cancelled!")
-                 }
-         refDBMess.child(user.uid).removeValue()
-             .addOnSuccessListener {
-                 Log.d("PROFILE", "user ${userProfile.username}'s messages have been cancelled!")
-             }
+         //MESSAGES FROM DATABASE LATEST-MESSAGE
+         removeMessages(refDBLatest)
+         //MESSAGES FROM DATABASE USER-MESSAGES
+         removeMessages(refDBMess)
+         //POSTS FROM DATABASE
+         removePosts(refDBPost)
+         //USER FROM DATABASE
          refDBUser.child(user.uid).removeValue()
                  .addOnSuccessListener {
                      val intent = Intent(activity, LoginActivity::class.java)
                      startActivity(intent)
                  }
      }
- }
- /*
- class ImageRotator {
-     fun rotateImage(path: String?): Bitmap {
-         val bitmap = BitmapFactory.decodeFile(path)
-         return rotateImage(bitmap, path)
-     }
 
-     fun rotateImage(bitmap: Bitmap, path: String?): Bitmap {
-         var rotate = 0
-         val exif = ExifInterface(path)
-         val orientation: Int = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL)
-         when (orientation) {
-             ExifInterface.ORIENTATION_ROTATE_270 -> rotate = 270
-             ExifInterface.ORIENTATION_ROTATE_180 -> rotate = 180
-             ExifInterface.ORIENTATION_ROTATE_90 -> rotate = 90
-         }
-         val matrix = Matrix()
-         matrix.postRotate(rotate.toFloat())
-         return Bitmap.createBitmap(bitmap, 0, 0, bitmap.width,
-             bitmap.height, matrix, true)
+     private fun removePosts(ref: DatabaseReference){
+         ref.addListenerForSingleValueEvent(object: ValueEventListener{
+             override fun onDataChange(snapshot: DataSnapshot) {
+                 snapshot.children.forEach {
+                     val postValue = it.child("fromID").value
+                     if(postValue == userProfile.uid){
+                         ref.child("${it.key}").removeValue()
+                     }
+                 }
+             }
+             override fun onCancelled(error: DatabaseError) {}
+         })
+     }
+     private fun removeMessages(ref: DatabaseReference){
+         ref.child(userProfile.uid).removeValue()
+             .addOnSuccessListener {
+                 Log.d("PROFILE", "user ${userProfile.username}'s messages have been cancelled!")
+             }
+         ref.addListenerForSingleValueEvent(object: ValueEventListener{
+             override fun onDataChange(snapshot: DataSnapshot) {
+                 snapshot.children.forEach {
+                     if(it.child(userProfile.uid).exists()){
+                         ref.child("${it.key}/${userProfile.uid}").removeValue()
+                     }
+                 }
+             }
+             override fun onCancelled(error: DatabaseError) {}
+         })
      }
  }
- */
 

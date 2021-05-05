@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -23,7 +24,7 @@ import java.util.*
 
 class PostRow(private val post: HomePost): Item<GroupieViewHolder>(){
     var postFromUser: User? = null
-    var currentUserID: String? = null
+    private var currentUserID: String? = null
 
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         currentUserID = FirebaseAuth.getInstance().currentUser!!.uid
@@ -50,7 +51,7 @@ class PostRow(private val post: HomePost): Item<GroupieViewHolder>(){
                 val target = v.user_imageView_post
                 val imageUrl = postFromUser?.profile_image_url
                 if (imageUrl != "default") {
-                    Picasso.get().load(imageUrl).into(target)
+                    Glide.with(v.context).load(imageUrl).into(target)
                 }
             }
 
