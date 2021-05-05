@@ -67,7 +67,6 @@ class ChatFragment : Fragment() {
                 messagesMap[snapshot.key!!] = chatMessage
                 refreshRView(view)
             }
-            //Not used, but needed
             override fun onChildRemoved(snapshot: DataSnapshot) {
             }
             override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
