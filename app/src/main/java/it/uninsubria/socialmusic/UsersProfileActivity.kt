@@ -7,11 +7,11 @@ import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.Spinner
+import com.bumptech.glide.Glide
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.squareup.picasso.Picasso
 import it.uninsubria.socialmusic.chat.ChatActivity
 import it.uninsubria.socialmusic.chat.ChatActivity.Companion.USER_KEY
 import java.lang.Integer.parseInt
@@ -51,7 +51,7 @@ class UsersProfileActivity : AppCompatActivity() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 user = snapshot.getValue(User::class.java)!!
                 if (user!!.profile_image_url != "default") {
-                    Picasso.get().load(user!!.profile_image_url).into(profilePhoto)
+                    Glide.with(applicationContext).load(user!!.profile_image_url).into(profilePhoto)
                 }
                 name.setText(user!!.name)
                 username.setText(user!!.username)
@@ -78,7 +78,7 @@ class UsersProfileActivity : AppCompatActivity() {
     private fun getUserGenres() : ArrayList<String> {
         val list = user!!.genres.split(",")
         val genresList = ArrayList(listOf(*resources.getStringArray(R.array.genres)))
-        var arrayList = ArrayList<String>()
+        val arrayList = ArrayList<String>()
         for (index in list)
             if (index.isNotEmpty()) {
                 if (index != "none")
@@ -92,7 +92,7 @@ class UsersProfileActivity : AppCompatActivity() {
     private fun getUserInstruments() : ArrayList<String> {
         val list = user!!.instruments.split(",")
         val instrumentList = ArrayList(listOf(*resources.getStringArray(R.array.instruments)))
-        var arrayList = ArrayList<String>()
+        val arrayList = ArrayList<String>()
         for (index in list)
             if (index.isNotEmpty()) {
                 if (index != "none")

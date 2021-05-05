@@ -5,7 +5,6 @@ import android.os.Bundle
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
@@ -116,7 +115,6 @@ class ChatToItem(val text: String, val user: User): Item<GroupieViewHolder>(){
             val target = viewHolder.itemView.chat_to_imageView
             Glide.with(viewHolder.itemView.context).load(photoUri).into(target)
         }
-
     }
     override fun getLayout(): Int {
         return R.layout.to_chat_row
