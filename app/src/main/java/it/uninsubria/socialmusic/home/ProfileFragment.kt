@@ -266,31 +266,11 @@ import java.util.*
          startActivity(intent)
      }
 
-     private fun getPosition(context: Context, city : String): LatLng? {
-         val addressList = Geocoder(context, Locale.getDefault()).getFromLocationName(city, 1)
-         var latitude : Double = -1.0
-         var longitude : Double = -1.0
-         if (addressList != null && addressList.size > 0) {
-             val address = addressList[0]
-             longitude = address.longitude
-             latitude = address.latitude
-         }
-         if(latitude != -1.0 && longitude != -1.0)
-             return LatLng(latitude, longitude)
-         return null
-     }
-
      private fun openMaps(view: View) {
          val intent = Intent(activity, MapsActivity::class.java)
-         val position = getPosition(view.context, city.text.toString())
-         if (position != null) {
-             intent.putExtra("city", city.text.toString())
-             intent.putExtra("nickname", nickname.text.toString())
-             startActivity(intent)
-         } else {
-             Toast.makeText(context, R.string.location_error, Toast.LENGTH_LONG).show()
-             return
-         }
+         intent.putExtra("city", city.text.toString())
+         intent.putExtra("nickname", nickname.text.toString())
+         startActivity(intent)
      }
 
      private fun editEmail(view: View) {
