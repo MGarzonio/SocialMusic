@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="8dp"
-    android:id="@+id/to_chat_row">
+    android:layout_marginBottom="8dp" >
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/chat_to_imageView"
