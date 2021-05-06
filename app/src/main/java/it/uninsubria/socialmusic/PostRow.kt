@@ -148,8 +148,9 @@ class PostRow(private val post: HomePost): Item<GroupieViewHolder>(){
         builder.setTitle(view.context.getString(R.string.alert_title))
         builder.setMessage(view.context.getString(R.string.r_u_sure))
         builder.setPositiveButton(android.R.string.yes) { dialog, which ->
-            val ref = FirebaseDatabase.getInstance().getReference("/posts/${post.id}")
-            ref.removeValue()
+            FirebaseDatabase.getInstance().getReference("/posts/${post.id}").removeValue()
+            FirebaseDatabase.getInstance().getReference("/postlike/${post.id}").removeValue()
+            FirebaseDatabase.getInstance().getReference("/postdislike/${post.id}").removeValue()
         }
         builder.setNegativeButton(android.R.string.no) { dialog, which ->
             Toast.makeText(view.context, android.R.string.no, Toast.LENGTH_SHORT).show()
