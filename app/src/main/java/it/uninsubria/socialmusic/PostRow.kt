@@ -9,10 +9,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
 import it.uninsubria.socialmusic.chat.ChatActivity
@@ -39,7 +36,7 @@ class PostRow(private val post: HomePost): Item<GroupieViewHolder>(){
         v.chat_button_post.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_send_24, 0);
         v.post_textView_post.text = post.text
         v.like_textView_post.text = post.like.toString()
-        v.notLike_textView_post.text = post.unlike.toString()
+        v.notLike_textView_post.text = post.dislike.toString()
         v.time_textView_post.text = getDateFromTimestamp(post.timestamp)
 
         val refUser = FirebaseDatabase.getInstance().getReference("/users/${post.fromID}")
@@ -68,12 +65,10 @@ class PostRow(private val post: HomePost): Item<GroupieViewHolder>(){
             }
         }
         v.like_button_post.setOnClickListener {
-            val ref = FirebaseDatabase.getInstance().getReference("/posts/${post.id}")
-            ref.child("like").setValue(post.like + 1)
+            checkLike(v, "liked")
         }
         v.notLike_button_post.setOnClickListener {
-            val ref = FirebaseDatabase.getInstance().getReference("/posts/${post.id}")
-            ref.child("unlike").setValue(post.unlike + 1)
+            checkLike(v, "disliked")
         }
         v.delete_button_post.setOnClickListener {
             openPopup(it)
@@ -82,6 +77,69 @@ class PostRow(private val post: HomePost): Item<GroupieViewHolder>(){
 
     override fun getLayout(): Int {
         return R.layout.home_post_row
+    }
+
+    private fun checkLike(view: View, type: String){
+        var child = ""
+        when(type){
+            "liked" ->
+                child = "postlike"
+            "disliked" ->
+                child = "postdislike"
+        }
+        val ref = FirebaseDatabase.getInstance().getReference("/$child/${post.id}")
+        ref.addListenerForSingleValueEvent(object: ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot){
+                snapshot.children.forEach {
+                    if(it.value == currentUserID){
+                        Toast.makeText(view.context, "Already $type!", Toast.LENGTH_SHORT).show()
+                        return
+                    }
+                }
+                addLikeOnPost(ref, type)
+            }
+            override fun onCancelled(error: DatabaseError) {}
+        })
+    }
+
+    private fun addLikeOnPost(refGiven: DatabaseReference, type: String){
+        val refPost = FirebaseDatabase.getInstance().getReference("/posts/${post.id}")
+        when(type){
+            "liked" ->
+                refPost.child("like").setValue(post.like + 1)
+            "disliked" ->
+                refPost.child("dislike").setValue(post.dislike + 1)
+        }
+        refGiven.push().setValue(currentUserID)
+        checkOppositeLike(refPost, type)
+    }
+
+    private fun checkOppositeLike(refGiven: DatabaseReference, type: String){
+        var child = ""
+        when(type){
+            "liked" ->
+                child = "postdislike"
+            "disliked" ->
+                child = "postlike"
+        }
+        val refLike = FirebaseDatabase.getInstance().getReference("/$child/${post.id}")
+        refLike.addListenerForSingleValueEvent(object: ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot){
+                snapshot.children.forEach {
+                    if(it.value == currentUserID){
+                        when(type){
+                            "liked" ->
+                                refGiven.child("dislike").setValue(post.dislike - 1)
+                            "disliked" ->
+                                refGiven.child("like").setValue(post.like - 1)
+                        }
+                        refLike.child(it.key!!).removeValue()
+                        return
+                    }
+                }
+            }
+            override fun onCancelled(error: DatabaseError) {}
+        })
     }
 
     private fun openPopup(view: View){
