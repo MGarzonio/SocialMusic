@@ -61,8 +61,7 @@ class SignUpActivity : AppCompatActivity() {
         if(requestCode == 0 && resultCode == Activity.RESULT_OK && data != null){
             selectedPhotoUri = data.data
             Log.d(tag, "photo was selected")
-            val bitmapImage = MediaStore.Images.Media.getBitmap(contentResolver, selectedPhotoUri)
-            Glide.with(this).load(bitmapImage).into(profilePhoto_imageView_signUp)
+            Glide.with(this).load(selectedPhotoUri).into(profilePhoto_imageView_signUp)
             selectPhoto_button_signUp.alpha = 0F
             deleteImage_button_signUp.alpha = 1F
         }

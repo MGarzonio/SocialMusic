@@ -340,6 +340,8 @@ import java.util.*
          val refDBLatest = FirebaseDatabase.getInstance().getReference("/latest-message/")
          val refDBMess = FirebaseDatabase.getInstance().getReference("/user-messages/")
          val refDBPost = FirebaseDatabase.getInstance().getReference("/posts/")
+         val refLike = FirebaseDatabase.getInstance().getReference("/postlike/")
+         val refDislike = FirebaseDatabase.getInstance().getReference("/postdislike/")
          val refStore = FirebaseStorage.getInstance().getReferenceFromUrl(userProfile.profile_image_url)
          //USER FROM AUTHENTICATION
          user!!.delete().addOnSuccessListener {
@@ -355,6 +357,9 @@ import java.util.*
          removeMessages(refDBMess)
          //POSTS FROM DATABASE
          removePosts(refDBPost)
+         //LIKE FROM DATABASE
+         removeLike(refLike)
+         removeLike(refDislike)
          //USER FROM DATABASE
          refDBUser.child(user.uid).removeValue()
                  .addOnSuccessListener {
@@ -387,6 +392,25 @@ import java.util.*
                      if(it.child(userProfile.uid).exists()){
                          ref.child("${it.key}/${userProfile.uid}").removeValue()
                      }
+                 }
+             }
+             override fun onCancelled(error: DatabaseError) {}
+         })
+     }
+     private fun removeLike(ref: DatabaseReference){
+         ref.addListenerForSingleValueEvent(object: ValueEventListener{
+             override fun onDataChange(snapshot: DataSnapshot) {
+                 snapshot.children.forEach { itFirst ->
+                     itFirst.ref.addListenerForSingleValueEvent(object: ValueEventListener{
+                         override fun onDataChange(snapshot: DataSnapshot) {
+                             snapshot.children.forEach {
+                                 if(it.value == userProfile.uid){
+                                     ref.child("${itFirst.key}/${it.key}").removeValue()
+                                 }
+                             }
+                         }
+                         override fun onCancelled(error: DatabaseError) {}
+                     })
                  }
              }
              override fun onCancelled(error: DatabaseError) {}
