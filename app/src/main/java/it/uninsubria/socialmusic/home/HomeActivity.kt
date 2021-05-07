@@ -16,7 +16,6 @@ import com.google.firebase.ktx.Firebase
 import it.uninsubria.socialmusic.LoginActivity
 import it.uninsubria.socialmusic.R
 import it.uninsubria.socialmusic.R.layout.activity_home
-import it.uninsubria.socialmusic.User
 
 class HomeActivity : AppCompatActivity() {
 

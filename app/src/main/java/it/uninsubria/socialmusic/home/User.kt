@@ -1,4 +1,4 @@
-package it.uninsubria.socialmusic
+package it.uninsubria.socialmusic.home
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

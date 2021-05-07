@@ -15,8 +15,6 @@ import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
 import it.uninsubria.socialmusic.R
-import it.uninsubria.socialmusic.User
-import it.uninsubria.socialmusic.UsersProfileActivity
 import it.uninsubria.socialmusic.chat.ChatActivity
 import kotlinx.android.synthetic.main.user_row.view.*
 import java.lang.Integer.parseInt
@@ -105,7 +103,7 @@ class SearchFragment : Fragment(), View.OnClickListener{
                 snapshot.children.forEach {
                     val user = it.getValue(User::class.java)
                     if (user != null && user.uid != myUid && user.verified == "yes") {
-                        if (viewableUser(user, name)) {
+                        if (viewableUser(user, name.split(" "))) {
                             adapter.add(UserItem(user))
                         }
                     }
@@ -142,16 +140,20 @@ class SearchFragment : Fragment(), View.OnClickListener{
         })
     }
 
-    private fun viewableUser(user: User, selectedName: String): Boolean {
+    private fun viewableUser(user: User, key: List<String>): Boolean {
         val genreCheck =
-                if (selectedGenre == -1) true
-                else inUserList(genresList[selectedGenre], user.genres, genresList)
+            if (selectedGenre == -1) true
+            else inUserList(genresList[selectedGenre], user.genres, genresList)
         val instrumentCheck =
-                if (selectedInstrument == -1) true
-                else inUserList(instrumentList[selectedInstrument], user.instruments, instrumentList)
-        val nameCheck =
-                if (selectedName.isEmpty()) true
-                else selectedName == user.name.toLowerCase(Locale.ROOT) || selectedName == user.username.toLowerCase(Locale.ROOT) || selectedName == user.surname.toLowerCase(Locale.ROOT)
+            if (selectedInstrument == -1) true
+            else inUserList(instrumentList[selectedInstrument], user.instruments, instrumentList)
+        var nameCheck = false
+        for (selectedName in key)
+            nameCheck = if (selectedName.isEmpty()) true
+            else
+                selectedName in user.name.toLowerCase(Locale.ROOT) ||
+                        selectedName in user.username.toLowerCase(Locale.ROOT) ||
+                        selectedName in user.surname.toLowerCase(Locale.ROOT)
         return genreCheck && instrumentCheck && nameCheck
     }
 

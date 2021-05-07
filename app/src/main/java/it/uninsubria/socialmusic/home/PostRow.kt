@@ -1,4 +1,4 @@
-package it.uninsubria.socialmusic
+package it.uninsubria.socialmusic.home
 
 import android.app.AlertDialog
 import android.content.Intent
@@ -12,8 +12,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
+import it.uninsubria.socialmusic.R
 import it.uninsubria.socialmusic.chat.ChatActivity
-import it.uninsubria.socialmusic.home.ChatFragment
 import kotlinx.android.synthetic.main.home_post_row.view.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -33,7 +33,8 @@ class PostRow(private val post: HomePost): Item<GroupieViewHolder>(){
             delButton.alpha = 0f
         }
         val v = viewHolder.itemView
-        v.chat_button_post.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_send_24, 0);
+        v.chat_button_post.setCompoundDrawablesWithIntrinsicBounds(0, 0,
+            R.drawable.ic_baseline_send_24, 0);
         v.post_textView_post.text = post.text
         v.like_textView_post.text = post.like.toString()
         v.notLike_textView_post.text = post.dislike.toString()

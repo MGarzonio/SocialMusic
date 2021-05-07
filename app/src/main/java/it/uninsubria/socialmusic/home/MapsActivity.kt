@@ -1,4 +1,4 @@
-package it.uninsubria.socialmusic
+package it.uninsubria.socialmusic.home
 
 import android.content.Context
 import android.location.Geocoder
@@ -10,6 +10,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import it.uninsubria.socialmusic.R
 import java.util.*
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {

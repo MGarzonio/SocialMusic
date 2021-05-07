@@ -88,5 +88,7 @@
     <string name="open_chat">apri chat</string>
     <string name="alert_title">Avviso da SocialMusic</string>
     <string name="r_u_sure">Sei sicuro?</string>
-    <string name="time_format">dd/MM/yy HH:mm</string>
+    <string name="write_something">Scrivi il post!</string>
+    <string name="back_to_register_page" translatable="false">Torna alla registrazione</string>
+    <string name="word" translatable="false">Parola</string>
 </resources>

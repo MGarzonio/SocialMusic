@@ -1,4 +1,4 @@
-package it.uninsubria.socialmusic
+package it.uninsubria.socialmusic.home
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,6 +8,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import it.uninsubria.socialmusic.R
 
 class ImagePopupActivity : AppCompatActivity() {
 

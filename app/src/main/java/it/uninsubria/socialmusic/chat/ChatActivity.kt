@@ -2,7 +2,6 @@ package it.uninsubria.socialmusic.chat
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.ContactsContract
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
@@ -10,7 +9,7 @@ import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
 import it.uninsubria.socialmusic.R
-import it.uninsubria.socialmusic.User
+import it.uninsubria.socialmusic.home.User
 import kotlinx.android.synthetic.main.activity_chat.*
 import kotlinx.android.synthetic.main.from_chat_row.view.*
 import kotlinx.android.synthetic.main.to_chat_row.view.*

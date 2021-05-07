@@ -12,9 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SocialMusic">
         <activity
-            android:name=".ImagePopupActivity"
+            android:name=".home.ImagePopupActivity"
             android:theme="@style/AppTheme.ImagePopUp"/>
-        <activity android:name=".UsersProfileActivity" />
+        <activity android:name=".home.UsersProfileActivity" />
         <activity
             android:name=".PopupActivity"
             android:theme="@style/AppTheme.PopUpWindowTheme" />
@@ -27,9 +27,9 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MapsActivity"
+            android:name=".home.MapsActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".ListActivity" />
+        <activity android:name=".home.ListActivity" />
         <activity
             android:name=".home.HomeActivity"
             android:label="@string/title_activity_home">

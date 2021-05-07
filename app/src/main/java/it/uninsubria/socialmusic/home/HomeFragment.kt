@@ -14,8 +14,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
-import it.uninsubria.socialmusic.HomePost
-import it.uninsubria.socialmusic.PostRow
 import it.uninsubria.socialmusic.R
 import kotlinx.android.synthetic.main.fragment_home.*
 import java.util.*

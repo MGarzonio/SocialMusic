@@ -1,4 +1,4 @@
-package it.uninsubria.socialmusic
+package it.uninsubria.socialmusic.home
 
 import android.os.Bundle
 import android.view.View
@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import it.uninsubria.socialmusic.R
 import java.lang.Integer.parseInt
 import kotlin.properties.Delegates
 

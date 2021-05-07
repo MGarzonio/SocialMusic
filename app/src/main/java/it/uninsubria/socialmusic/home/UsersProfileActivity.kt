@@ -1,4 +1,4 @@
-package it.uninsubria.socialmusic
+package it.uninsubria.socialmusic.home
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +12,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import it.uninsubria.socialmusic.R
 import it.uninsubria.socialmusic.chat.ChatActivity
 import it.uninsubria.socialmusic.chat.ChatActivity.Companion.USER_KEY
 import java.lang.Integer.parseInt

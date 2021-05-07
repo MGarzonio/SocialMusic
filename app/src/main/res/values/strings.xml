@@ -28,7 +28,7 @@
     <string name="title_activity_home">SocialMusic</string>
     <string name="already_have_an_account">Already have an account?</string>
     <string name="login">LOGIN</string>
-    <string name="back_to_register_page" translatable="false">Back to register page</string>
+    <string name="back_to_register_page">Back to register page</string>
     <string name="invalidEmail">This email address is not valid!</string>
     <string name="invalidPassword">This password is not valid!! Must have at least 6 characters.</string>
     <string name="empty_user_psw">Please, enter email address and password!</string>
@@ -73,7 +73,7 @@
     <string name="none">None</string>
     <string name="send">Send</string>
     <string name="write_a_message">Write a message..</string>
-    <string name="word" translatable="false">Word</string>
+    <string name="word">Word</string>
     <string name="edit_password">Edit password</string>
     <string name="maps_image">Maps image</string>
     <string name="search">Search</string>
@@ -94,6 +94,6 @@
     <string name="open_chat">open chat</string>
     <string name="alert_title">SocialMusic Alert</string>
     <string name="r_u_sure">Are you sure?</string>
-    <string name="time_format">dd/MM/yy hh:mm a</string>
+    <string name="time_format" translatable="false">dd/MM/yy hh:mm a</string>
     <string name="write_something">Write something to post!</string>
 </resources>

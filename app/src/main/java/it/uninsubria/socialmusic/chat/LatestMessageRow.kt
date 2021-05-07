@@ -10,9 +10,9 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
-import it.uninsubria.socialmusic.ImagePopupActivity
+import it.uninsubria.socialmusic.home.ImagePopupActivity
 import it.uninsubria.socialmusic.R
-import it.uninsubria.socialmusic.User
+import it.uninsubria.socialmusic.home.User
 import kotlinx.android.synthetic.main.latestmessage_row.view.*
 
 class LatestMessageRow(private val chatMessage: ChatMessage): Item<GroupieViewHolder>(){
