@@ -149,11 +149,12 @@ class SearchFragment : Fragment(), View.OnClickListener{
             else inUserList(instrumentList[selectedInstrument], user.instruments, instrumentList)
         var nameCheck = false
         for (selectedName in key)
-            nameCheck = if (selectedName.isEmpty()) true
-            else
+            if (selectedName.isEmpty() ||
                 selectedName in user.name.toLowerCase(Locale.ROOT) ||
-                        selectedName in user.username.toLowerCase(Locale.ROOT) ||
-                        selectedName in user.surname.toLowerCase(Locale.ROOT)
+                selectedName in user.username.toLowerCase(Locale.ROOT) ||
+                selectedName in user.surname.toLowerCase(Locale.ROOT)
+            )
+                nameCheck = true
         return genreCheck && instrumentCheck && nameCheck
     }
 
