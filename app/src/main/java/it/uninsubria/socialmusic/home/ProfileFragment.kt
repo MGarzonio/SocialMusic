@@ -15,6 +15,7 @@ import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
@@ -336,19 +337,29 @@ import java.util.*
 
      private fun deleteUser() {
          val user = FirebaseAuth.getInstance().currentUser
+         //USER FROM AUTHENTICATION
+         user!!.delete()
+             .addOnSuccessListener {
+                 Log.d("PROFILE", "user ${userProfile.username} has been cancelled!")
+                 removeAllUserData(user)
+         }
+             .addOnFailureListener {
+                 Toast.makeText(context,"User deletion failed!", Toast.LENGTH_SHORT).show()
+                 return@addOnFailureListener
+             }
+
+     }
+     private fun removeAllUserData(user: FirebaseUser){
          val refDBUser = FirebaseDatabase.getInstance().getReference("/users/")
          val refDBLatest = FirebaseDatabase.getInstance().getReference("/latest-message/")
          val refDBMess = FirebaseDatabase.getInstance().getReference("/user-messages/")
          val refDBPost = FirebaseDatabase.getInstance().getReference("/posts/")
          val refLike = FirebaseDatabase.getInstance().getReference("/postlike/")
          val refDislike = FirebaseDatabase.getInstance().getReference("/postdislike/")
-         val refStore = FirebaseStorage.getInstance().getReferenceFromUrl(userProfile.profile_image_url)
-         //USER FROM AUTHENTICATION
-         user!!.delete().addOnSuccessListener {
-             Log.d("PROFILE", "user ${userProfile.username} has been cancelled!")
-         }
+
          //IMAGE FROM STORE
          if (userProfile.profile_image_url != "default") {
+             val refStore = FirebaseStorage.getInstance().getReferenceFromUrl(userProfile.profile_image_url)
              refStore.delete()
          }
          //MESSAGES FROM DATABASE LATEST-MESSAGE
@@ -362,10 +373,10 @@ import java.util.*
          removeLike(refDislike)
          //USER FROM DATABASE
          refDBUser.child(user.uid).removeValue()
-                 .addOnSuccessListener {
-                     val intent = Intent(activity, LoginActivity::class.java)
-                     startActivity(intent)
-                 }
+             .addOnSuccessListener {
+                 val intent = Intent(activity, LoginActivity::class.java)
+                 startActivity(intent)
+             }
      }
 
      private fun removePosts(ref: DatabaseReference){

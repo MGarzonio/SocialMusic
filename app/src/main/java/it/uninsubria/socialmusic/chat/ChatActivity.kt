@@ -2,6 +2,7 @@ package it.uninsubria.socialmusic.chat
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
@@ -70,7 +71,9 @@ class ChatActivity : AppCompatActivity() {
                 chat_recyclerView.scrollToPosition(adapter.itemCount -1)
             }
             override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {}
-            override fun onChildRemoved(snapshot: DataSnapshot) {}
+            override fun onChildRemoved(snapshot: DataSnapshot) {
+                finish()
+            }
             override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {}
             override fun onCancelled(error: DatabaseError) {}
         })

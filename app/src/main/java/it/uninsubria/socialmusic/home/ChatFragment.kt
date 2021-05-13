@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
@@ -24,7 +25,7 @@ class ChatFragment : Fragment() {
     private val adapter = GroupAdapter<GroupieViewHolder>()
     val messagesMap = HashMap<String, ChatMessage>()
     val fromID = FirebaseAuth.getInstance().uid
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val viewVal = inflater.inflate(R.layout.fragment_chat, container, false) as View
         val recyclerView = viewVal.findViewById<RecyclerView>(R.id.latestMessage_recyclerView)
         listenForLatestMessages(viewVal)
@@ -68,6 +69,9 @@ class ChatFragment : Fragment() {
                 refreshRView(view)
             }
             override fun onChildRemoved(snapshot: DataSnapshot) {
+                messagesMap.remove(snapshot.key!!)
+                Toast.makeText(view.context, "User has been removed!", Toast.LENGTH_SHORT).show()
+                refreshRView(view)
             }
             override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
             }
