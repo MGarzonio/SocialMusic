@@ -25,7 +25,7 @@
         android:background="@drawable/rounded_edittext"
         android:maxWidth="240dp"
         android:padding="16dp"
-        android:text="TextView"
+        android:text="@string/message"
         android:textColor="@color/black"
         app:layout_constraintStart_toEndOf="@+id/chat_from_imageView"
         app:layout_constraintTop_toTopOf="@+id/chat_from_imageView" />
@@ -35,7 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:text="TextView"
+        android:text="@string/date"
         android:textColor="@color/gray_hint"
         android:textSize="10sp"
         app:layout_constraintEnd_toEndOf="@+id/chat_from_textView"

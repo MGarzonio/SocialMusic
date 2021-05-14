@@ -70,9 +70,9 @@
     <string name="write_a_message">Scrivi un messaggio..</string>
     <string name="edit_password">Modifica password</string>
     <string name="maps_image">Immagine mappa</string>
-    <string name="search">Ricerca</string>
+    <string name="search">Cerca</string>
     <string name="message">Messaggio</string>
-    <string name="home">Pagina principale</string>
+    <string name="home">Home</string>
     <string name="chat">Chat</string>
     <string name="search_users">Ricerca utente</string>
     <string name="profile">Profilo</string>
@@ -89,6 +89,5 @@
     <string name="alert_title">Avviso da SocialMusic</string>
     <string name="r_u_sure">Sei sicuro?</string>
     <string name="write_something">Scrivi il post!</string>
-    <string name="back_to_register_page" translatable="false">Torna alla registrazione</string>
-    <string name="word" translatable="false">Parola</string>
+    <string name="date">Data</string>
 </resources>

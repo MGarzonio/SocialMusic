@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="16dp"
+    android:layout_marginTop="8dp"
     android:foregroundGravity="center"
     android:foregroundTint="@color/black">
 
@@ -24,13 +24,14 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="5dp"
         android:text="@string/username"
         android:textColor="@color/black"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/user_imageView_post"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed" />
+        app:layout_constraintTop_toBottomOf="@+id/time_textView_post" />
 
     <TextView
         android:id="@+id/post_textView_post"
@@ -142,9 +143,9 @@
         android:layout_height="wrap_content"
         android:text="time"
         android:textColor="@color/gray_hint"
-        app:layout_constraintBottom_toBottomOf="@+id/user_textView_post"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/user_textView_post" />
+        android:textSize="10sp"
+        app:layout_constraintStart_toStartOf="@+id/user_textView_post"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

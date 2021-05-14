@@ -32,4 +32,15 @@
         android:textColor="@color/black"
         app:layout_constraintEnd_toStartOf="@+id/chat_to_imageView"
         app:layout_constraintTop_toTopOf="@+id/chat_to_imageView" />
+
+    <TextView
+        android:id="@+id/time_to_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/date"
+        android:textColor="@color/gray_hint"
+        android:textSize="10sp"
+        app:layout_constraintStart_toStartOf="@+id/chat_to_textView"
+        app:layout_constraintTop_toBottomOf="@+id/chat_to_textView" />
 </androidx.constraintlayout.widget.ConstraintLayout>
