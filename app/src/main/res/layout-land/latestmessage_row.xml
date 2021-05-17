@@ -5,16 +5,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="16dp">
+    android:layout_marginTop="8dp"
+    android:background="@color/trans_white">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/user_imageView_latestMessage"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:src="@mipmap/default_profile"
-        app:civ_border_color="@android:color/holo_blue_dark"
+        app:civ_border_color="@color/holo_blue"
         app:civ_border_width="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,7 +47,7 @@
         android:layout_marginEnd="16dp"
         android:maxHeight="60dp"
         android:text="@string/message"
-        android:textColor="@color/gray_hint"
+        android:textColor="@color/gray"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

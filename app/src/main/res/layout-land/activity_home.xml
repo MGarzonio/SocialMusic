@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@drawable/home_background"
+    android:backgroundTint="@color/trans_white_background"
+    android:backgroundTintMode="src_over"
     tools:context=".home.HomeActivity">
 
     <fragment
@@ -12,10 +14,7 @@
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="12dp"
-        android:layout_marginBottom="12dp"
+        android:layout_margin="16dp"
         app:defaultNavHost="true"
         app:layout_constraintBottom_toTopOf="@id/BottomMenu"
         app:layout_constraintEnd_toEndOf="parent"

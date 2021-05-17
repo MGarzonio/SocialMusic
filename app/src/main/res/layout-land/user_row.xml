@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:background="@android:color/transparent"
     android:paddingLeft="8dp"
     android:paddingRight="24dp">
 
@@ -25,9 +27,8 @@
         android:id="@+id/circle_user_ImageView"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginTop="16dp"
         android:src="@mipmap/default_profile"
-        app:civ_border_color="@android:color/holo_blue_dark"
+        app:civ_border_color="@color/holo_blue"
         app:civ_border_width="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

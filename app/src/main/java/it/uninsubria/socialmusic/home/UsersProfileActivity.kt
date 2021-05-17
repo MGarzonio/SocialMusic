@@ -108,6 +108,7 @@ class UsersProfileActivity : AppCompatActivity() {
         val intent = Intent(this, ChatActivity::class.java)
         intent.putExtra(USER_KEY, user)
         startActivity(intent)
+        finish()
     }
 
     fun openMaps(view: View) {
