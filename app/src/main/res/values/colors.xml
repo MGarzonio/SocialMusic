@@ -10,5 +10,5 @@
     <color name="gray">#808080</color>
     <color name="gray_hint">#80636262</color>
     <color name="trans_white">#B3FFFFFF</color>
-    <color name="trans_white_background">#E6C0FDF6</color>
+    <color name="trans_background">#E6FFD747</color>
 </resources>

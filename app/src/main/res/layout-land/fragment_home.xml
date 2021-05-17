@@ -33,6 +33,19 @@
         app:layout_constraintDimensionRatio="1"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <ImageView
+        android:id="@+id/addButtonBackground"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/rounded_edittext"
+        android:minWidth="40dp"
+        android:minHeight="40dp"
+        android:padding="5dp"
+        app:layout_constraintBottom_toBottomOf="@id/add_button_home"
+        app:layout_constraintEnd_toEndOf="@id/add_button_home"
+        app:layout_constraintStart_toStartOf="@id/add_button_home"
+        app:layout_constraintTop_toTopOf="@id/add_button_home" />
+
     <EditText
         android:id="@+id/message_editText_home"
         android:layout_width="0dp"
