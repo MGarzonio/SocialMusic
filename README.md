@@ -14,3 +14,7 @@ package it.uninsubria.socialmusic.home
 
 package it.uninsubria.socialmusic
   Main application package, contains activities and classes used for login and registration.
+  
+Description:
+  Application designed for musicians. Social network where you can publish posts, search for users based on genres and musical instruments of interest.
+  Once found, you can chat, view the profile and location of users.
