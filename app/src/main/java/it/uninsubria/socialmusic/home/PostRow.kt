@@ -46,9 +46,20 @@ class PostRow(private val post: HomePost): Item<GroupieViewHolder>(){
                 postFromUser = snapshot.getValue(User::class.java)
                 v.user_textView_post.text = postFromUser?.username
                 val target = v.user_imageView_post
+                val target2 = v.user_textView_post
                 val imageUrl = postFromUser?.profile_image_url
                 if (imageUrl != "default") {
                     Glide.with(v.context).load(imageUrl).into(target)
+                    target.setOnClickListener {
+                        val intent = Intent(it.context, ImagePopupActivity::class.java)
+                        intent.putExtra("userID", postFromUser!!.uid)
+                        startActivity(it.context, intent, null)
+                    }
+                }
+                target2.setOnClickListener {
+                    val intent = Intent(it.context, UsersProfileActivity::class.java)
+                    intent.putExtra("userID", postFromUser!!.uid)
+                    startActivity(it.context, intent, null)
                 }
             }
 
