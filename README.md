@@ -17,4 +17,7 @@ package it.uninsubria.socialmusic
   
 Description:
   Application designed for musicians. Social network where you can publish posts, search for users based on genres and musical instruments of interest.
-  Once found, you can chat, view the profile and location of users.
+  Once found, you can chat with, view the profile and location of users.
+  
+Future update:
+  - Login with the main social networks such as facebook and google
