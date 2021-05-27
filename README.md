@@ -23,3 +23,4 @@ Description:
 Future updates:
   - Login with the main social networks such as facebook and google
   - Implementation of photos and videos in the home page posts
+  - Notifications of new messages
