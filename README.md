@@ -3,6 +3,7 @@
 Minimum SDK version: 21 - Android 5.0 Lollipop
 Target SdkVersion: 30 - Android 11.0 R
 Source language: Kotlin
+Application version: 1.0
 
 package it.uninsubria.socialmusic.chat
   This package contains all classes and activities used for users chat.
